@@ -1,9 +1,7 @@
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
-public class PlayerMove : MonoBehaviour, Controls.IGmaeControlsActions
+public class IH_Palyer : MonoBehaviour, Controls.IGmaeControlsActions
 {
     Controls controls;
 
@@ -124,7 +122,7 @@ public class PlayerMove : MonoBehaviour, Controls.IGmaeControlsActions
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("ground"))
+        if (collision.gameObject.CompareTag("ground") || collision.gameObject.CompareTag("Rock"))
         {
             if (isJump)
             {
