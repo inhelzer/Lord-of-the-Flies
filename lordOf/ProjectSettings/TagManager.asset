@@ -6,7 +6,12 @@ TagManager:
   tags:
   - ground
   - Rock
+<<<<<<< HEAD
   - enemy
+=======
+  - "'\u05D5\u05D9\u05D0\u05E7_\u05E0\u05DD\u05E1"
+  - WHITBOX
+>>>>>>> a81fbb50a80afdcb007dd8c0ec72ec304b93e2d6
   layers:
   - Default
   - TransparentFX
@@ -41,8 +46,23 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: trail
+    uniqueID: 2997966985
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: particles
+    uniqueID: 2905862919
+    locked: 0
+  - name: dots
+    uniqueID: 2909817149
+    locked: 0
+  - name: player
+    uniqueID: 1379222211
+    locked: 0
+  - name: ground
+    uniqueID: 3975224341
     locked: 0
   m_RenderingLayers:
   - Default
