@@ -40,8 +40,23 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: trail
+    uniqueID: 2997966985
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: particles
+    uniqueID: 2905862919
+    locked: 0
+  - name: dots
+    uniqueID: 2909817149
+    locked: 0
+  - name: player
+    uniqueID: 1379222211
+    locked: 0
+  - name: ground
+    uniqueID: 3975224341
     locked: 0
   m_RenderingLayers:
   - Default
