@@ -6,6 +6,8 @@ TagManager:
   tags:
   - ground
   - Rock
+  - "'\u05D5\u05D9\u05D0\u05E7_\u05E0\u05DD\u05E1"
+  - WHITBOX
   layers:
   - Default
   - TransparentFX
