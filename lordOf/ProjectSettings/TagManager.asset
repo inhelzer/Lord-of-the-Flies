@@ -6,11 +6,12 @@ TagManager:
   tags:
   - ground
   - Rock
+  - Peror
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Effect
   - Water
   - UI
   - 
