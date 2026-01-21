@@ -26,7 +26,7 @@ public class enemy_bot : MonoBehaviour
         {
             if (delay < Time.timeSinceLevelLoad)
             {
-                Instantiate(ball, transform.position + new Vector3(0, 0, 0), Quaternion.identity);
+                Instantiate(ball, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
                 delay = Time.timeSinceLevelLoad + 1f;
             }
         }

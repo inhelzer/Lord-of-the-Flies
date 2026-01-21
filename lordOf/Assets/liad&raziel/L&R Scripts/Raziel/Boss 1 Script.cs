@@ -3,7 +3,7 @@ using UnityEngine;
 public class Boss1Script : MonoBehaviour
 {
     [Header("Player")]
-    [SerializeField] Transform playerTransform;
+    [SerializeField] GameObject Player;
 
     [Header("Choose Attack")]
     public int amountOfAttacks;
@@ -11,12 +11,13 @@ public class Boss1Script : MonoBehaviour
     private float lastAttack = 0;
     public float deltaAttack;
     private bool isAttacking = false;
+    public float SecondsBeforeNextAttack;
 
     [Header("Attack 0")]
     [SerializeField] Vector3 attack0SpawnPosition;
     [SerializeField] GameObject attack0Object;
     public float object0Velocity;
-    public int amountToSpawn;
+    public int amountToSpawn0;
     public float object0Life;
     public float deltaSpawn0;
 
@@ -25,7 +26,13 @@ public class Boss1Script : MonoBehaviour
     public float object1Velocity;
     public float object1Life;
     public float deltaSpawnPosition1;
-   
+
+    [Header("Attack 2")]
+    [SerializeField] GameObject attack2Object;
+    [SerializeField] Vector3 attack2SpawnPosition;
+    public int amountToSpawn2;
+    public float object2Life;
+    public float deltaSpawn2;
 
     void Update()
     {
@@ -52,17 +59,7 @@ public class Boss1Script : MonoBehaviour
 
                 case 2:
                     Debug.Log("Attack " + 2);
-                    isAttacking = false; // Remove when an attack is added
-                    break;
-
-                case 3:
-                    Debug.Log("Attack " + 3);
-                    isAttacking = false; // Remove when an attack is added
-                    break;
-
-                case 4:
-                    Debug.Log("Attack " + 4);
-                    isAttacking = false; // Remove when an attack is added
+                    Attack2();
                     break;
 
                 default:
@@ -70,7 +67,12 @@ public class Boss1Script : MonoBehaviour
                     isAttacking = false;
                     break;
             }
+            WaitBeforeNextAttack();
         }
+    }
+    private IEnumerator WaitBeforeNextAttack()
+    {
+        yield return new WaitForSeconds(SecondsBeforeNextAttack);
     }
     private void Attack0()
     {
@@ -79,9 +81,10 @@ public class Boss1Script : MonoBehaviour
     }
     private IEnumerator Attack0Coroutine()
     {
-        for (int i = 0; i < amountToSpawn; i++)
+        for (int i = 1; i <= amountToSpawn0; i++)
         {
             GameObject thisAttackObject = Instantiate(attack0Object, attack0SpawnPosition, Quaternion.identity);
+            thisAttackObject.GetComponent<AttackObject1>().SetPlayerToTrack(Player);
             thisAttackObject.GetComponent<Rigidbody2D>().linearVelocityX = object0Velocity;
             Destroy(thisAttackObject, object0Life);
             yield return new WaitForSeconds(deltaSpawn0);
@@ -90,9 +93,26 @@ public class Boss1Script : MonoBehaviour
     private void Attack1()
     {
         GameObject thisAttackObject = Instantiate(attack1Object,
-            new Vector3(playerTransform.position.x, playerTransform.position.y + deltaSpawnPosition1, 0), Quaternion.identity);
+            new Vector3(Player.transform.position.x, Player.transform.position.y + deltaSpawnPosition1, 0), Quaternion.identity);
+        thisAttackObject.GetComponent<AttackObject1>().SetPlayerToTrack(Player);
         thisAttackObject.GetComponent<Rigidbody2D>().linearVelocityY = object1Velocity;
         Destroy(thisAttackObject, object1Life);
         isAttacking = false;
     }
+    private void Attack2()
+    {
+        StartCoroutine(Attack2Coroutine());
+        isAttacking = false;
+    }
+    private IEnumerator Attack2Coroutine()
+    {
+        for (int i = 1; i <= amountToSpawn2; i++)
+        {
+            GameObject thisAttackObject = Instantiate(attack2Object, attack2SpawnPosition, Quaternion.identity);
+            thisAttackObject.GetComponent<AttackObject2>().SetPlayerToTrack(Player);
+            Destroy(thisAttackObject, object2Life);
+            yield return new WaitForSeconds(deltaSpawn2);
+        }
+    }
+    
 }
