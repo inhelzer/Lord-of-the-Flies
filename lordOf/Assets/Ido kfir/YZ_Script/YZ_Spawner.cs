@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class IH_Spawner : MonoBehaviour
+public class YZ_Spawner : MonoBehaviour
 {
     [SerializeField] GameObject[] objToSpawn;
     [SerializeField] float delay;

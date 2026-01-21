@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class IH_rock : MonoBehaviour
+public class YZ_rock : MonoBehaviour
 {
     [SerializeField] Sprite[] looks;
 
