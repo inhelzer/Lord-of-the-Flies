@@ -450,8 +450,8 @@ Transform:
   m_GameObject: {fileID: 471511461}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.21, y: -9.11, z: 0}
-  m_LocalScale: {x: 36.489388, y: 2.9554582, z: 1}
+  m_LocalPosition: {x: 0.21, y: -6.5188, z: 0}
+  m_LocalScale: {x: 36.489388, y: 8.137854, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -611,7 +611,7 @@ Transform:
   m_GameObject: {fileID: 869629087}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.9051, y: -7.0032, z: 0}
+  m_LocalPosition: {x: 2.2, y: -2.23, z: 0}
   m_LocalScale: {x: 1.4264978, y: 0.41867495, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1378,7 +1378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5f00d29056b724499f3a2773453e867, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::enemy2
-  speed: 3
+  speed: 1000
   height: 0
 --- !u!212 &1356104247
 SpriteRenderer:
@@ -1448,7 +1448,7 @@ Transform:
   m_GameObject: {fileID: 1356104245}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.3, y: -3.9, z: 0}
+  m_LocalPosition: {x: -15.5, y: 0.7, z: 0}
   m_LocalScale: {x: 2.9472, y: 3.0769427, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1978,7 +1978,7 @@ Transform:
   m_GameObject: {fileID: 2058120759}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.8, y: -6.9, z: 0}
+  m_LocalPosition: {x: 6.87, y: -2, z: 0}
   m_LocalScale: {x: 6.687852, y: 0.7851732, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -3,8 +3,8 @@ using UnityEngine.SceneManagement;
 public class enemy2 : MonoBehaviour
 {
  
-    public float speed = 0.3f;
-    public float height = 0.2f;
+    public float speed = 100f;
+    public float height = 0.0f;
     private float offset;
 
     void Start()
