@@ -708,7 +708,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -812,7 +812,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   player: {fileID: 7608653347515814924}
   ball: {fileID: 3499862752884027738, guid: dfb3d872b38f15142be8967276c66ed6, type: 3}
-  enemy_speed: -5
+  enemy_speed: 10
 --- !u!1 &1699381472
 GameObject:
   m_ObjectHideFlags: 0
@@ -1438,7 +1438,7 @@ GameObject:
   - component: {fileID: 7044653625491356596}
   - component: {fileID: 7608653347515814925}
   m_Layer: 0
-  m_Name: Palyer
+  m_Name: player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
