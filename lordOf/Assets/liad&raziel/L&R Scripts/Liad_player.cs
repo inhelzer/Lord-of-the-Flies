@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 
 public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
 {
+    [SerializeField] float respawn_ground; 
     Controls controls;
-
     [Header("Movement")]
     public float moveSpeed = 8f;
     public float moveInput;
@@ -69,7 +69,10 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
                 CreateSpark();
             }
         }
-
+        if (gameObject.transform.position.y <= respawn_ground)
+        {
+            gameObject.transform.position = new Vector2(0,0);
+        }
     }
 
     private void FixedUpdate()
