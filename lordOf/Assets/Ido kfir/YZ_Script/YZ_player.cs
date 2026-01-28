@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class YZ_player : MonoBehaviour, Controls.IGmaeControlsActions, Controls.IMouseActionsActions
+public class YZ_Palyer : MonoBehaviour, Controls.IGmaeControlsActions
 {
     Controls controls;
 
@@ -122,7 +122,7 @@ public class YZ_player : MonoBehaviour, Controls.IGmaeControlsActions, Controls.
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("ground"))
+        if (collision.gameObject.CompareTag("ground") || collision.gameObject.CompareTag("Rock"))
         {
             if (isJump)
             {
@@ -161,24 +161,6 @@ public class YZ_player : MonoBehaviour, Controls.IGmaeControlsActions, Controls.
     private void OnDestroy()
     {
         controls.GmaeControls.Disable();
-    }
-
-    public void OnMovement(InputAction.CallbackContext context)
-    {
-        if(context.performed)
-        {
-            // fings to do
-        }
-    }
-
-    public void OnPointerPosition(InputAction.CallbackContext context)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void OnAttack(InputAction.CallbackContext context)
-    {
-        throw new System.NotImplementedException();
     }
 }
 
