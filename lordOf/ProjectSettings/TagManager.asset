@@ -3,12 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
+<<<<<<< HEAD
   tags: []
+=======
+
+>>>>>>> ec7d977cc0710b22e3a1d401b9ce92a0d32193af
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Effect
   - Water
   - UI
   - 
