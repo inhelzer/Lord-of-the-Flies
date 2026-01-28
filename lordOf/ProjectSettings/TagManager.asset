@@ -3,14 +3,26 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
+<<<<<<< HEAD
   tags:
   - ground
   - quicksand
+=======
+<<<<<<< HEAD
+  tags:
+  - ground
+  - Rock
+  - BlueBox
+  - Spike
+=======
+
+>>>>>>> 8f84b1ae8584adb118bb169991b96168d82e26ac
+>>>>>>> 8878afd0c1b677d8f8d2340a91261437361c6f0f
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Effect
   - Water
   - UI
   - 

@@ -677,7 +677,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &1549670568
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -708,11 +708,11 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.000000029802322, y: 0.21133333}
+  m_Offset: {x: 0, y: 0.051061526}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.28866667}
@@ -722,7 +722,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.0000005, y: 1}
+  m_Size: {x: 1.0000005, y: 0.67945635}
   m_EdgeRadius: 0
 --- !u!212 &1549670569
 SpriteRenderer:
@@ -812,7 +812,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   player: {fileID: 7608653347515814924}
   ball: {fileID: 3499862752884027738, guid: dfb3d872b38f15142be8967276c66ed6, type: 3}
-  enemy_speed: -5
+  max_speed: 5
 --- !u!1 &1699381472
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,7 +902,7 @@ Transform:
   m_GameObject: {fileID: 1699381472}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 41.3, y: 0, z: -10}
+  m_LocalPosition: {x: -8.42, y: -2.57, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1115,7 +1115,7 @@ Transform:
   m_GameObject: {fileID: 1765435115}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 41.3, y: 0, z: -10}
+  m_LocalPosition: {x: -8.42, y: -2.57, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1296,7 +1296,7 @@ Transform:
   m_GameObject: {fileID: 7608653347515814924}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 41.3, y: 0, z: 0}
+  m_LocalPosition: {x: -8.42, y: -2.57, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1438,7 +1438,7 @@ GameObject:
   - component: {fileID: 7044653625491356596}
   - component: {fileID: 7608653347515814925}
   m_Layer: 0
-  m_Name: Palyer
+  m_Name: player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
