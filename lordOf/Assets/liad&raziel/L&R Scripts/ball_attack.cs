@@ -13,15 +13,11 @@ public class ball_attack : MonoBehaviour
     {
         
     }
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("ground"))
         {
             Destroy(gameObject);
-        }
-        else if (other.gameObject.CompareTag("player"))
-        {
-
         }
     }
 }
