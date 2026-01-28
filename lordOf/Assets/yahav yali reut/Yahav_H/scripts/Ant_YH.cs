@@ -2,14 +2,17 @@
 
 public class Ant_YH : MonoBehaviour
 {
-    public GameObject body;
     Animator anim;
     public float speed = 3.0f;//מהירות הנמלה
     public bool way;//הכיון שהנמלה זזה אליו
+    public string ant;
+
+    string currentAnimation;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        anim = body.GetComponent<Animator>();
+        anim = GetComponent<Animator>();
+        ChangeAnimationState(ant);
     }
 
     // Update is called once per frame
@@ -27,14 +30,23 @@ public class Ant_YH : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "wall")
+        if (other.gameObject.tag == "Wall")
         {
             way = !way;
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
 
         if (other.gameObject.tag == "player")
         {
             Destroy(other.gameObject);
         }
+
+    }
+
+    public void ChangeAnimationState(string newAnimation)
+    {
+        if (currentAnimation == newAnimation) return;
+        anim.Play(newAnimation);
+        currentAnimation = newAnimation;
     }
 }
