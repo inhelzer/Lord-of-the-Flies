@@ -22,9 +22,9 @@ public class trap1 : MonoBehaviour
             // משהו שמתריאה את השחקן
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        delay = Time.timeSinceLevelLoad+1f;
+        delay = Time.timeSinceLevelLoad + 1.5f;
         trap_on = true;
     }
 }
