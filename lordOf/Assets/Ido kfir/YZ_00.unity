@@ -1362,6 +1362,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f082b63256c855429eb711ee3fab861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  moveSpeed: 8
+  moveInput: 0
+  jumpForce: 16
+  maxJumps: 2
+  isGrounded: 0
+  body: {fileID: 0}
+  idle: 
+  run: 
+  jump: 
+  spark: {fileID: 0}
+  sparkColor: {r: 0, g: 0, b: 0, a: 0}
+  yShift: -2
 --- !u!1 &7662927014019616515
 GameObject:
   m_ObjectHideFlags: 0
