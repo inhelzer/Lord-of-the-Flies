@@ -3,20 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-<<<<<<< HEAD
-  tags:
-  - ground
-  - Rock
-  - BlueBox
-  - Spike
-=======
-
->>>>>>> 8f84b1ae8584adb118bb169991b96168d82e26ac
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Effect
+  - 
   - Water
   - UI
   - 
