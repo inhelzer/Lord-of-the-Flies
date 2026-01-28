@@ -4,6 +4,12 @@
 TagManager:
   serializedVersion: 3
 <<<<<<< HEAD
+<<<<<<< HEAD
+  tags: []
+=======
+
+>>>>>>> ec7d977cc0710b22e3a1d401b9ce92a0d32193af
+=======
   tags:
   - ground
   - Rock
@@ -12,6 +18,7 @@ TagManager:
 =======
 
 >>>>>>> 8f84b1ae8584adb118bb169991b96168d82e26ac
+>>>>>>> 48e6962c3036a7e7858e4ddaa30d796a8d149a00
   layers:
   - Default
   - TransparentFX
