@@ -18,11 +18,9 @@ public class lever_script : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Pull = !Pull;
-        update_switch();
-        
+        pull_switch();
     }
-    private void update_switch()
+    private void pull_switch()
     {
         if (Pull)
         {
