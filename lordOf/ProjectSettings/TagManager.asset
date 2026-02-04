@@ -3,6 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
+<<<<<<< HEAD
+<<<<<<< HEAD
+  tags:
+  - ground
+  - Peror
+  - Wall
+  - Jump
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 3b35664bb366383b792a449217f20773ea24d8c2
   tags: []
   layers:
   - Default
