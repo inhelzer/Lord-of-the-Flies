@@ -162,4 +162,18 @@ public class Player_REB : MonoBehaviour, Controls.IGmaeControlsActions
     {
         controls.GmaeControls.Disable();
     }
+
+    public void OnShot(InputAction.CallbackContext context)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    // ????? ??????? ?? ????? ????? ????
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("food"))
+        {
+
+        }
+    }
 }
