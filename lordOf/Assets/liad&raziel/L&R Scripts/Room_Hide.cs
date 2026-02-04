@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ball_attack : MonoBehaviour
+public class Room_Hide : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -12,12 +12,5 @@ public class ball_attack : MonoBehaviour
     void Update()
     {
         
-    }
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("ground"))
-        {
-            Destroy(gameObject);
-        }
     }
 }
