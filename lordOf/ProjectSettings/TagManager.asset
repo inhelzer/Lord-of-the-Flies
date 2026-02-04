@@ -3,7 +3,26 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
+<<<<<<< HEAD
   tags: []
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+  tags: []
+=======
+
+>>>>>>> ec7d977cc0710b22e3a1d401b9ce92a0d32193af
+=======
+  tags:
+  - ground
+  - Rock
+  - BlueBox
+  - Spike
+=======
+
+>>>>>>> 8f84b1ae8584adb118bb169991b96168d82e26ac
+>>>>>>> 48e6962c3036a7e7858e4ddaa30d796a8d149a00
+>>>>>>> 4a27ae72b3ba3d52e24a617b04f00a013362c231
   layers:
   - Default
   - TransparentFX
