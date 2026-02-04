@@ -11777,7 +11777,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 19.07, y: 10.95}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -11834,8 +11834,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.5267261, g: 0.94716984, b: 0.51290137, a: 1}
+  m_Sprite: {fileID: -5107677499478342438, guid: 3e13dfc8b73740542b936ef40cdb3580, type: 3}
+  m_Color: {r: 0.2830189, g: 0.23522441, b: 0.1767533, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -11853,9 +11853,9 @@ Transform:
   m_GameObject: {fileID: 1950718943}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -31.2762, y: -2.1457, z: 0}
-  m_LocalScale: {x: 30.298437, y: -0.16441517, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0.0887, y: -8.3511, z: 0}
+  m_LocalScale: {x: 5.5, y: -0.7012179, z: 0.11115888}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16763,8 +16763,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.5267261, g: 0.94716984, b: 0.51290137, a: 1}
+  m_Sprite: {fileID: 5280375111224181810, guid: 595e50c92850ddd40940875a59643cc5, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -16782,8 +16782,8 @@ Transform:
   m_GameObject: {fileID: 2123237801}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.9563, y: -7.2803, z: 0}
-  m_LocalScale: {x: 64.77669, y: 6.861448, z: 1}
+  m_LocalPosition: {x: 0.2, y: -3.2528, z: 0}
+  m_LocalScale: {x: 1, y: 1.5227405, z: 0.015437652}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -16853,7 +16853,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 49.480003, y: 2.3618546}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
