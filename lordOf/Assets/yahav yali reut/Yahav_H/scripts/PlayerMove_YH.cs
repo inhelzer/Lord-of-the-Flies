@@ -234,4 +234,9 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
     {
         controls.GmaeControls.Disable();
     }
+
+    public void OnShot(InputAction.CallbackContext context)
+    {
+        throw new System.NotImplementedException();
+    }
 }
