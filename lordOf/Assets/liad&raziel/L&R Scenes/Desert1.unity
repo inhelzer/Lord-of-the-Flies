@@ -1792,6 +1792,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ramp (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6229466860373961035, guid: cfbef291e662ec946b7692f06ffb9fd2, type: 3}
+      propertyPath: m_Mass
+      value: 500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2467,7 +2471,7 @@ Transform:
   m_GameObject: {fileID: 1176030335}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.5, y: 30.6, z: 0}
+  m_LocalPosition: {x: -58.5, y: 30.6, z: 0}
   m_LocalScale: {x: 39.910362, y: 0.7186, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
