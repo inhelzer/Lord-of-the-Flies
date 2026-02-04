@@ -109,6 +109,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shot"",
+                    ""type"": ""Button"",
+                    ""id"": ""56aed98e-1b00-49aa-a08c-00906c38d681"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -179,6 +188,39 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""5aa4f445-ad27-4eb5-98fc-9681227712b3"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""moveHorizontal"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""43dc0a94-ddaf-43cf-a924-66f9e5df7748"",
+                    ""path"": ""<Joystick>/stick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""moveHorizontal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""39bd098c-8d62-48c5-b15c-c1c5513a78f7"",
+                    ""path"": ""<Joystick>/stick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""moveHorizontal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
                     ""id"": ""1d9bfc51-9011-4af9-8e58-ff155eebd1ab"",
                     ""path"": ""<Keyboard>/space"",
@@ -197,6 +239,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5f183416-eefc-475d-bb54-653ea7304feb"",
+                    ""path"": ""<HID::Microntek              USB Joystick          >/button3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a0ea2ad-c138-4f6d-a7ea-d4a5eac155d6"",
+                    ""path"": ""<HID::Microntek              USB Joystick          >/button8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -429,6 +493,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_GmaeControls = asset.FindActionMap("GmaeControls", throwIfNotFound: true);
         m_GmaeControls_moveHorizontal = m_GmaeControls.FindAction("moveHorizontal", throwIfNotFound: true);
         m_GmaeControls_Jump = m_GmaeControls.FindAction("Jump", throwIfNotFound: true);
+        m_GmaeControls_Shot = m_GmaeControls.FindAction("Shot", throwIfNotFound: true);
         // MicroBit
         m_MicroBit = asset.FindActionMap("MicroBit", throwIfNotFound: true);
         m_MicroBit_right = m_MicroBit.FindAction("right", throwIfNotFound: true);
@@ -525,6 +590,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private List<IGmaeControlsActions> m_GmaeControlsActionsCallbackInterfaces = new List<IGmaeControlsActions>();
     private readonly InputAction m_GmaeControls_moveHorizontal;
     private readonly InputAction m_GmaeControls_Jump;
+    private readonly InputAction m_GmaeControls_Shot;
     /// <summary>
     /// Provides access to input actions defined in input action map "GmaeControls".
     /// </summary>
@@ -544,6 +610,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "GmaeControls/Jump".
         /// </summary>
         public InputAction @Jump => m_Wrapper.m_GmaeControls_Jump;
+        /// <summary>
+        /// Provides access to the underlying input action "GmaeControls/Shot".
+        /// </summary>
+        public InputAction @Shot => m_Wrapper.m_GmaeControls_Shot;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -576,6 +646,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Shot.started += instance.OnShot;
+            @Shot.performed += instance.OnShot;
+            @Shot.canceled += instance.OnShot;
         }
 
         /// <summary>
@@ -593,6 +666,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Shot.started -= instance.OnShot;
+            @Shot.performed -= instance.OnShot;
+            @Shot.canceled -= instance.OnShot;
         }
 
         /// <summary>
@@ -905,6 +981,13 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnJump(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Shot" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnShot(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "MicroBit" which allows adding and removing callbacks.
