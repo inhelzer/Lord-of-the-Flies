@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class YZ_player : MonoBehaviour, Controls.IGmaeControlsActions, Controls.IMouseActionsActions
+public class YZ_Player : MonoBehaviour, Controls.IGmaeControlsActions
 {
     Controls controls;
 
@@ -9,7 +9,6 @@ public class YZ_player : MonoBehaviour, Controls.IGmaeControlsActions, Controls.
     public float moveSpeed = 8f;
     public float moveInput;
     private Rigidbody2D rb;
-
     float yLocalScale;
 
     [Header("Jumping")]
@@ -34,151 +33,172 @@ public class YZ_player : MonoBehaviour, Controls.IGmaeControlsActions, Controls.
     public Color sparkColor;
     public float yShift = -2f;
 
+[Header("Shooting")]
+[SerializeField] private Transform firePoint;
+[SerializeField] private GameObject bulletPrefab;
+[SerializeField] private float bulletSpeed = 14f;
+[SerializeField] private float fireCooldown = 0.15f;
+private float lastFireTime;
+
     private void Awake()
     {
         controls = new Controls();
         controls.GmaeControls.SetCallbacks(this);
+
+        // Auto-find FirePoint by name
+        if (firePoint == null)
+            firePoint = transform.Find("FirePoint");
+
+        // Auto-load bullet prefab from Resources/Bullet.prefab
+        if (bulletPrefab == null)
+            bulletPrefab = Resources.Load<GameObject>("Bullet");
     }
+
+
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         controls.GmaeControls.Enable();
-        anim = body.GetComponent<Animator>();
-        ChangeAnimationState(idle);
+
+        if (body != null)
+        {
+            anim = body.GetComponent<Animator>();
+            ChangeAnimationState(idle);
+        }
+
         yLocalScale = transform.localScale.y;
     }
-
-
 
     private void Update()
     {
         if (moveInput > 0)
-            transform.localScale = new Vector3(1, yLocalScale, 1);  // Facing right
+            transform.localScale = new Vector3(1, yLocalScale, 1);
         else if (moveInput < 0)
-            transform.localScale = new Vector3(-1, yLocalScale, 1);  // Facing left
+            transform.localScale = new Vector3(-1, yLocalScale, 1);
 
         if (spark != null)
         {
-            if ((isGrounded) && (moveInput != 0) &&
+            if (isGrounded && moveInput != 0 &&
                 (Time.timeSinceLevelLoad - sparkTime >= Random.Range(delay * 0.6f, delay * 1.3f)))
             {
                 sparkTime = Time.timeSinceLevelLoad;
                 CreateSpark();
             }
         }
-
     }
 
     private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+        // אם אצלך linearVelocity עובד ואתה רוצה להשאיר - אפשר.
+        // זה הסטנדרט הבטוח:
+        rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
     }
 
     public void OnMoveHorizontal(InputAction.CallbackContext context)
     {
-        if (!context.performed)
+        // קורא תמיד, ומאפס כשעוזבים
+        if (context.canceled)
         {
             moveInput = 0;
-            if (!isJump)
-            {
-                ChangeAnimationState(idle);
-            }
-
+            if (!isJump) ChangeAnimationState(idle);
+            return;
         }
-        if (context.performed)
+
+        moveInput = context.ReadValue<float>();
+        if (!isJump)
         {
-            moveInput = context.ReadValue<float>();
-            if (!isJump)
-            {
-                ChangeAnimationState(run);
-            }
+            if (moveInput != 0) ChangeAnimationState(run);
+            else ChangeAnimationState(idle);
         }
-    }
-
-    public void CreateSpark()
-    {
-        GameObject currentSpark =
-        Instantiate(spark, transform.position + new Vector3(moveInput * -0.5f, yShift, 0), Quaternion.identity) as GameObject;
-        currentSpark.GetComponent<SpriteRenderer>().color = sparkColor;
-        currentSpark.GetComponent<Rigidbody2D>().linearVelocity =
-            new Vector2(moveInput * -1, Random.Range(0.7f, 4f));
-        Destroy(currentSpark, 1f);
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (!context.performed) return;
+
+        // מינימום שינוי כדי שזה יעבוד טוב: מאפשר עד maxJumps גם באוויר
+        if (jumpCount >= maxJumps) return;
+
+        isJump = true;
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        jumpCount++;
+        ChangeAnimationState(jump);
+    }
+
+    public void OnShot(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        if (Time.time < lastFireTime + fireCooldown) return;
+
+        lastFireTime = Time.time;
+
+        if (bulletPrefab == null || firePoint == null) return;
+
+        float dir = transform.localScale.x >= 0 ? 1f : -1f;
+
+        GameObject b = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        Rigidbody2D brb = b.GetComponent<Rigidbody2D>();
+        if (brb != null)
+            brb.linearVelocity = new Vector2(dir * bulletSpeed, 0f);
+    }
+
+
+    public void CreateSpark()
+    {
+        GameObject currentSpark = Instantiate(
+            spark,
+            transform.position + new Vector3(moveInput * -0.5f, yShift, 0),
+            Quaternion.identity
+        );
+
+        SpriteRenderer sr = currentSpark.GetComponent<SpriteRenderer>();
+        if (sr != null) sr.color = sparkColor;
+
+        Rigidbody2D srb = currentSpark.GetComponent<Rigidbody2D>();
+        if (srb != null)
         {
-            if (isGrounded && jumpCount < maxJumps - 1)
-            {
-                isJump = true;
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-                jumpCount++;
-                ChangeAnimationState(jump);
-            }
+            srb.velocity = new Vector2(moveInput * -1, Random.Range(0.7f, 4f));
         }
+
+        Destroy(currentSpark, 1f);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("ground"))
+        if (collision.gameObject.CompareTag("ground") || collision.gameObject.CompareTag("Rock"))
         {
             if (isJump)
             {
-                if (moveInput != 0)
-                {
-                    isJump = false;
-                    ChangeAnimationState(run);
-                }
-                else
-                {
-                    isJump = false;
-                    ChangeAnimationState(idle);
-                }
+                isJump = false;
+                if (moveInput != 0) ChangeAnimationState(run);
+                else ChangeAnimationState(idle);
             }
+
             isGrounded = true;
-            jumpCount = 0;  // Reset jump count when touching ground
+            jumpCount = 0;
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("ground"))
+        if (collision.gameObject.CompareTag("ground") || collision.gameObject.CompareTag("Rock"))
         {
             isGrounded = false;
-
         }
     }
 
     public void ChangeAnimationState(string newAnimation)
     {
+        if (anim == null) return;
         if (currentAnimation == newAnimation) return;
+
         anim.Play(newAnimation);
         currentAnimation = newAnimation;
     }
 
     private void OnDestroy()
     {
-        controls.GmaeControls.Disable();
-    }
-
-    public void OnMovement(InputAction.CallbackContext context)
-    {
-        if(context.performed)
-        {
-            // fings to do
-        }
-    }
-
-    public void OnPointerPosition(InputAction.CallbackContext context)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void OnAttack(InputAction.CallbackContext context)
-    {
-        throw new System.NotImplementedException();
+        if (controls != null) controls.GmaeControls.Disable();
     }
 }
-
