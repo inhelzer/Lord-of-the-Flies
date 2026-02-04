@@ -164,5 +164,10 @@ public class PlayerMove : MonoBehaviour, Controls.IGmaeControlsActions
     {
         controls.GmaeControls.Disable();
     }
+
+    void Controls.IGmaeControlsActions.OnShot(InputAction.CallbackContext context)
+    {
+        throw new System.NotImplementedException();
+    }
 }
 

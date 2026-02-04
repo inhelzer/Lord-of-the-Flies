@@ -164,5 +164,10 @@ public class YZ_PlayerMove : MonoBehaviour, Controls.IGmaeControlsActions
     {
         controls.GmaeControls.Disable();
     }
+
+    public void OnShot(InputAction.CallbackContext context)
+    {
+        throw new System.NotImplementedException();
+    }
 }
 
