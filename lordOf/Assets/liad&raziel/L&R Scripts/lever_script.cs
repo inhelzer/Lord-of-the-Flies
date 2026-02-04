@@ -2,9 +2,7 @@ using UnityEngine;
 
 public class lever_script : MonoBehaviour
 {
-    [SerializeField] bool Pull;
-    [SerializeField] GameObject[] On_Objects;
-    [SerializeField] GameObject[] Off_Objects;
+    [SerializeField] GameObject[] Objects;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {   
@@ -22,26 +20,11 @@ public class lever_script : MonoBehaviour
     }
     private void pull_switch()
     {
-        if (Pull)
+        for (int i = 0; i < Objects.Length; i++)
         {
-            for (int i = 0; i < On_Objects.Length; i++)
+            if (Objects[i] != null)
             {
-                On_Objects[i].GetComponent<GameObject>().SetActive(false);
-            }
-            for (int i = 0; i < On_Objects.Length; i++)
-            {
-                Off_Objects[i].GetComponent<GameObject>().SetActive(true);
-            }
-        }
-        else
-        {
-            for (int i = 0; i < On_Objects.Length; i++)
-            {
-                Off_Objects[i].GetComponent<GameObject>().SetActive(false);
-            }
-            for (int i = 0; i < On_Objects.Length; i++)
-            {
-                On_Objects[i].GetComponent<GameObject>().SetActive(true);
+                Objects[i].GetComponent<GameObject>().SetActive(!Objects[i].GetComponent<GameObject>().activeSelf);
             }
         }
     }

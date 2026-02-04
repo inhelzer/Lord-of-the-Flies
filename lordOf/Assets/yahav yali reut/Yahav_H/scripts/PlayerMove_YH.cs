@@ -26,6 +26,7 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
     bool lastdirection;//????? ?????? ???? ????? ?????
     float scaletime;
     public float PerorPower = 0.35f;
+    public float jumpPower = 3;
 
     [SerializeField] private GameObject effectPrefab;//effect
     bool lostTriggered = false;
@@ -212,6 +213,12 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
             isGrounded = true;
             jumpCount = 0;  // Reset jump count when touching ground
         }
+
+        if (collision.gameObject.CompareTag("Jump"))
+        {
+            Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
+            rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -233,5 +240,10 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
     private void OnDestroy()
     {
         controls.GmaeControls.Disable();
+    }
+
+    public void OnShot(InputAction.CallbackContext context)
+    {
+        throw new System.NotImplementedException();
     }
 }
