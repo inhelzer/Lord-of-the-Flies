@@ -30,17 +30,20 @@ public class Ant_YH : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        if (other.gameObject.tag == "Player")
+        {
+            Destroy(other.gameObject);
+        }
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
         if (other.gameObject.tag == "Wall")
         {
             way = !way;
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
-
-        if (other.gameObject.tag == "player")
-        {
-            Destroy(other.gameObject);
-        }
-
     }
 
     public void ChangeAnimationState(string newAnimation)
