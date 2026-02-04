@@ -230,5 +230,11 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
     {
 
     }
+
+    // Kfir what the fuck
+    public void OnShot(InputAction.CallbackContext context)
+    {
+        throw new System.NotImplementedException();
+    }
 }
 

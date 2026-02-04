@@ -1792,10 +1792,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ramp (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 6229466860373961035, guid: cfbef291e662ec946b7692f06ffb9fd2, type: 3}
-      propertyPath: m_Mass
-      value: 500
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
