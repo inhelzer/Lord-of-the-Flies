@@ -5,11 +5,6 @@ using UnityEngine.InputSystem;
 
 public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
 {
-    [Header("Raziel")]
-    bool canClimb = false;
-    bool isClimbing = false;
-
-
     [SerializeField] float respawn_ground; 
     Controls controls;
     [Header("Movement")]
@@ -134,7 +129,6 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
     {
         if (collision.gameObject.CompareTag("ground"))
         {
-            Debug.Log(2);
             if (isJump)
             {
                 if (moveInput != 0)
@@ -154,41 +148,11 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
     }
 
     private void OnCollisionExit2D(Collision2D collision)
-    {    
+    {
         if (collision.gameObject.CompareTag("ground"))
         {
-            Debug.Log(3);
             isGrounded = false;
-        }
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // Raziel - Added quicksand
-        if (collision.gameObject.CompareTag("quicksand"))
-        {
-            Debug.Log(0);
-            EnterQucicksand();
-        }
-
-        if (collision.gameObject.CompareTag("ladder"))
-        {
-            canClimb = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        // Raziel - Added quicksand
-        if (collision.gameObject.CompareTag("quicksand"))
-        {
-            Debug.Log(1);
-            ExitQuicksand();
-        }
-
-        if (collision.gameObject.CompareTag("ladder"))
-        {
-            canClimb = false;
         }
     }
 
@@ -202,39 +166,6 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
     private void OnDestroy()
     {
         controls.GmaeControls.Disable();
-    }
-
-    // Raziel
-    public void EnterQucicksand()
-    {
-        moveSpeed = 1f;
-        jumpForce = 1f;
-        gameObject.GetComponent<Rigidbody2D>().gravityScale = 0.005f;
-        isGrounded = true;
-        jumpCount = -9999;
-        //isJump = false;
-    }
-
-    // Raziel
-    public void ExitQuicksand()
-    {
-        moveSpeed = 8f;
-        jumpForce = 20f;
-        gameObject.GetComponent<Rigidbody2D>().gravityScale = 4f;
-        jumpCount = 0;
-
-    }
-
-    // Raziel
-    public void Climb()
-    {
-
-    }
-
-    // Kfir what the fuck
-    public void OnShot(InputAction.CallbackContext context)
-    {
-        throw new System.NotImplementedException();
     }
 }
 
