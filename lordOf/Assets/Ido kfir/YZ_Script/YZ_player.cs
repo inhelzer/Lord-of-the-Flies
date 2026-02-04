@@ -90,14 +90,14 @@ private float lastFireTime;
 
     private void FixedUpdate()
     {
-        // àí àöìê linearVelocity òåáã åàúä øåöä ìäùàéø - àôùø.
-        // æä äñèðãøè äáèåç:
-        rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
+        // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ linearVelocity ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ - ï¿½ï¿½ï¿½ï¿½.
+        // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½:
+        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
     }
 
     public void OnMoveHorizontal(InputAction.CallbackContext context)
     {
-        // ÷åøà úîéã, åîàôñ ëùòåæáéí
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (context.canceled)
         {
             moveInput = 0;
@@ -117,11 +117,11 @@ private float lastFireTime;
     {
         if (!context.performed) return;
 
-        // îéðéîåí ùéðåé ëãé ùæä éòáåã èåá: îàôùø òã maxJumps âí áàååéø
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ maxJumps ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (jumpCount >= maxJumps) return;
 
         isJump = true;
-        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         jumpCount++;
         ChangeAnimationState(jump);
     }
@@ -158,7 +158,7 @@ private float lastFireTime;
         Rigidbody2D srb = currentSpark.GetComponent<Rigidbody2D>();
         if (srb != null)
         {
-            srb.velocity = new Vector2(moveInput * -1, Random.Range(0.7f, 4f));
+            srb.linearVelocity = new Vector2(moveInput * -1, Random.Range(0.7f, 4f));
         }
 
         Destroy(currentSpark, 1f);
