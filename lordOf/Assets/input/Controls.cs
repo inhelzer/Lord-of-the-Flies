@@ -109,6 +109,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shot"",
+                    ""type"": ""Button"",
+                    ""id"": ""56aed98e-1b00-49aa-a08c-00906c38d681"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -179,6 +188,39 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""5aa4f445-ad27-4eb5-98fc-9681227712b3"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""moveHorizontal"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""43dc0a94-ddaf-43cf-a924-66f9e5df7748"",
+                    ""path"": ""<Joystick>/stick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""moveHorizontal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""39bd098c-8d62-48c5-b15c-c1c5513a78f7"",
+                    ""path"": ""<Joystick>/stick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""moveHorizontal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
                     ""id"": ""1d9bfc51-9011-4af9-8e58-ff155eebd1ab"",
                     ""path"": ""<Keyboard>/space"",
@@ -197,6 +239,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5f183416-eefc-475d-bb54-653ea7304feb"",
+                    ""path"": ""<HID::Microntek              USB Joystick          >/button3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a0ea2ad-c138-4f6d-a7ea-d4a5eac155d6"",
+                    ""path"": ""<HID::Microntek              USB Joystick          >/button8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -309,6 +373,118 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""MouseActions"",
+            ""id"": ""3cbb9e34-db52-4d27-99c3-5dc3c0e801b5"",
+            ""actions"": [
+                {
+                    ""name"": ""Movement"",
+                    ""type"": ""Value"",
+                    ""id"": ""3d1c03bc-c59e-4228-a4ef-cb919914cf85"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PointerPosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""dc950839-8f0e-4cf2-985a-4a8619f53a5b"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""6e9cc12f-cd97-47f3-9c94-e900999c6a9f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""d485979a-79f3-489f-9d9c-bbe0e730e5a3"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PointerPosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""311eb9e6-2911-40fd-a515-186d7bc5c063"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""a958e8a4-e457-48dc-8e72-76d72cf383bb"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""30582ca3-9a15-4635-8c24-d1706b5496ff"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""9878eec8-509a-4f68-82e6-3a4b3f3df6dd"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""6ebe2cfb-61b6-4797-a60f-40f8286618d3"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""b9a3d944-fa86-4990-bfed-f02af8d4983a"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -317,6 +493,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_GmaeControls = asset.FindActionMap("GmaeControls", throwIfNotFound: true);
         m_GmaeControls_moveHorizontal = m_GmaeControls.FindAction("moveHorizontal", throwIfNotFound: true);
         m_GmaeControls_Jump = m_GmaeControls.FindAction("Jump", throwIfNotFound: true);
+        m_GmaeControls_Shot = m_GmaeControls.FindAction("Shot", throwIfNotFound: true);
         // MicroBit
         m_MicroBit = asset.FindActionMap("MicroBit", throwIfNotFound: true);
         m_MicroBit_right = m_MicroBit.FindAction("right", throwIfNotFound: true);
@@ -324,12 +501,18 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_MicroBit_middle = m_MicroBit.FindAction("middle", throwIfNotFound: true);
         m_MicroBit_jump = m_MicroBit.FindAction("jump", throwIfNotFound: true);
         m_MicroBit_highJump = m_MicroBit.FindAction("highJump", throwIfNotFound: true);
+        // MouseActions
+        m_MouseActions = asset.FindActionMap("MouseActions", throwIfNotFound: true);
+        m_MouseActions_Movement = m_MouseActions.FindAction("Movement", throwIfNotFound: true);
+        m_MouseActions_PointerPosition = m_MouseActions.FindAction("PointerPosition", throwIfNotFound: true);
+        m_MouseActions_Attack = m_MouseActions.FindAction("Attack", throwIfNotFound: true);
     }
 
     ~@Controls()
     {
         UnityEngine.Debug.Assert(!m_GmaeControls.enabled, "This will cause a leak and performance issues, Controls.GmaeControls.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_MicroBit.enabled, "This will cause a leak and performance issues, Controls.MicroBit.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_MouseActions.enabled, "This will cause a leak and performance issues, Controls.MouseActions.Disable() has not been called.");
     }
 
     /// <summary>
@@ -407,6 +590,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private List<IGmaeControlsActions> m_GmaeControlsActionsCallbackInterfaces = new List<IGmaeControlsActions>();
     private readonly InputAction m_GmaeControls_moveHorizontal;
     private readonly InputAction m_GmaeControls_Jump;
+    private readonly InputAction m_GmaeControls_Shot;
     /// <summary>
     /// Provides access to input actions defined in input action map "GmaeControls".
     /// </summary>
@@ -426,6 +610,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "GmaeControls/Jump".
         /// </summary>
         public InputAction @Jump => m_Wrapper.m_GmaeControls_Jump;
+        /// <summary>
+        /// Provides access to the underlying input action "GmaeControls/Shot".
+        /// </summary>
+        public InputAction @Shot => m_Wrapper.m_GmaeControls_Shot;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -458,6 +646,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Shot.started += instance.OnShot;
+            @Shot.performed += instance.OnShot;
+            @Shot.canceled += instance.OnShot;
         }
 
         /// <summary>
@@ -475,6 +666,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Shot.started -= instance.OnShot;
+            @Shot.performed -= instance.OnShot;
+            @Shot.canceled -= instance.OnShot;
         }
 
         /// <summary>
@@ -648,6 +842,124 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="MicroBitActions" /> instance referencing this action map.
     /// </summary>
     public MicroBitActions @MicroBit => new MicroBitActions(this);
+
+    // MouseActions
+    private readonly InputActionMap m_MouseActions;
+    private List<IMouseActionsActions> m_MouseActionsActionsCallbackInterfaces = new List<IMouseActionsActions>();
+    private readonly InputAction m_MouseActions_Movement;
+    private readonly InputAction m_MouseActions_PointerPosition;
+    private readonly InputAction m_MouseActions_Attack;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "MouseActions".
+    /// </summary>
+    public struct MouseActionsActions
+    {
+        private @Controls m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public MouseActionsActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "MouseActions/Movement".
+        /// </summary>
+        public InputAction @Movement => m_Wrapper.m_MouseActions_Movement;
+        /// <summary>
+        /// Provides access to the underlying input action "MouseActions/PointerPosition".
+        /// </summary>
+        public InputAction @PointerPosition => m_Wrapper.m_MouseActions_PointerPosition;
+        /// <summary>
+        /// Provides access to the underlying input action "MouseActions/Attack".
+        /// </summary>
+        public InputAction @Attack => m_Wrapper.m_MouseActions_Attack;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_MouseActions; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="MouseActionsActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(MouseActionsActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="MouseActionsActions" />
+        public void AddCallbacks(IMouseActionsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_MouseActionsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_MouseActionsActionsCallbackInterfaces.Add(instance);
+            @Movement.started += instance.OnMovement;
+            @Movement.performed += instance.OnMovement;
+            @Movement.canceled += instance.OnMovement;
+            @PointerPosition.started += instance.OnPointerPosition;
+            @PointerPosition.performed += instance.OnPointerPosition;
+            @PointerPosition.canceled += instance.OnPointerPosition;
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="MouseActionsActions" />
+        private void UnregisterCallbacks(IMouseActionsActions instance)
+        {
+            @Movement.started -= instance.OnMovement;
+            @Movement.performed -= instance.OnMovement;
+            @Movement.canceled -= instance.OnMovement;
+            @PointerPosition.started -= instance.OnPointerPosition;
+            @PointerPosition.performed -= instance.OnPointerPosition;
+            @PointerPosition.canceled -= instance.OnPointerPosition;
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="MouseActionsActions.UnregisterCallbacks(IMouseActionsActions)" />.
+        /// </summary>
+        /// <seealso cref="MouseActionsActions.UnregisterCallbacks(IMouseActionsActions)" />
+        public void RemoveCallbacks(IMouseActionsActions instance)
+        {
+            if (m_Wrapper.m_MouseActionsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="MouseActionsActions.AddCallbacks(IMouseActionsActions)" />
+        /// <seealso cref="MouseActionsActions.RemoveCallbacks(IMouseActionsActions)" />
+        /// <seealso cref="MouseActionsActions.UnregisterCallbacks(IMouseActionsActions)" />
+        public void SetCallbacks(IMouseActionsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_MouseActionsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_MouseActionsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="MouseActionsActions" /> instance referencing this action map.
+    /// </summary>
+    public MouseActionsActions @MouseActions => new MouseActionsActions(this);
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "GmaeControls" which allows adding and removing callbacks.
     /// </summary>
@@ -669,6 +981,13 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnJump(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Shot" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnShot(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "MicroBit" which allows adding and removing callbacks.
@@ -712,5 +1031,34 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnHighJump(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "MouseActions" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="MouseActionsActions.AddCallbacks(IMouseActionsActions)" />
+    /// <seealso cref="MouseActionsActions.RemoveCallbacks(IMouseActionsActions)" />
+    public interface IMouseActionsActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "Movement" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMovement(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "PointerPosition" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPointerPosition(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Attack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAttack(InputAction.CallbackContext context);
     }
 }
