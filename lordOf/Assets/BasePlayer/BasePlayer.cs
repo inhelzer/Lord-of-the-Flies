@@ -1,17 +1,10 @@
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
-public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
+public class BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
 {
-    [Header("Raziel")]
-    bool canClimb = false;
-    bool isClimbing = false;
-    Vector3 respawnPosition; // Default in start
+     Controls controls;
 
-    [SerializeField] float respawn_ground; 
-    Controls controls;
     [Header("Movement")]
     public float moveSpeed = 8f;
     public float moveInput;
@@ -34,12 +27,7 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
     public string jump;
     bool isJump = false;
 
-    [Header("walkEffect")]
-    [SerializeField] GameObject spark;
-    [SerializeField] float delay;
-    float sparkTime;
-    public Color sparkColor;
-    public float yShift = -2f;
+    
 
     private void Awake()
     {
@@ -54,39 +42,17 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
         anim = body.GetComponent<Animator>();
         ChangeAnimationState(idle);
         yLocalScale = transform.localScale.y;
-
-        // Raziel added
-        respawnPosition = transform.localPosition;
     }
 
 
 
     private void Update()
     {
-        // Raziel added
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SendToCheckpoint();
-        }
-
         if (moveInput > 0)
             transform.localScale = new Vector3(1, yLocalScale, 1);  // Facing right
         else if (moveInput < 0)
             transform.localScale = new Vector3(-1, yLocalScale, 1);  // Facing left
 
-        if (spark != null)
-        {
-            if ((isGrounded) && (moveInput != 0) &&
-                (Time.timeSinceLevelLoad - sparkTime >= Random.Range(delay * 0.6f, delay * 1.3f)))
-            {
-                sparkTime = Time.timeSinceLevelLoad;
-                CreateSpark();
-            }
-        }
-        if (gameObject.transform.position.y <= respawn_ground)
-        {
-            gameObject.transform.position = new Vector2(0,0);
-        }
     }
 
     private void FixedUpdate()
@@ -115,16 +81,6 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
         }
     }
 
-    public void CreateSpark()
-    {
-        GameObject currentSpark =
-        Instantiate(spark, transform.position + new Vector3(moveInput * -0.5f, yShift, 0), Quaternion.identity) as GameObject;
-        currentSpark.GetComponent<SpriteRenderer>().color = sparkColor;
-        currentSpark.GetComponent<Rigidbody2D>().linearVelocity =
-            new Vector2(moveInput * -1, Random.Range(0.7f, 4f));
-        Destroy(currentSpark, 1f);
-    }
-
     public void OnJump(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -139,12 +95,10 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
         }
     }
 
-    
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("ground"))
+        if (collision.gameObject.CompareTag("ground") || collision.gameObject.CompareTag("Rock"))
         {
-            //Debug.Log(2);
             if (isJump)
             {
                 if (moveInput != 0)
@@ -167,37 +121,8 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
     {
         if (collision.gameObject.CompareTag("ground"))
         {
-            //Debug.Log(3);
             isGrounded = false;
-        }
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // Raziel - Added quicksand
-        if (collision.gameObject.CompareTag("quicksand"))
-        {
-            //Debug.Log(0);
-            EnterQucicksand();
-        }
 
-        if (collision.gameObject.CompareTag("ladder"))
-        {
-            canClimb = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        // Raziel - Added quicksand
-        if (collision.gameObject.CompareTag("quicksand"))
-        {
-            //Debug.Log(1);
-            ExitQuicksand();
-        }
-
-        if (collision.gameObject.CompareTag("ladder"))
-        {
-            canClimb = false;
         }
     }
 
@@ -213,49 +138,8 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
         controls.GmaeControls.Disable();
     }
 
-    // Raziel
-    public void EnterQucicksand()
-    {
-        moveSpeed = 1f;
-        jumpForce = 1f;
-        gameObject.GetComponent<Rigidbody2D>().gravityScale = 0.005f;
-        isGrounded = true;
-        jumpCount = -9999;
-        //isJump = false;
-    }
-
-    // Raziel
-    public void ExitQuicksand()
-    {
-        moveSpeed = 8f;
-        jumpForce = 20f;
-        gameObject.GetComponent<Rigidbody2D>().gravityScale = 4f;
-        jumpCount = 0;
-
-    }
-
-    // Raziel
-    public void Climb()
-    {
-
-    }
-
-    // Raziel
-    public void SetRespawnPosition(Vector3 respawnPosition)
-    {
-        this.respawnPosition = respawnPosition;
-    }
-
-    // Raziel
-    public void SendToCheckpoint()
-    {
-        transform.position = respawnPosition;
-    }
-
-    // Kfir what the fuck
     public void OnShot(InputAction.CallbackContext context)
     {
         throw new System.NotImplementedException();
     }
 }
-
