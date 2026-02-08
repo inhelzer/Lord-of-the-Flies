@@ -8,6 +8,7 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
     [Header("Raziel")]
     bool canClimb = false;
     bool isClimbing = false;
+    Vector3 respawnPosition; // Default in start
 
 
     [SerializeField] float respawn_ground; 
@@ -54,12 +55,21 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
         anim = body.GetComponent<Animator>();
         ChangeAnimationState(idle);
         yLocalScale = transform.localScale.y;
+
+        // Raziel added
+        respawnPosition = transform.localPosition;
     }
 
 
 
     private void Update()
     {
+        // Raziel added
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SendToCheckpoint();
+        }
+
         if (moveInput > 0)
             transform.localScale = new Vector3(1, yLocalScale, 1);  // Facing right
         else if (moveInput < 0)
@@ -134,7 +144,7 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
     {
         if (collision.gameObject.CompareTag("ground"))
         {
-            Debug.Log(2);
+            //Debug.Log(2);
             if (isJump)
             {
                 if (moveInput != 0)
@@ -157,7 +167,7 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
     {    
         if (collision.gameObject.CompareTag("ground"))
         {
-            Debug.Log(3);
+            //Debug.Log(3);
             isGrounded = false;
         }
     }
@@ -167,7 +177,7 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
         // Raziel - Added quicksand
         if (collision.gameObject.CompareTag("quicksand"))
         {
-            Debug.Log(0);
+            //Debug.Log(0);
             EnterQucicksand();
         }
 
@@ -182,7 +192,7 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
         // Raziel - Added quicksand
         if (collision.gameObject.CompareTag("quicksand"))
         {
-            Debug.Log(1);
+            //Debug.Log(1);
             ExitQuicksand();
         }
 
@@ -229,6 +239,18 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
     public void Climb()
     {
 
+    }
+
+    // Raziel
+    public void SetRespawnPosition(Vector3 respawnPosition)
+    {
+        this.respawnPosition = respawnPosition;
+    }
+
+    // Raziel
+    public void SendToCheckpoint()
+    {
+        transform.position = respawnPosition;
     }
 
     // Kfir what the fuck
