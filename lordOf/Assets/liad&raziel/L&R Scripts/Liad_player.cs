@@ -138,7 +138,6 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
             }
         }
     }
-
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
