@@ -169,5 +169,10 @@ public class PlayerMove : MonoBehaviour, Controls.IGmaeControlsActions
     {
         throw new System.NotImplementedException();
     }
+
+    public void OnShot(InputAction.CallbackContext context)
+    {
+        throw new System.NotSupportedException();
+    }
 }
 

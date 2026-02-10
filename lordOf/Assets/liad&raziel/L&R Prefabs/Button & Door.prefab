@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 6331739116634872669}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 131.03854, y: -16.49479, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 8.244, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -189,13 +189,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1020919661594148942}
   - component: {fileID: 2462536194608424490}
-  - component: {fileID: 6960351480679220454}
   - component: {fileID: 732057701540557248}
   - component: {fileID: 8558562897912753494}
   - component: {fileID: 674725687313177706}
   m_Layer: 0
   m_Name: Button
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -209,7 +208,7 @@ Transform:
   m_GameObject: {fileID: 6584985279450351800}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 134.69655, y: -11.29479, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.106342, y: 1.1074518, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -274,18 +273,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &6960351480679220454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6584985279450351800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33fa39e3a61d86b4ebfae71631ec74ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Raziel_Door
 --- !u!114 &732057701540557248
 MonoBehaviour:
   m_ObjectHideFlags: 0
