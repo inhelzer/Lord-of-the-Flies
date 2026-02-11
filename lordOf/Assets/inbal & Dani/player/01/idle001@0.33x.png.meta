@@ -1,0 +1,263 @@
+fileFormatVersion: 2
+guid: 972fa9a44ea814e35b90d0f4d1c40def
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -392453526849052355
+    second: idle001@0.33x_0
+  - first:
+      213: -1529325370782148079
+    second: idle001@0.33x_1
+  - first:
+      213: -4511456234343183727
+    second: idle001@0.33x_2
+  - first:
+      213: 7248984142856764583
+    second: idle001@0.33x_3
+  - first:
+      213: -8211404309523226823
+    second: idle001@0.33x_4
+  - first:
+      213: 481331586038187738
+    second: idle001@0.33x_5
+  - first:
+      213: 8656294829897191629
+    second: idle001@0.33x_6
+  - first:
+      213: 864436496480852288
+    second: idle001@0.33x_7
+  - first:
+      213: -2965480645363401532
+    second: idle001@0.33x_8
+  - first:
+      213: -7047906586754637020
+    second: idle001@0.33x_9
+  - first:
+      213: -4321090555569766869
+    second: idle001@0.33x_10
+  - first:
+      213: 6723948734426817640
+    second: idle001@0.33x_11
+  - first:
+      213: -5757565801601140070
+    second: idle001@0.33x_12
+  - first:
+      213: 1380016678661851254
+    second: idle001@0.33x_13
+  - first:
+      213: -2239735012093670890
+    second: idle001@0.33x_14
+  - first:
+      213: -3820828861724432376
+    second: idle001@0.33x_15
+  - first:
+      213: -7271560125569469503
+    second: idle001@0.33x_16
+  - first:
+      213: -5814356615324854278
+    second: idle001@0.33x_17
+  - first:
+      213: -6656343750150638459
+    second: idle001@0.33x_18
+  - first:
+      213: -6216884417988306730
+    second: idle001@0.33x_19
+  - first:
+      213: -4665372545663847552
+    second: idle001@0.33x_20
+  - first:
+      213: -1008068821334472887
+    second: idle001@0.33x_21
+  - first:
+      213: -1261964099337169018
+    second: idle001@0.33x_22
+  - first:
+      213: 8167398303799289193
+    second: idle001@0.33x_23
+  - first:
+      213: 3852991156652931930
+    second: idle001@0.33x_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 130
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: idle001@0.33x_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 539
+        height: 690
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d31205db899bd8af0800000000000000
+      internalID: -392453526849052355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle001@0.33x_1
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 0
+        width: 539
+        height: 690
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11a99809daeb6cae0800000000000000
+      internalID: -1529325370782148079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle001@0.33x_2
+      rect:
+        serializedVersion: 2
+        x: 1078
+        y: 0
+        width: 539
+        height: 690
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19ac04425761461c0800000000000000
+      internalID: -4511456234343183727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: e7888f320f5484df69073129ab9b6eef
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":7.0,"y":1.0},"gridSpriteSize":{"x":539.0,"y":690.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      idle001@0.33x_0: -392453526849052355
+      idle001@0.33x_1: -1529325370782148079
+      idle001@0.33x_2: -4511456234343183727
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
