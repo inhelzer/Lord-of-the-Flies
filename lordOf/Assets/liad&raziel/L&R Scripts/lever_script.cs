@@ -24,7 +24,7 @@ public class lever_script : MonoBehaviour
         {
             if (Objects[i] != null)
             {
-                Objects[i].GetComponent<GameObject>().SetActive(!Objects[i].GetComponent<GameObject>().activeSelf);
+                Objects[i].SetActive(!Objects[i].activeSelf);
             }
         }
     }
