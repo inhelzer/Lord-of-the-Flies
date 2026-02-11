@@ -1,15 +1,17 @@
-using UnityEditor.Experimental.GraphView;
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
-public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
+public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
 {
     [Header("Raziel")]
     Vector3 respawnPosition; // Default in start
 
-    [SerializeField] float respawn_ground; 
+    [SerializeField] float respawn_ground;
+
     Controls controls;
+
     [Header("Movement")]
     public float moveSpeed = 8f;
     public float moveInput;
@@ -32,12 +34,7 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
     public string jump;
     bool isJump = false;
 
-    [Header("walkEffect")]
-    [SerializeField] GameObject spark;
-    [SerializeField] float delay;
-    float sparkTime;
-    public Color sparkColor;
-    public float yShift = -2f;
+
 
     private void Awake()
     {
@@ -72,19 +69,6 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
         else if (moveInput < 0)
             transform.localScale = new Vector3(-1, yLocalScale, 1);  // Facing left
 
-        if (spark != null)
-        {
-            if ((isGrounded) && (moveInput != 0) &&
-                (Time.timeSinceLevelLoad - sparkTime >= Random.Range(delay * 0.6f, delay * 1.3f)))
-            {
-                sparkTime = Time.timeSinceLevelLoad;
-                CreateSpark();
-            }
-        }
-        if (gameObject.transform.position.y <= respawn_ground)
-        {
-            gameObject.transform.position = new Vector2(0,0);
-        }
     }
 
     private void FixedUpdate()
@@ -113,16 +97,6 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
         }
     }
 
-    public void CreateSpark()
-    {
-        GameObject currentSpark =
-        Instantiate(spark, transform.position + new Vector3(moveInput * -0.5f, yShift, 0), Quaternion.identity) as GameObject;
-        currentSpark.GetComponent<SpriteRenderer>().color = sparkColor;
-        currentSpark.GetComponent<Rigidbody2D>().linearVelocity =
-            new Vector2(moveInput * -1, Random.Range(0.7f, 4f));
-        Destroy(currentSpark, 1f);
-    }
-
     public void OnJump(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -136,12 +110,11 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
             }
         }
     }
-    
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("ground"))
         {
-            //Debug.Log(2);
             if (isJump)
             {
                 if (moveInput != 0)
@@ -162,12 +135,14 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
 
     private void OnCollisionExit2D(Collision2D collision)
     {
+        /*
         if (collision.gameObject.CompareTag("ground"))
         {
-            //Debug.Log(3);
             isGrounded = false;
         }
+        */
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Raziel - Added quicksand
@@ -175,6 +150,25 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
         {
             //Debug.Log(0);
             EnterQucicksand();
+        }
+
+        if (collision.gameObject.CompareTag("ground"))
+        {
+            if (isJump)
+            {
+                if (moveInput != 0)
+                {
+                    isJump = false;
+                    ChangeAnimationState(run);
+                }
+                else
+                {
+                    isJump = false;
+                    ChangeAnimationState(idle);
+                }
+            }
+            isGrounded = true;
+            jumpCount = 0;  // Reset jump count when touching ground
         }
     }
 
@@ -185,6 +179,11 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
         {
             //Debug.Log(1);
             ExitQuicksand();
+        }
+
+        if (collision.gameObject.CompareTag("ground"))
+        {
+            isGrounded = false;
         }
     }
 
@@ -200,6 +199,10 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
         controls.GmaeControls.Disable();
     }
 
+    public void OnShot(InputAction.CallbackContext context)
+    {
+        throw new System.NotImplementedException();
+    }
     // Raziel
     public void EnterQucicksand()
     {
@@ -232,11 +235,4 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
     {
         transform.position = respawnPosition;
     }
-
-    // Kfir what the fuck
-    public void OnShot(InputAction.CallbackContext context)
-    {
-        throw new System.NotImplementedException();
-    }
 }
-
