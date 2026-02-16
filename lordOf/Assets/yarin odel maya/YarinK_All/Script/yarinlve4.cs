@@ -20,7 +20,7 @@ public class yarinlve4 : MonoBehaviour
         {
             timer += Time.deltaTime;
 
-            if (timer >= 1f)
+            if (timer >= 2f)
             {
                 Disappear();
             }
