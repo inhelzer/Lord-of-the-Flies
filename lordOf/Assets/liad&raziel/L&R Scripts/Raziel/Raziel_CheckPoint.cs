@@ -3,12 +3,12 @@ using UnityEngine;
 public class Raziel_CheckPoint : MonoBehaviour
 {
     private Vector3 myPosition;
-    Liad_player playerCode;
+    Raziel_BasePlayer playerCode;
     [SerializeField] private GameObject player;
     private void Start()
     {
         myPosition = transform.position;
-        playerCode = player.GetComponent<Liad_player>();
+        playerCode = player.GetComponent<Raziel_BasePlayer>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
