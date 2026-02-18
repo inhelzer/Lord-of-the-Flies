@@ -6,8 +6,6 @@ using UnityEngine.InputSystem;
 public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
 {
     [Header("Raziel")]
-    bool canClimb = false;
-    bool isClimbing = false;
     Vector3 respawnPosition; // Default in start
 
     [SerializeField] float respawn_ground; 
@@ -178,11 +176,6 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
             //Debug.Log(0);
             EnterQucicksand();
         }
-
-        if (collision.gameObject.CompareTag("ladder"))
-        {
-            canClimb = true;
-        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -192,11 +185,6 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
         {
             //Debug.Log(1);
             ExitQuicksand();
-        }
-
-        if (collision.gameObject.CompareTag("ladder"))
-        {
-            canClimb = false;
         }
     }
 
@@ -230,12 +218,6 @@ public class Liad_player : MonoBehaviour, Controls.IGmaeControlsActions
         jumpForce = 20f;
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 4f;
         jumpCount = 0;
-
-    }
-
-    // Raziel
-    public void Climb()
-    {
 
     }
 
