@@ -9,7 +9,7 @@ public class kill1m : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             // טוען מחדש את השלב הנוכחי
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene("maya1");
 
             // אם אתה רוצה גם להעלים את השחקן באותו רגע:
             Destroy(other.gameObject);

@@ -2,15 +2,22 @@ using UnityEngine;
 
 public class flipx : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+    [SerializeField] private GameObject target;
+    private float timer;
+
     void Update()
     {
-        
+        timer += Time.deltaTime;
+
+        if (timer >= 0.1f)
+        {
+            Vector3 scale = target.transform.localScale;
+            scale.x *= -1;
+            target.transform.localScale = scale;
+
+            timer = 0f;
+        }
+
     }
 }
