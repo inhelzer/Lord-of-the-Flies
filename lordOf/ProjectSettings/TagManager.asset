@@ -6,6 +6,9 @@ TagManager:
   tags:
   - ground
   - kill
+  - Spike
+  - BlueBox
+  - rock
   layers:
   - Default
   - TransparentFX
