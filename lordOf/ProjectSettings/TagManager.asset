@@ -18,6 +18,7 @@ TagManager:
   - LaserWarning
   - Wind
   - kill
+  - Jily
   layers:
   - Default
   - TransparentFX
