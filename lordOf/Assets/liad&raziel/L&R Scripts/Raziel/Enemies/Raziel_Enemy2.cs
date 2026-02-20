@@ -120,7 +120,8 @@ public class Raziel_Enemy2 : MonoBehaviour
         {
             canMove = true;
         }
-        else if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("ground"))
+        else if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("ground") &&
+            !collision.gameObject.CompareTag("Wind"))
         {
             SwitchDirection();
         }

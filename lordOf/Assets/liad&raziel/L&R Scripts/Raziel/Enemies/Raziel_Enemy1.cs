@@ -35,7 +35,8 @@ public class Raziel_Enemy1 : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("ground") &&
-            !collision.gameObject.CompareTag("LaserWarning") && !collision.gameObject.CompareTag("Laser"))
+            !collision.gameObject.CompareTag("LaserWarning") && !collision.gameObject.CompareTag("Laser") &&
+            !collision.gameObject.CompareTag("Wind"))
         {
             SwitchDirection();
         }
