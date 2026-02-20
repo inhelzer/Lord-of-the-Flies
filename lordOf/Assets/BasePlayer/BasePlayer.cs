@@ -27,6 +27,7 @@ public class BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
     public string jump;
     public string shot;
     bool isJump = false;
+    public bool isShooting = false;
 
     
 
@@ -72,7 +73,7 @@ public class BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
             }
 
         }
-        if (context.performed)
+        if ((context.performed) && (!isShooting))
         {
             moveInput = context.ReadValue<float>();
             if (!isJump)
@@ -84,7 +85,7 @@ public class BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if ((context.performed) && (!isShooting))
         {
             if (isGrounded && jumpCount < maxJumps - 1)
             {
@@ -143,8 +144,15 @@ public class BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
     {
         if (context.performed)
         {
+            isShooting = true;
             ChangeAnimationState(shot);
+            Invoke("StopShooting", 0.7f);
         }
-        
+    }
+
+    private void StopShooting()
+    {
+        isShooting = false;
+        ChangeAnimationState(idle);
     }
 }

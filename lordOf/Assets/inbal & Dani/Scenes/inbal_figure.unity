@@ -954,6 +954,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 206249913779657822, guid: 065de5bea6b834061b301360eb25296c, type: 3}
+      propertyPath: shot
+      value: P_shot
+      objectReference: {fileID: 0}
     - target: {fileID: 1343060390962931900, guid: 065de5bea6b834061b301360eb25296c, type: 3}
       propertyPath: m_Name
       value: BasePlayer
@@ -1231,6 +1235,10 @@ PrefabInstance:
     - target: {fileID: 2324078303657842493, guid: 52067595d4181414ebb044ecda86098a, type: 3}
       propertyPath: m_Name
       value: SPawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 2324078303657842493, guid: 52067595d4181414ebb044ecda86098a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4726586511030997738, guid: 52067595d4181414ebb044ecda86098a, type: 3}
       propertyPath: m_LocalPosition.x
