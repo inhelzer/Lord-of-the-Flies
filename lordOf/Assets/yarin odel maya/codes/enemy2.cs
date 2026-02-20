@@ -26,9 +26,7 @@ public class enemy2 : MonoBehaviour
         // בדיקה אם האובייקט שנגענו בו הוא השחקן
         if (other.CompareTag("Player"))
         {
-            // הדפסה למסך הבדיקה (Console) כדי לראות שזה עובד
-            Debug.Log("The enemy killed the player!");
-
+          
             // טעינת השלב מחדש
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
