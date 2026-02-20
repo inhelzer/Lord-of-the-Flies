@@ -6,6 +6,8 @@ public class elevator2 : MonoBehaviour
     public float yMove;
     public float speed;
     public bool isPressed = false;
+    private float returnTimer = 0f; // timer to count 3 seconds
+private bool shouldReturn = false;
 
     private float startY;   // נשמור את ה-Y ההתחלתי
     private bool goingUp = true; // בודק אם עולה או יורד
