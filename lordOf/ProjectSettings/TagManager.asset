@@ -18,6 +18,10 @@ TagManager:
   - LaserWarning
   - Wind
   - kill
+  - Bad
+  - Spike
+  - BlueBox
+  - rock
   layers:
   - Default
   - TransparentFX

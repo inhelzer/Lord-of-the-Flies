@@ -98,7 +98,7 @@ public class BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("ground") || collision.gameObject.CompareTag("Rock"))
+        if (collision.gameObject.CompareTag("ground"))
         {
             if (isJump)
             {
