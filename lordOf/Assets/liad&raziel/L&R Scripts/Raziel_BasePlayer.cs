@@ -6,6 +6,10 @@ using UnityEngine.InputSystem;
 
 public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, Controls.IRazielControlsActions
 {
+    [Header("Liad")]
+    [SerializeField] int health;
+    int full_health;
+
     [Header("Raziel")]
     Vector3 respawnPosition; // Default in start
     [SerializeField] float respawn_ground;
@@ -52,6 +56,9 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
 
     private void Start()
     {
+        // Liad
+        full_health = health; 
+
         rb = GetComponent<Rigidbody2D>();
         controls.GmaeControls.Enable();
         controls.RazielControls.Enable();
@@ -64,15 +71,12 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
         isDashing = false;
         dashesLeft = 1;
     }
-
-
-
     private void Update()
     {
         // Raziel added
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SendToCheckpoint();
+            SendToPosition();
         }
 
         if (moveInput > 0)
@@ -146,7 +150,6 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
         }
         */
     }
-
     private void OnCollisionExit2D(Collision2D collision)
     {
         /*
@@ -156,7 +159,6 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
         }
         */
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Raziel - Added quicksand
@@ -168,6 +170,16 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
         }
 
         */
+        // Liad
+        if (collision.gameObject.CompareTag("Bad"))
+        {
+            health = health - 1;
+            if (health < 0)
+            {
+                SendToPosition();
+                health = full_health;
+            }
+        }
         if (collision.gameObject.CompareTag("ground"))
         {
             if (isJump)
@@ -208,7 +220,6 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
         {
             isGrounded = false;
         }
-
         // Wind Checks
         if (collision.gameObject.CompareTag("Wind"))
         {
@@ -258,7 +269,7 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
         this.respawnPosition = respawnPosition;
     }
 
-    public void SendToCheckpoint()
+    public void SendToPosition()
     {
         transform.position = respawnPosition;
     }

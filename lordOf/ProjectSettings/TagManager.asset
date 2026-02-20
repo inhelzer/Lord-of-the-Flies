@@ -12,6 +12,7 @@ TagManager:
   - LaserWarning
   - Wind
   - kill
+  - Bad
   layers:
   - Default
   - TransparentFX
