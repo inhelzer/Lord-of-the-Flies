@@ -72,7 +72,7 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
         // Raziel added
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SendToCheckpoint();
+            SendToPosition();
         }
 
         if (moveInput > 0)
@@ -258,7 +258,7 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
         this.respawnPosition = respawnPosition;
     }
 
-    public void SendToCheckpoint()
+    public void SendToPosition()
     {
         transform.position = respawnPosition;
     }
