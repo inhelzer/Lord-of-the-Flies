@@ -22,6 +22,8 @@ TagManager:
   - Spike
   - BlueBox
   - rock
+  - s
+  - as
   layers:
   - Default
   - TransparentFX
