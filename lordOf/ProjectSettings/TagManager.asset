@@ -10,11 +10,12 @@ TagManager:
   - Laser
   - LaserWarning
   - Wind
+  - kill
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Temp
   - Water
   - UI
   - 
