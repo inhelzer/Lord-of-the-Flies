@@ -6,68 +6,62 @@ public class YZ_Player : MonoBehaviour, Controls.IGmaeControlsActions
     Controls controls;
 
     [Header("Movement")]
-    public float moveSpeed = 8f;
-    public float moveInput;
+    [SerializeField] private float moveSpeed = 8f;
+    private float moveInput;
     private Rigidbody2D rb;
-    float yLocalScale;
+    private float yLocalScale;
 
     [Header("Jumping")]
-    public float jumpForce = 16f;
-    public int maxJumps = 2;
+    [SerializeField] private float jumpForce = 16f;
+    [SerializeField] private int maxJumps = 3;
     private int jumpCount;
-    public bool isGrounded;
+    private bool isJump;
 
-    [Header("anim")]
-    public GameObject body;
-    Animator anim;
-    string currentAnimation;
-    public string idle;
-    public string run;
-    public string jump;
-    bool isJump = false;
+    [Header("Jump Reset")]
+    [SerializeField] private string resetJumpTag = "toJump";
 
-    [Header("walkEffect")]
-    [SerializeField] GameObject spark;
-    [SerializeField] float delay;
-    float sparkTime;
-    public Color sparkColor;
-    public float yShift = -2f;
+    [Header("Animation")]
+    [SerializeField] private GameObject body;
+    [SerializeField] private string idle;
+    [SerializeField] private string run;
+    [SerializeField] private string jump;
+    private Animator anim;
+    private string currentAnimation;
 
-[Header("Shooting")]
-[SerializeField] private Transform firePoint;
-[SerializeField] private GameObject bulletPrefab;
-[SerializeField] private float bulletSpeed = 14f;
-[SerializeField] private float fireCooldown = 0.15f;
-private float lastFireTime;
+    [Header("Shooting")]
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private float bulletSpeed = 14f;
+    [SerializeField] private float fireCooldown = 0.15f;
+    private float lastFireTime;
 
     private void Awake()
     {
         controls = new Controls();
         controls.GmaeControls.SetCallbacks(this);
 
-        // Auto-find FirePoint by name
+        rb = GetComponent<Rigidbody2D>();
+
+        yLocalScale = transform.localScale.y;
+
+        if (body != null)
+            anim = body.GetComponent<Animator>();
+
         if (firePoint == null)
             firePoint = transform.Find("FirePoint");
 
-        // Auto-load bullet prefab from Resources/Bullet.prefab
         if (bulletPrefab == null)
             bulletPrefab = Resources.Load<GameObject>("Bullet");
     }
 
-
-
-    private void Start()
+    private void OnEnable()
     {
-        rb = GetComponent<Rigidbody2D>();
         controls.GmaeControls.Enable();
+    }
 
-        if (body != null)
-        {
-            anim = body.GetComponent<Animator>();
-            ChangeAnimationState(idle);
-        }
-
-        yLocalScale = transform.localScale.y;
+    private void OnDisable()
+    {
+        controls.GmaeControls.Disable();
     }
 
     private void Update()
@@ -76,53 +70,32 @@ private float lastFireTime;
             transform.localScale = new Vector3(1, yLocalScale, 1);
         else if (moveInput < 0)
             transform.localScale = new Vector3(-1, yLocalScale, 1);
-
-        if (spark != null)
-        {
-            if (isGrounded && moveInput != 0 &&
-                (Time.timeSinceLevelLoad - sparkTime >= Random.Range(delay * 0.6f, delay * 1.3f)))
-            {
-                sparkTime = Time.timeSinceLevelLoad;
-                CreateSpark();
-            }
-        }
     }
 
     private void FixedUpdate()
     {
-        // �� ���� linearVelocity ���� ���� ���� ������ - ����.
-        // �� ������� �����:
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
     }
 
     public void OnMoveHorizontal(InputAction.CallbackContext context)
     {
-        // ���� ����, ����� ��������
         if (context.canceled)
-        {
-            moveInput = 0;
-            if (!isJump) ChangeAnimationState(idle);
-            return;
-        }
+            moveInput = 0f;
+        else
+            moveInput = context.ReadValue<float>();
 
-        moveInput = context.ReadValue<float>();
-        if (!isJump)
-        {
-            if (moveInput != 0) ChangeAnimationState(run);
-            else ChangeAnimationState(idle);
-        }
+        UpdateMoveAnim();
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
         if (!context.performed) return;
-
-        // ������� ����� ��� ��� ����� ���: ����� �� maxJumps �� ������
         if (jumpCount >= maxJumps) return;
 
         isJump = true;
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         jumpCount++;
+
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         ChangeAnimationState(jump);
     }
 
@@ -130,75 +103,63 @@ private float lastFireTime;
     {
         if (!context.performed) return;
         if (Time.time < lastFireTime + fireCooldown) return;
+        if (bulletPrefab == null) return;
+        if (firePoint == null) return;
 
         lastFireTime = Time.time;
 
-        if (bulletPrefab == null || firePoint == null) return;
+        float dir = 1f;
+        if (transform.localScale.x < 0)
+            dir = -1f;
 
-        float dir = transform.localScale.x >= 0 ? 1f : -1f;
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        Rigidbody2D brb = bullet.GetComponent<Rigidbody2D>();
 
-        GameObject b = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-        Rigidbody2D brb = b.GetComponent<Rigidbody2D>();
         if (brb != null)
             brb.linearVelocity = new Vector2(dir * bulletSpeed, 0f);
     }
 
-
-    public void CreateSpark()
-    {
-        GameObject currentSpark = Instantiate(
-            spark,
-            transform.position + new Vector3(moveInput * -0.5f, yShift, 0),
-            Quaternion.identity
-        );
-
-        SpriteRenderer sr = currentSpark.GetComponent<SpriteRenderer>();
-        if (sr != null) sr.color = sparkColor;
-
-        Rigidbody2D srb = currentSpark.GetComponent<Rigidbody2D>();
-        if (srb != null)
-        {
-            srb.linearVelocity = new Vector2(moveInput * -1, Random.Range(0.7f, 4f));
-        }
-
-        Destroy(currentSpark, 1f);
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("ground") || collision.gameObject.CompareTag("Rock"))
-        {
-            if (isJump)
-            {
-                isJump = false;
-                if (moveInput != 0) ChangeAnimationState(run);
-                else ChangeAnimationState(idle);
-            }
+        if (collision.collider == null) return;
+        if (!collision.collider.CompareTag(resetJumpTag)) return;
 
-            isGrounded = true;
-            jumpCount = 0;
-        }
+        ResetJumpsAndAnim();
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.CompareTag("ground") || collision.gameObject.CompareTag("Rock"))
-        {
-            isGrounded = false;
-        }
+        if (other == null) return;
+        if (!other.CompareTag(resetJumpTag)) return;
+
+        ResetJumpsAndAnim();
     }
 
-    public void ChangeAnimationState(string newAnimation)
+    private void ResetJumpsAndAnim()
+    {
+        jumpCount = 0;
+        isJump = false;
+
+        UpdateMoveAnim();
+    }
+
+    private void UpdateMoveAnim()
+    {
+        if (isJump) return;
+
+        if (moveInput != 0)
+            ChangeAnimationState(run);
+        else
+            ChangeAnimationState(idle);
+    }
+
+    private void ChangeAnimationState(string newAnimation)
     {
         if (anim == null) return;
+        if (string.IsNullOrEmpty(newAnimation)) return;
         if (currentAnimation == newAnimation) return;
 
         anim.Play(newAnimation);
         currentAnimation = newAnimation;
-    }
-
-    private void OnDestroy()
-    {
-        if (controls != null) controls.GmaeControls.Disable();
     }
 }
