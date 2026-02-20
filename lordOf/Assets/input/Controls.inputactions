@@ -399,6 +399,34 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "RazielControls",
+            "id": "e9ecf737-da2f-496b-a1d3-ebfb5eba02eb",
+            "actions": [
+                {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "ac649774-4cc0-4219-874b-f3fec2c12ad8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9f70e1ca-f744-436c-aa72-93973cac6ef8",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

@@ -1,14 +1,21 @@
 using System;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
+public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, Controls.IRazielControlsActions
 {
     [Header("Raziel")]
     Vector3 respawnPosition; // Default in start
-
     [SerializeField] float respawn_ground;
+    float windSpeed;
+    [SerializeField] float enteredWindSpeed;
+    bool isDashing;
+    [SerializeField] float dashSpeed;
+    [SerializeField] float dashTime;
+    float dashDirection;
+    int dashesLeft;
 
     Controls controls;
 
@@ -40,18 +47,22 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
     {
         controls = new Controls();
         controls.GmaeControls.SetCallbacks(this);
+        controls.RazielControls.SetCallbacks(this);
     }
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         controls.GmaeControls.Enable();
+        controls.RazielControls.Enable();
         anim = body.GetComponent<Animator>();
         ChangeAnimationState(idle);
         yLocalScale = transform.localScale.y;
 
         // Raziel added
         respawnPosition = transform.localPosition;
+        isDashing = false;
+        dashesLeft = 1;
     }
 
 
@@ -73,7 +84,8 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
 
     private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+        if (!isDashing)
+        rb.linearVelocity = new Vector2(moveInput * moveSpeed + windSpeed, rb.linearVelocity.y);
     }
 
     public void OnMoveHorizontal(InputAction.CallbackContext context)
@@ -113,7 +125,8 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("ground"))
+        /*
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             if (isJump)
             {
@@ -131,6 +144,7 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
             isGrounded = true;
             jumpCount = 0;  // Reset jump count when touching ground
         }
+        */
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -146,12 +160,14 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Raziel - Added quicksand
+        /*
         if (collision.gameObject.CompareTag("quicksand"))
         {
             //Debug.Log(0);
             EnterQucicksand();
         }
 
+        */
         if (collision.gameObject.CompareTag("ground"))
         {
             if (isJump)
@@ -169,6 +185,13 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
             }
             isGrounded = true;
             jumpCount = 0;  // Reset jump count when touching ground
+            dashesLeft = 1;
+        }
+
+        // Wind checks
+        if (collision.gameObject.CompareTag("Wind"))
+        {
+            windSpeed = enteredWindSpeed;
         }
     }
 
@@ -185,6 +208,12 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
         {
             isGrounded = false;
         }
+
+        // Wind Checks
+        if (collision.gameObject.CompareTag("Wind"))
+        {
+            windSpeed = 0;
+        }
     }
 
     public void ChangeAnimationState(string newAnimation)
@@ -197,13 +226,14 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
     private void OnDestroy()
     {
         controls.GmaeControls.Disable();
+        controls.RazielControls.Disable();
     }
 
     public void OnShot(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
-    // Raziel
+    // Raziel -
     public void EnterQucicksand()
     {
         moveSpeed = 1f;
@@ -214,7 +244,6 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
         //isJump = false;
     }
 
-    // Raziel
     public void ExitQuicksand()
     {
         moveSpeed = 8f;
@@ -224,15 +253,42 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
 
     }
 
-    // Raziel
     public void SetRespawnPosition(Vector3 respawnPosition)
     {
         this.respawnPosition = respawnPosition;
     }
 
-    // Raziel
     public void SendToCheckpoint()
     {
         transform.position = respawnPosition;
+    }
+
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if (context.performed && !isDashing && dashesLeft >= 1)
+        {
+            dashDirection = transform.localScale.x;
+            StartCoroutine(Dash());
+        }
+    }
+
+    private IEnumerator Dash()
+    {
+        isDashing = true;
+
+        dashesLeft--;
+        float elapsed = 0f;
+
+        while (elapsed < dashTime)
+        {
+            rb.linearVelocity = new Vector2(dashDirection * dashSpeed, rb.linearVelocity.y);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        if (isGrounded)
+            dashesLeft = 1;
+
+        isDashing = false;
     }
 }
