@@ -4,13 +4,23 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - Peror
   - ground
+  - Rock
+  - Wall
+  - Jump
+  - enemy
+  - ground
+  - quicksand
   - Weapon
   - quicksand
   - Laser
   - LaserWarning
   - Wind
   - kill
+  - Spike
+  - BlueBox
+  - rock
   layers:
   - Default
   - TransparentFX
@@ -18,7 +28,7 @@ TagManager:
   - Temp
   - Water
   - UI
-  - 
+  - enemy
   - 
   - 
   - 
