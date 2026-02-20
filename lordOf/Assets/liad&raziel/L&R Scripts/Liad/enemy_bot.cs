@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class enemy_bot : MonoBehaviour
 {
-    [SerializeField] GameObject player;
+    GameObject player;
+    [SerializeField] string playerName;
     [SerializeField] GameObject ball;
     [SerializeField] float max_speed;
     float accelerator = 0;
@@ -12,7 +13,7 @@ public class enemy_bot : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        player = GameObject.Find(playerName);
     }
 
     // Update is called once per frame
