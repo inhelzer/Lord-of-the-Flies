@@ -25,6 +25,7 @@ public class BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
     public string idle;
     public string run;
     public string jump;
+    public string shot;
     bool isJump = false;
 
     
@@ -140,6 +141,10 @@ public class BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
 
     public void OnShot(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        if (context.performed)
+        {
+            ChangeAnimationState(shot);
+        }
+        
     }
 }
