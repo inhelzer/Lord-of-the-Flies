@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Raziel_LaserEnemy : Raziel_Enemy1
 {
-    [SerializeField] Transform playerTransform;
+    Transform playerTransform;
     [SerializeField] float attackRange;
     float deltaFromPlayer;
     bool isAttacking;
@@ -23,6 +23,8 @@ public class Raziel_LaserEnemy : Raziel_Enemy1
 
     private void Start()
     {
+        playerTransform = GameObject.Find("Raziel_BasePlayer Variant").transform;
+
         isAttacking = false;
         laserWarning = transform.Find("LaserWarning").gameObject;
         laser = transform.Find("Laser").gameObject;

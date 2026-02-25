@@ -67,10 +67,14 @@ TagManager:
     locked: 0
   - name: background
     uniqueID: 2488526317
+  - name: Background
     uniqueID: 1659263577
     locked: 0
-  - name: figures
+  - name: Figures
     uniqueID: 2626324439
+    locked: 0
+  - name: Floor
+    uniqueID: 1581953921
     locked: 0
   m_RenderingLayers:
   - Default
