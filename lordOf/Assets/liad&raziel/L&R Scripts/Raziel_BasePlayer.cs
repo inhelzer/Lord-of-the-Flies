@@ -9,6 +9,7 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
     [Header("Liad")]
     [SerializeField] int health;
     int full_health;
+    float delay;
 
     [Header("Raziel")]
     Vector3 respawnPosition; // Default in start
@@ -61,6 +62,7 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
     {
         // Liad
         full_health = health; 
+        delay = Time.timeSinceLevelLoad-1f;
 
         rb = GetComponent<Rigidbody2D>();
         controls.GmaeControls.Enable();
@@ -76,6 +78,12 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
     }
     private void Update()
     {
+        // Liad
+        if (body.GetComponent<SpriteRenderer>().color == Color.red && delay < Time.timeSinceLevelLoad)
+        {
+            body.GetComponent<SpriteRenderer>().color = Color.white;
+        }
+
         // Raziel added
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -153,11 +161,19 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
         // Liad
         if (collision.gameObject.CompareTag("Bad"))
         {
-            health = health - 1;
-            if (health < 0)
+            if (delay < Time.timeSinceLevelLoad)
             {
-                SendToPosition();
-                health = full_health;
+                health = health - 1;
+                if (health <= 0)
+                {
+                    SendToPosition();
+                    health = full_health;
+                }
+                else
+                {
+                    body.GetComponent<SpriteRenderer>().color = Color.red;
+                    delay = Time.timeSinceLevelLoad + 1f;
+                }
             }
         }
         if (collision.gameObject.CompareTag("ground"))
