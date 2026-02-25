@@ -1,3 +1,6 @@
+using Unity.Cinemachine;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -39,6 +42,12 @@ public class Player_REB : MonoBehaviour, Controls.IGmaeControlsActions
         controls = new Controls();
         controls.GmaeControls.SetCallbacks(this);
     }
+    
+    [SerializeField] private AudioClip munch;
+    [SerializeField] private AudioClip eat;
+    [SerializeField] private AudioClip chip;
+
+    AudioClip[] aud;
 
     private void Start()
     {
@@ -47,6 +56,8 @@ public class Player_REB : MonoBehaviour, Controls.IGmaeControlsActions
         anim = body.GetComponent<Animator>();
         ChangeAnimationState(idle);
         yLocalScale = transform.localScale.y;
+
+        aud = new AudioClip[3] { munch, eat, chip };
     }
 
 
@@ -54,9 +65,15 @@ public class Player_REB : MonoBehaviour, Controls.IGmaeControlsActions
     private void Update()
     {
         if (moveInput > 0)
-            transform.localScale = new Vector3(1, yLocalScale, 1);  // Facing right
+        {
+            //transform.position = new Vector3(transform.position.x, transform.position.y, 1);  // Facing right
+            body.GetComponent<SpriteRenderer>().flipX = false;
+        }
         else if (moveInput < 0)
-            transform.localScale = new Vector3(-1, yLocalScale, 1);  // Facing left
+        {
+            //transform.position = new Vector3(transform.position.x, transform.position.y, 1);
+            body.GetComponent<SpriteRenderer>().flipX = true;
+        }
 
         if (spark != null)
         {
@@ -168,12 +185,35 @@ public class Player_REB : MonoBehaviour, Controls.IGmaeControlsActions
         throw new System.NotImplementedException();
     }
 
-    // ????? ??????? ?? ????? ????? ????
-    public void OnCollisionEnter(Collision collision)
+
+
+    
+    int counter = 0;
+    public void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.CompareTag("food"))
+        if (other.gameObject.CompareTag("food"))
         {
+            counter++;
+
+            transform.localScale = new Vector3(transform.localScale.x + 1f,
+                transform.localScale.y + 1f, transform.localScale.z);
+
+            Destroy(other.gameObject);
+
+            AudioClip clipToPlay = aud[Random.Range(0, aud.Length)];
+            body.GetComponent<AudioSource>().PlayOneShot(clipToPlay);
+
+            GetComponent<CinemachineCamera>().Lens.OrthographicSize = 50f * counter;
 
         }
     }
+
+    public Sprite eiffel;
+    public Sprite spaceship;
+    public Sprite plane;
+    public Sprite building;
+    public Sprite spiral;
+    public Sprite sparkle;
+    public Sprite building2;
+    public Sprite bigben;
 }
