@@ -17583,6 +17583,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1656380582}
   - component: {fileID: 1656380583}
+  - component: {fileID: 1656380584}
   m_Layer: 0
   m_Name: "\u05D8\u05DC\u05E4\u05D5\u05DF@0.5x_0"
   m_TagString: Untagged
@@ -17664,6 +17665,52 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!61 &1656380584
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656380581}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 6.9, y: 6.56}
+    newSize: {x: 6.9, y: 6.56}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 6.9, y: 6.56}
+  m_EdgeRadius: 0
 --- !u!1 &1699381472
 GameObject:
   m_ObjectHideFlags: 0
@@ -23729,7 +23776,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3618730884416898597, guid: fe816163cc0b87749b37259faa2c0481, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -23.1
+      value: -36.3
       objectReference: {fileID: 0}
     - target: {fileID: 3618730884416898597, guid: fe816163cc0b87749b37259faa2c0481, type: 3}
       propertyPath: m_LocalPosition.y
@@ -23770,6 +23817,10 @@ PrefabInstance:
     - target: {fileID: 3618730884416898597, guid: fe816163cc0b87749b37259faa2c0481, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7760943353324739873, guid: fe816163cc0b87749b37259faa2c0481, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
