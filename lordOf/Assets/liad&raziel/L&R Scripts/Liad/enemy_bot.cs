@@ -23,7 +23,7 @@ public class enemy_bot : MonoBehaviour
         {
             accelerator = accelerator - (accelerator / 2.0f);
         }
-        else if (player.transform.position.x - gameObject.transform.position.x < 10f && player.transform.position.x - gameObject.transform.position.x > -10f)
+        else if (player.transform.position.x - gameObject.transform.position.x < 20f && player.transform.position.x - gameObject.transform.position.x > -20f)
         {
             direction = math.sqrt(math.pow(player.transform.position.x - gameObject.transform.position.x, 2)) / (player.transform.position.x - gameObject.transform.position.x); // caculating direction from the player
             transform.Translate(direction * Time.deltaTime * accelerator, 0, 0);
@@ -31,6 +31,14 @@ public class enemy_bot : MonoBehaviour
             {
                 accelerator = accelerator + 0.05f;
             }
+        }
+        if (direction > 0)
+        {
+            gameObject.GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else
+        {
+            gameObject.GetComponent<SpriteRenderer>().flipX = false;
         }
         // ball attack
         /*
