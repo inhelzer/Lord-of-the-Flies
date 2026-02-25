@@ -263,6 +263,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Shot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""26886ecd-140f-4d98-955f-c929ebf850ff"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -485,6 +496,34 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""RazielControls"",
+            ""id"": ""e9ecf737-da2f-496b-a1d3-ebfb5eba02eb"",
+            ""actions"": [
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""ac649774-4cc0-4219-874b-f3fec2c12ad8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""9f70e1ca-f744-436c-aa72-93973cac6ef8"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -506,6 +545,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_MouseActions_Movement = m_MouseActions.FindAction("Movement", throwIfNotFound: true);
         m_MouseActions_PointerPosition = m_MouseActions.FindAction("PointerPosition", throwIfNotFound: true);
         m_MouseActions_Attack = m_MouseActions.FindAction("Attack", throwIfNotFound: true);
+        // RazielControls
+        m_RazielControls = asset.FindActionMap("RazielControls", throwIfNotFound: true);
+        m_RazielControls_Dash = m_RazielControls.FindAction("Dash", throwIfNotFound: true);
     }
 
     ~@Controls()
@@ -513,6 +555,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_GmaeControls.enabled, "This will cause a leak and performance issues, Controls.GmaeControls.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_MicroBit.enabled, "This will cause a leak and performance issues, Controls.MicroBit.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_MouseActions.enabled, "This will cause a leak and performance issues, Controls.MouseActions.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_RazielControls.enabled, "This will cause a leak and performance issues, Controls.RazielControls.Disable() has not been called.");
     }
 
     /// <summary>
@@ -960,6 +1003,102 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="MouseActionsActions" /> instance referencing this action map.
     /// </summary>
     public MouseActionsActions @MouseActions => new MouseActionsActions(this);
+
+    // RazielControls
+    private readonly InputActionMap m_RazielControls;
+    private List<IRazielControlsActions> m_RazielControlsActionsCallbackInterfaces = new List<IRazielControlsActions>();
+    private readonly InputAction m_RazielControls_Dash;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "RazielControls".
+    /// </summary>
+    public struct RazielControlsActions
+    {
+        private @Controls m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public RazielControlsActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "RazielControls/Dash".
+        /// </summary>
+        public InputAction @Dash => m_Wrapper.m_RazielControls_Dash;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_RazielControls; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="RazielControlsActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(RazielControlsActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="RazielControlsActions" />
+        public void AddCallbacks(IRazielControlsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_RazielControlsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_RazielControlsActionsCallbackInterfaces.Add(instance);
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="RazielControlsActions" />
+        private void UnregisterCallbacks(IRazielControlsActions instance)
+        {
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="RazielControlsActions.UnregisterCallbacks(IRazielControlsActions)" />.
+        /// </summary>
+        /// <seealso cref="RazielControlsActions.UnregisterCallbacks(IRazielControlsActions)" />
+        public void RemoveCallbacks(IRazielControlsActions instance)
+        {
+            if (m_Wrapper.m_RazielControlsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="RazielControlsActions.AddCallbacks(IRazielControlsActions)" />
+        /// <seealso cref="RazielControlsActions.RemoveCallbacks(IRazielControlsActions)" />
+        /// <seealso cref="RazielControlsActions.UnregisterCallbacks(IRazielControlsActions)" />
+        public void SetCallbacks(IRazielControlsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_RazielControlsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_RazielControlsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="RazielControlsActions" /> instance referencing this action map.
+    /// </summary>
+    public RazielControlsActions @RazielControls => new RazielControlsActions(this);
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "GmaeControls" which allows adding and removing callbacks.
     /// </summary>
@@ -1060,5 +1199,20 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAttack(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "RazielControls" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="RazielControlsActions.AddCallbacks(IRazielControlsActions)" />
+    /// <seealso cref="RazielControlsActions.RemoveCallbacks(IRazielControlsActions)" />
+    public interface IRazielControlsActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "Dash" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDash(InputAction.CallbackContext context);
     }
 }
