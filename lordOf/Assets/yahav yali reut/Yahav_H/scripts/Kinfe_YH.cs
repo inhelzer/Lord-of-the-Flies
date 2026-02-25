@@ -5,7 +5,7 @@ public class Kinfe_YH : MonoBehaviour
 {
     public Vector3 rotationDirection;
     float r_speed = 300;
-    int direction = 4;
+    int direction = 1;
     float timer = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,11 +20,13 @@ public class Kinfe_YH : MonoBehaviour
 
         if (timer + 4 > Time.timeSinceLevelLoad)
         {
-            direction = -4;
+            r_speed = 40;
+            direction = -1;
         }
         else if (timer + 4.4 > Time.timeSinceLevelLoad)
         {
-            direction = 40;
+            r_speed = 300;
+            direction = 1;
         }
         else { timer = Time.timeSinceLevelLoad; }
 

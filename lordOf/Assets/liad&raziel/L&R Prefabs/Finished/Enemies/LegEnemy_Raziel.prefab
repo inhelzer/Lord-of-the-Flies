@@ -67,7 +67,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 2.2243195, y: -0.5941162}
+  m_Offset: {x: 1.993927, y: 0.644577}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -77,7 +77,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.39389038, y: 1.7536011}
+  m_Size: {x: 0.28845215, y: 4.2309875}
   m_EdgeRadius: 0
 --- !u!61 &352423922074053983
 BoxCollider2D:
@@ -636,7 +636,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81a1df591b036a84b8dd3f4cd6360c59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Raziel_Enemy2
-  playerTransform: {fileID: 5953709400108599138, guid: c1b109b14d6821546aa36481f3b0bba5, type: 3}
   aggroRange: 10
   attackRange: 4
   aggroSpeed: 6

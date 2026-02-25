@@ -26,17 +26,22 @@ public class Raziel_Enemy1 : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        /*
         if (collision.gameObject.CompareTag("ground") && !canMove)
         {
             canMove = true;
         }
+        */
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("ground") &&
-            !collision.gameObject.CompareTag("LaserWarning") && !collision.gameObject.CompareTag("Laser") &&
-            !collision.gameObject.CompareTag("Wind"))
+        if (collision.gameObject.CompareTag("ground") && !canMove)
+        {
+            canMove = true;
+        }
+        else if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Wind") &&
+            !collision.gameObject.CompareTag("LaserWarning") && !collision.gameObject.CompareTag("Laser"))
         {
             SwitchDirection();
         }
