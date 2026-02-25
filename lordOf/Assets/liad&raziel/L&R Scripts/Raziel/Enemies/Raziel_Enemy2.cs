@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Raziel_Enemy2 : MonoBehaviour
 {
-    [SerializeField] Transform playerTransform;
+    Transform playerTransform;
     [SerializeField] float aggroRange;
     [SerializeField] float attackRange;
     [SerializeField] float aggroSpeed;
@@ -49,6 +49,8 @@ public class Raziel_Enemy2 : MonoBehaviour
 
     private void Start()
     {
+        playerTransform = GameObject.Find("Raziel_BasePlayer Variant").transform;
+
         animator = GetComponent<Animator>();
         ChangeAnimationState(walk);
     }
@@ -120,8 +122,8 @@ public class Raziel_Enemy2 : MonoBehaviour
         {
             canMove = true;
         }
-        else if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("ground") &&
-            !collision.gameObject.CompareTag("Wind"))
+        else if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Wind") &&
+            !collision.gameObject.CompareTag("LaserWarning") && !collision.gameObject.CompareTag("Laser"))
         {
             SwitchDirection();
         }

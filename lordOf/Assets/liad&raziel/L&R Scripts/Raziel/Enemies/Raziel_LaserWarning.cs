@@ -2,8 +2,13 @@ using UnityEngine;
 
 public class Raziel_LaserWarning : MonoBehaviour
 {
-    [SerializeField] Transform playerTransform;
+    Transform playerTransform;
     Vector3 direction;
+
+    private void Start()
+    {
+        playerTransform = GameObject.Find("Raziel_BasePlayer Variant").transform;
+    }
 
     private void Update()
     {
