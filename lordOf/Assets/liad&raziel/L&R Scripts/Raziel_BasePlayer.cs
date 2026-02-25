@@ -6,6 +6,10 @@ using UnityEngine.InputSystem;
 
 public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, Controls.IRazielControlsActions
 {
+    [Header("Liad")]
+    [SerializeField] int health;
+    int full_health;
+
     [Header("Raziel")]
     Vector3 respawnPosition; // Default in start
     [SerializeField] float respawn_ground;
@@ -55,6 +59,9 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
 
     private void Start()
     {
+        // Liad
+        full_health = health; 
+
         rb = GetComponent<Rigidbody2D>();
         controls.GmaeControls.Enable();
         controls.RazielControls.Enable();
@@ -67,9 +74,6 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
         isDashing = false;
         dashesLeft = 1;
     }
-
-
-
     private void Update()
     {
         // Raziel added
@@ -131,12 +135,10 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
     {
 
     }
-
     private void OnCollisionExit2D(Collision2D collision)
     {
 
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Raziel - Added quicksand
@@ -148,6 +150,16 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
         }
 
         */
+        // Liad
+        if (collision.gameObject.CompareTag("Bad"))
+        {
+            health = health - 1;
+            if (health < 0)
+            {
+                SendToPosition();
+                health = full_health;
+            }
+        }
         if (collision.gameObject.CompareTag("ground"))
         {
             if (isJump)
@@ -188,7 +200,6 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
         {
             isGrounded = false;
         }
-
         // Wind Checks
         if (collision.gameObject.CompareTag("Wind"))
         {
