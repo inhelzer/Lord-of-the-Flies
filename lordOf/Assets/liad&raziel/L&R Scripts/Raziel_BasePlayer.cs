@@ -21,6 +21,7 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
     float dashDirection;
     int dashesLeft;
 
+    bool playerControlling;
     Controls controls;
 
     [Header("Movement")]
@@ -52,6 +53,8 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
         controls = new Controls();
         controls.GmaeControls.SetCallbacks(this);
         controls.RazielControls.SetCallbacks(this);
+
+        playerControlling = true;
     }
 
     private void Start()
@@ -79,6 +82,7 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
             SendToPosition();
         }
 
+
         if (moveInput > 0)
             transform.localScale = new Vector3(1, yLocalScale, 1);  // Facing right
         else if (moveInput < 0)
@@ -89,7 +93,7 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
     private void FixedUpdate()
     {
         if (!isDashing)
-        rb.linearVelocity = new Vector2(moveInput * moveSpeed + windSpeed, rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(moveInput * moveSpeed + windSpeed, rb.linearVelocity.y);
     }
 
     public void OnMoveHorizontal(InputAction.CallbackContext context)
@@ -103,7 +107,7 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
             }
 
         }
-        if (context.performed)
+        if (context.performed && playerControlling)
         {
             moveInput = context.ReadValue<float>();
             if (!isJump)
@@ -115,7 +119,7 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && playerControlling)
         {
             if (isGrounded && jumpCount < maxJumps - 1)
             {
@@ -129,35 +133,11 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        /*
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            if (isJump)
-            {
-                if (moveInput != 0)
-                {
-                    isJump = false;
-                    ChangeAnimationState(run);
-                }
-                else
-                {
-                    isJump = false;
-                    ChangeAnimationState(idle);
-                }
-            }
-            isGrounded = true;
-            jumpCount = 0;  // Reset jump count when touching ground
-        }
-        */
+
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        /*
-        if (collision.gameObject.CompareTag("ground"))
-        {
-            isGrounded = false;
-        }
-        */
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -274,12 +254,20 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
         transform.position = respawnPosition;
     }
 
+    public void SendToPosition(Vector3 position)
+    {
+        transform.position = position;
+    }
+
     public void OnDash(InputAction.CallbackContext context)
     {
-        if (context.performed && !isDashing && dashesLeft >= 1)
+        if (playerControlling)
         {
-            dashDirection = transform.localScale.x;
-            StartCoroutine(Dash());
+            if (context.performed && !isDashing && dashesLeft >= 1)
+            {
+                dashDirection = transform.localScale.x;
+                StartCoroutine(Dash());
+            }
         }
     }
 
@@ -301,5 +289,18 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
             dashesLeft = 1;
 
         isDashing = false;
+    }
+
+    public void GiveControls(bool controls)
+    {
+        playerControlling = controls;
+    }
+
+    public void CheckPlayerConstraints()
+    {
+        if (playerControlling)
+            rb.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
+        else
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
     }
 }
