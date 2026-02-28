@@ -14,6 +14,13 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
     public float moveSpeed = 8f;
     public float moveInput;
     private Rigidbody2D rb;
+    [SerializeField] private float butterDuration = 5f;
+    [SerializeField] private float butterSpeedMultiplier = 1.5f;
+    [SerializeField] private float butterAccelerationControl = 10f;
+    [SerializeField] private float butterDecelerationControl = 1f;
+    private bool isSlipping;
+    private float slipEndTime;
+    private float normalMoveSpeed;
 
     //?????
     [SerializeField] private AudioSource audioSource;
@@ -72,6 +79,7 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
         ChangeAnimationState(idle);
         yLocalScale = transform.localScale.y;
         xLocalScale = transform.localScale.x;
+        normalMoveSpeed = moveSpeed;
     }
 
 
@@ -131,10 +139,26 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
             }
         }
 
+        if (isSlipping && Time.time >= slipEndTime)
+        {
+            isSlipping = false;
+            moveSpeed = normalMoveSpeed;
+        }
     }
 
     private void FixedUpdate()
     {
+        if (isSlipping)
+        {
+            float targetX = moveInput * moveSpeed;
+            bool noInput = Mathf.Abs(moveInput) < 0.01f;
+            bool oppositeDirection = !noInput && Mathf.Sign(moveInput) != Mathf.Sign(rb.linearVelocity.x);
+            float control = (noInput || oppositeDirection) ? butterDecelerationControl : butterAccelerationControl;
+            float smoothX = Mathf.Lerp(rb.linearVelocity.x, targetX, control * Time.fixedDeltaTime);
+            rb.linearVelocity = new Vector2(smoothX, rb.linearVelocity.y);
+            return;
+        }
+
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
     }
 
@@ -196,7 +220,7 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("ground"))
+        if (collision.gameObject.CompareTag("ground") || collision.gameObject.CompareTag("Butter"))
         {
             if (isJump)
             {
@@ -215,6 +239,12 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
             jumpCount = 0;  // Reset jump count when touching ground
         }
 
+        if (collision.gameObject.CompareTag("Butter"))
+        {
+            isSlipping = true;
+            slipEndTime = Time.time + butterDuration;
+            moveSpeed = normalMoveSpeed * butterSpeedMultiplier;
+        }
         if (collision.gameObject.CompareTag("Jump"))
         {
             Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
@@ -230,7 +260,7 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("ground"))
+        if (collision.gameObject.CompareTag("ground") || collision.gameObject.CompareTag("Butter"))
         {
             isGrounded = false;
 
