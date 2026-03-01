@@ -23,4 +23,9 @@ public class Fire_YH : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+    }
 }

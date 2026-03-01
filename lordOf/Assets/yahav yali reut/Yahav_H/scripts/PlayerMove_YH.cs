@@ -36,6 +36,7 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
     public float PerorPower = 0.35f;
     public float jumpPower = 3;
 
+    public ParticleSystem dust;
     [SerializeField] private GameObject effectPrefab;//effect
     bool lostTriggered = false;
     float losttimer;
@@ -150,6 +151,15 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
     {
         if (isSlipping)
         {
+            if (Mathf.Abs(rb.linearVelocity.x) > 0.1f)
+            {
+                Debug.Log("DUST PLAY");
+                CreateDust();
+            }
+            else
+            {
+                StopDust();
+            }
             float targetX = moveInput * moveSpeed;
             bool noInput = Mathf.Abs(moveInput) < 0.01f;
             bool oppositeDirection = !noInput && Mathf.Sign(moveInput) != Mathf.Sign(rb.linearVelocity.x);
@@ -159,6 +169,7 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
             return;
         }
 
+        StopDust();
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
     }
 
@@ -282,5 +293,21 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
     public void OnShot(InputAction.CallbackContext context)
     {
         throw new System.NotImplementedException();
+    }
+
+    void CreateDust()
+    {
+        if (dust != null && !dust.isPlaying)
+        {
+            dust.Play();
+        }
+    }
+
+    void StopDust()
+    {
+        if (dust != null && dust.isPlaying)
+        {
+            dust.Stop();
+        }
     }
 }
