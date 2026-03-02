@@ -51,7 +51,10 @@ public class enemy_bot : MonoBehaviour
             }
         }
         */ 
+
+
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision != player)
