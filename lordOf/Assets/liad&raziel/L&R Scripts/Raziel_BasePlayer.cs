@@ -141,23 +141,6 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
-    }
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // Raziel - Added quicksand
-        /*
-        if (collision.gameObject.CompareTag("quicksand"))
-        {
-            //Debug.Log(0);
-            EnterQucicksand();
-        }
-
-        */
         // Liad
         if (collision.gameObject.CompareTag("Bad"))
         {
@@ -176,6 +159,22 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
                 }
             }
         }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Raziel - Added quicksand
+        /*
+        if (collision.gameObject.CompareTag("quicksand"))
+        {
+            //Debug.Log(0);
+            EnterQucicksand();
+        }
+
+        */
         if (collision.gameObject.CompareTag("ground"))
         {
             if (isJump)
