@@ -82,6 +82,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2095480964599020529}
     m_Modifications:
+    - target: {fileID: 3371090387821197115, guid: fbace7a326ff7bb439eb35d6792c1016, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6040137327127290770, guid: fbace7a326ff7bb439eb35d6792c1016, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6040137327127290770, guid: fbace7a326ff7bb439eb35d6792c1016, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1668642857
+      objectReference: {fileID: 0}
     - target: {fileID: 6218660351070266350, guid: fbace7a326ff7bb439eb35d6792c1016, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -180,7 +192,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 1.9559937, y: -1.0901108}
+  m_Offset: {x: 1.6327362, y: 0.006477356}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -190,7 +202,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.3843994, y: 1.3055878}
+  m_Size: {x: 0.2791443, y: 3.498764}
   m_EdgeRadius: 0
 --- !u!61 &1530983857163500744
 BoxCollider2D:

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6690712931582447863}
   - component: {fileID: 2904742625710828572}
   - component: {fileID: 4379135292513611039}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Up
   m_TagString: Jump
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 5827770216117273598}
   - component: {fileID: 2664595334937050825}
   - component: {fileID: 4185889967573920368}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Ant_Enemey (2)
   m_TagString: enemy
   m_Icon: {fileID: 0}
