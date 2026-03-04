@@ -19,7 +19,7 @@ public class Fork_YH : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
         }
     }
     private void OnTriggerEnter2D(Collider2D other)

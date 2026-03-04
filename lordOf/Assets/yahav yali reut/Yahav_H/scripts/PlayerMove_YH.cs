@@ -38,6 +38,7 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
 
     public ParticleSystem dust;
     [SerializeField] private GameObject effectPrefab;//effect
+    [SerializeField] private GameObject blood;//effect
     bool lostTriggered = false;
     float losttimer;
 
@@ -120,6 +121,9 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
             Instantiate(effectPrefab, transform.position, Quaternion.identity);
             losttimer = Time.timeSinceLevelLoad;
             lostTriggered = true;
+            moveInput = 0f;
+            rb.linearVelocity = Vector2.zero;
+            HideBody();
             audioSource.PlayOneShot(loseClip);
             ChangeAnimationState(non);
         }
@@ -133,7 +137,7 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
         if (spark != null)
         {
             if ((isGrounded) && (moveInput != 0) &&
-                (Time.timeSinceLevelLoad - sparkTime >= Random.Range(delay * 0.6f, delay * 1.3f)))
+                (Time.timeSinceLevelLoad - sparkTime >= Random.Range(delay * 0.1f, delay * 0.2f)))
             {
                 sparkTime = Time.timeSinceLevelLoad;
                 CreateSpark();
@@ -149,11 +153,18 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
 
     private void FixedUpdate()
     {
+        if (lostTriggered)
+        {
+            StopDust();
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
         if (isSlipping)
         {
             if (Mathf.Abs(rb.linearVelocity.x) > 0.1f)
             {
-                Debug.Log("DUST PLAY");
+                //Debug.Log("DUST PLAY");
                 CreateDust();
             }
             else
@@ -267,6 +278,20 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
             Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
             rb.linearVelocity = new Vector2(moveInput * moveSpeed, 35);
         }
+        if (!lostTriggered && collision.gameObject.CompareTag("enemy"))
+        {
+            if (blood != null)
+            {
+                Instantiate(blood, transform.position, Quaternion.identity);
+            }
+            losttimer = Time.timeSinceLevelLoad;
+            lostTriggered = true;
+            moveInput = 0f;
+            rb.linearVelocity = Vector2.zero;
+            HideBody();
+            audioSource.PlayOneShot(loseClip);
+            ChangeAnimationState(non);
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -310,4 +335,21 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
             dust.Stop();
         }
     }
+
+    void HideBody()
+    {
+        if (body == null)
+        {
+            return;
+        }
+
+        SpriteRenderer[] renderers = body.GetComponentsInChildren<SpriteRenderer>(true);
+        foreach (SpriteRenderer sr in renderers)
+        {
+            Color c = sr.color;
+            c.a = 0f;
+            sr.color = c;
+        }
+    }
 }
+
