@@ -235,4 +235,9 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
     {
         transform.position = respawnPosition;
     }
+
+    public void OnBend(InputAction.CallbackContext context)
+    {
+        throw new NotImplementedException();
+    }
 }

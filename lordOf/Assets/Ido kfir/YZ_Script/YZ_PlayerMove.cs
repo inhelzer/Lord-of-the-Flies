@@ -169,5 +169,10 @@ public class YZ_PlayerMove : MonoBehaviour, Controls.IGmaeControlsActions
     {
         throw new System.NotImplementedException();
     }
+
+    public void OnBend(InputAction.CallbackContext context)
+    {
+        throw new System.NotImplementedException();
+    }
 }
 

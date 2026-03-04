@@ -7,6 +7,8 @@ TagManager:
   - ground
   - Rock
   - toJump
+  - Enemy
+  - pBullet
   layers:
   - Default
   - TransparentFX
@@ -14,8 +16,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - Enemy
   - 
   - 
   - 
@@ -43,6 +45,18 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: player
+    uniqueID: 3375582245
+    locked: 0
+  - name: destroyed
+    uniqueID: 4233329279
+    locked: 0
+  - name: enemy
+    uniqueID: 3893511163
+    locked: 0
+  - name: ground
+    uniqueID: 346356921
     locked: 0
   m_RenderingLayers:
   - Default

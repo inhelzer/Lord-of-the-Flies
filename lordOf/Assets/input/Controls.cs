@@ -118,11 +118,20 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Bend"",
+                    ""type"": ""Button"",
+                    ""id"": ""45879af0-9aac-43df-a9ec-4b7278d07869"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
-                    ""name"": ""1D Axis"",
+                    ""name"": ""1D Axis - Arrows"",
                     ""id"": ""14c534a4-2666-4b2e-9b45-a04d74ef36c4"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
@@ -155,7 +164,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""1D Axis"",
+                    ""name"": ""1D Axis - A/D"",
                     ""id"": ""532183fb-84f3-4e08-8b10-26bfa6fa7073"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
@@ -188,7 +197,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""1D Axis"",
+                    ""name"": ""1D Axis - Joystick"",
                     ""id"": ""5aa4f445-ad27-4eb5-98fc-9681227712b3"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
@@ -213,6 +222,39 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""name"": ""positive"",
                     ""id"": ""39bd098c-8d62-48c5-b15c-c1c5513a78f7"",
                     ""path"": ""<Joystick>/stick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""moveHorizontal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis - PS Arrows"",
+                    ""id"": ""797f19bd-18b7-4401-8448-bd48a247b32d"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""moveHorizontal"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""a15a2b7f-390a-4851-ac33-06a98ea9441a"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""moveHorizontal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""0a3336eb-03c8-4ea1-8efa-5975628b2c10"",
+                    ""path"": ""<Gamepad>/dpad/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -255,6 +297,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""3af607f1-1b02-4705-946f-2f1453920cec"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""1a0ea2ad-c138-4f6d-a7ea-d4a5eac155d6"",
                     ""path"": ""<HID::Microntek              USB Joystick          >/button8"",
                     ""interactions"": """",
@@ -266,12 +319,56 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""8688c77a-5b4d-45d3-81dc-681181c42f89"",
+                    ""id"": ""723da55d-73f9-4d47-9dfa-f2320db32e04"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Shot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a70cb45-214a-417b-974a-06c188206a43"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""240828ad-1d37-428b-b444-c4b806e6e1a6"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Bend"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""093ada5d-4dc9-4043-ad12-f9976176a3a2"",
+                    ""path"": ""<Joystick>/trigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Bend"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""71da3628-fc27-47b9-ad6a-a63daa204555"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Bend"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -505,6 +602,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_GmaeControls_moveHorizontal = m_GmaeControls.FindAction("moveHorizontal", throwIfNotFound: true);
         m_GmaeControls_Jump = m_GmaeControls.FindAction("Jump", throwIfNotFound: true);
         m_GmaeControls_Shot = m_GmaeControls.FindAction("Shot", throwIfNotFound: true);
+        m_GmaeControls_Bend = m_GmaeControls.FindAction("Bend", throwIfNotFound: true);
         // MicroBit
         m_MicroBit = asset.FindActionMap("MicroBit", throwIfNotFound: true);
         m_MicroBit_right = m_MicroBit.FindAction("right", throwIfNotFound: true);
@@ -602,6 +700,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_GmaeControls_moveHorizontal;
     private readonly InputAction m_GmaeControls_Jump;
     private readonly InputAction m_GmaeControls_Shot;
+    private readonly InputAction m_GmaeControls_Bend;
     /// <summary>
     /// Provides access to input actions defined in input action map "GmaeControls".
     /// </summary>
@@ -625,6 +724,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "GmaeControls/Shot".
         /// </summary>
         public InputAction @Shot => m_Wrapper.m_GmaeControls_Shot;
+        /// <summary>
+        /// Provides access to the underlying input action "GmaeControls/Bend".
+        /// </summary>
+        public InputAction @Bend => m_Wrapper.m_GmaeControls_Bend;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -660,6 +763,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Shot.started += instance.OnShot;
             @Shot.performed += instance.OnShot;
             @Shot.canceled += instance.OnShot;
+            @Bend.started += instance.OnBend;
+            @Bend.performed += instance.OnBend;
+            @Bend.canceled += instance.OnBend;
         }
 
         /// <summary>
@@ -680,6 +786,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Shot.started -= instance.OnShot;
             @Shot.performed -= instance.OnShot;
             @Shot.canceled -= instance.OnShot;
+            @Bend.started -= instance.OnBend;
+            @Bend.performed -= instance.OnBend;
+            @Bend.canceled -= instance.OnBend;
         }
 
         /// <summary>
@@ -999,6 +1108,13 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnShot(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Bend" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnBend(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "MicroBit" which allows adding and removing callbacks.
