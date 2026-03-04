@@ -3822,9 +3822,9 @@ MonoBehaviour:
   maxJumps: 2
   resetJumpTag: toJump
   body: {fileID: 6461990629910273192}
-  idle: P_idle
-  run: P_walk
-  jump: P_jump
+  idle: S_idle
+  run: S_run
+  jump: S_jump
   firePoint: {fileID: 1347003648}
   bulletPrefab: {fileID: 7290369740598179601, guid: ce3da1ae2a8e4c54c948e85f03026940, type: 3}
   bulletSpeed: 14
@@ -4445,7 +4445,7 @@ Animator:
   m_GameObject: {fileID: 6461990629910273192}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e8eb1c44ee51f4fe1a897fcc7c53bd68, type: 2}
+  m_Controller: {fileID: 9100000, guid: 76025f6257cdf4bde9fc6b4a53d7e911, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
