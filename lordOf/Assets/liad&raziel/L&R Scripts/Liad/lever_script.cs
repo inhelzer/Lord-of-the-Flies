@@ -4,11 +4,11 @@ using UnityEngine.UIElements;
 public class lever_script : MonoBehaviour
 {
     [SerializeField] GameObject[] Objects;
-    [SerializeField] float a;
+    float delay;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-    {   
-        
+    {
+        delay = Time.time;
     }
 
     // Update is called once per frame
@@ -18,8 +18,12 @@ public class lever_script : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        pull_switch();
-        gameObject.GetComponent<Transform>().rotation = new Quaternion(0, 0, gameObject.GetComponent<Transform>().rotation.z * -1, 0.9762961f);
+        if (delay < Time.time)
+        {
+            pull_switch();
+            gameObject.GetComponent<Transform>().rotation = new Quaternion(0, 0, gameObject.GetComponent<Transform>().rotation.z * -1, 0.9762961f);
+            delay = Time.time + 0.5f;
+        }
     }
     private void pull_switch()
     {

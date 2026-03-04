@@ -1,15 +1,28 @@
 using System;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
+public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, Controls.IRazielControlsActions
 {
+    [Header("Liad")]
+    [SerializeField] int health;
+    int full_health;
+    float delay;
+
     [Header("Raziel")]
-    Vector3 respawnPosition; // Default in start
-
+    Vector3 respawnPosition;
     [SerializeField] float respawn_ground;
+    float windSpeed;
+    [SerializeField] float enteredWindSpeed;
+    bool isDashing;
+    [SerializeField] float dashSpeed;
+    [SerializeField] float dashTime;
+    float dashDirection;
+    int dashesLeft;
 
+    bool playerControlling;
     Controls controls;
 
     [Header("Movement")]
@@ -34,46 +47,54 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
     public string jump;
     bool isJump = false;
 
-
-
     private void Awake()
     {
         controls = new Controls();
         controls.GmaeControls.SetCallbacks(this);
+        controls.RazielControls.SetCallbacks(this);
+
+        playerControlling = true;
     }
 
     private void Start()
     {
+        full_health = health;
+        delay = Time.timeSinceLevelLoad - 1f;
+
         rb = GetComponent<Rigidbody2D>();
         controls.GmaeControls.Enable();
+        controls.RazielControls.Enable();
         anim = body.GetComponent<Animator>();
         ChangeAnimationState(idle);
         yLocalScale = transform.localScale.y;
 
-        // Raziel added
         respawnPosition = transform.localPosition;
+        isDashing = false;
+        dashesLeft = 1;
     }
-
-
 
     private void Update()
     {
-        // Raziel added
+        if (body.GetComponent<SpriteRenderer>().color == Color.red && delay < Time.timeSinceLevelLoad)
+        {
+            body.GetComponent<SpriteRenderer>().color = Color.white;
+        }
+
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SendToCheckpoint();
+            SendToPosition();
         }
 
         if (moveInput > 0)
-            transform.localScale = new Vector3(1, yLocalScale, 1);  // Facing right
+            transform.localScale = new Vector3(1, yLocalScale, 1);
         else if (moveInput < 0)
-            transform.localScale = new Vector3(-1, yLocalScale, 1);  // Facing left
-
+            transform.localScale = new Vector3(-1, yLocalScale, 1);
     }
 
     private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+        if (!isDashing)
+            rb.linearVelocity = new Vector2(moveInput * moveSpeed + windSpeed, rb.linearVelocity.y);
     }
 
     public void OnMoveHorizontal(InputAction.CallbackContext context)
@@ -85,9 +106,8 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
             {
                 ChangeAnimationState(idle);
             }
-
         }
-        if (context.performed)
+        if (context.performed && playerControlling)
         {
             moveInput = context.ReadValue<float>();
             if (!isJump)
@@ -99,7 +119,7 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && playerControlling)
         {
             if (isGrounded && jumpCount < maxJumps - 1)
             {
@@ -113,45 +133,32 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("ground"))
+        if (collision.gameObject.CompareTag("Bad"))
         {
-            if (isJump)
+            if (delay < Time.timeSinceLevelLoad)
             {
-                if (moveInput != 0)
+                health = health - 1;
+                if (health <= 0)
                 {
-                    isJump = false;
-                    ChangeAnimationState(run);
+                    SendToPosition();
+                    health = full_health;
                 }
                 else
                 {
-                    isJump = false;
-                    ChangeAnimationState(idle);
+                    body.GetComponent<SpriteRenderer>().color = Color.red;
+                    delay = Time.timeSinceLevelLoad + 1f;
                 }
             }
-            isGrounded = true;
-            jumpCount = 0;  // Reset jump count when touching ground
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        /*
-        if (collision.gameObject.CompareTag("ground"))
-        {
-            isGrounded = false;
-        }
-        */
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Raziel - Added quicksand
-        if (collision.gameObject.CompareTag("quicksand"))
-        {
-            //Debug.Log(0);
-            EnterQucicksand();
-        }
-
         if (collision.gameObject.CompareTag("ground"))
         {
             if (isJump)
@@ -168,22 +175,31 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
                 }
             }
             isGrounded = true;
-            jumpCount = 0;  // Reset jump count when touching ground
+            jumpCount = 0;
+            dashesLeft = 1;
+        }
+
+        if (collision.gameObject.CompareTag("Wind"))
+        {
+            windSpeed = enteredWindSpeed;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        // Raziel - Added quicksand
         if (collision.gameObject.CompareTag("quicksand"))
         {
-            //Debug.Log(1);
             ExitQuicksand();
         }
 
         if (collision.gameObject.CompareTag("ground"))
         {
             isGrounded = false;
+        }
+
+        if (collision.gameObject.CompareTag("Wind"))
+        {
+            windSpeed = 0;
         }
     }
 
@@ -197,13 +213,14 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
     private void OnDestroy()
     {
         controls.GmaeControls.Disable();
+        controls.RazielControls.Disable();
     }
 
     public void OnShot(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
-    // Raziel
+
     public void EnterQucicksand()
     {
         moveSpeed = 1f;
@@ -211,29 +228,74 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 0.005f;
         isGrounded = true;
         jumpCount = -9999;
-        //isJump = false;
     }
 
-    // Raziel
     public void ExitQuicksand()
     {
         moveSpeed = 8f;
         jumpForce = 20f;
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 4f;
         jumpCount = 0;
-
     }
 
-    // Raziel
     public void SetRespawnPosition(Vector3 respawnPosition)
     {
         this.respawnPosition = respawnPosition;
     }
 
-    // Raziel
-    public void SendToCheckpoint()
+    public void SendToPosition()
     {
         transform.position = respawnPosition;
+    }
+
+    public void SendToPosition(Vector3 position)
+    {
+        transform.position = position;
+    }
+
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if (playerControlling)
+        {
+            if (context.performed && !isDashing && dashesLeft >= 1)
+            {
+                dashDirection = transform.localScale.x;
+                StartCoroutine(Dash());
+            }
+        }
+    }
+
+    private IEnumerator Dash()
+    {
+        isDashing = true;
+
+        dashesLeft--;
+        float elapsed = 0f;
+
+        while (elapsed < dashTime)
+        {
+            rb.linearVelocity = new Vector2(dashDirection * dashSpeed, rb.linearVelocity.y);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        if (isGrounded)
+            dashesLeft = 1;
+
+        isDashing = false;
+    }
+
+    public void GiveControls(bool controls)
+    {
+        playerControlling = controls;
+    }
+
+    public void CheckPlayerConstraints()
+    {
+        if (playerControlling)
+            rb.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
+        else
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
     }
 
     public void OnBend(InputAction.CallbackContext context)

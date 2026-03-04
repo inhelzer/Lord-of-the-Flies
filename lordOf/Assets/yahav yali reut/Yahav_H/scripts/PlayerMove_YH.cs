@@ -19,6 +19,7 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
     [SerializeField] private AudioSource audioSource;
 
     [SerializeField] private AudioClip eat;
+    [SerializeField] private AudioClip jily;
     [SerializeField] private AudioClip loseClip;
 
     float yLocalScale;
@@ -217,7 +218,13 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
         if (collision.gameObject.CompareTag("Jump"))
         {
             Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
-            rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(moveInput * moveSpeed, 25);
+        }
+        if (collision.gameObject.CompareTag("Jily"))
+        {
+            audioSource.PlayOneShot(jily);
+            Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
+            rb.linearVelocity = new Vector2(moveInput * moveSpeed, 35);
         }
     }
 

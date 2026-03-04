@@ -4,20 +4,49 @@
 TagManager:
   serializedVersion: 3
   tags:
+<<<<<<< HEAD
   - ground
   - Rock
   - toJump
   - Enemy
   - pBullet
+=======
+  - Peror
+  - ground
+  - Rock
+  - Wall
+  - Jump
+  - enemy
+  - ground
+  - quicksand
+  - Weapon
+  - quicksand
+  - Laser
+  - LaserWarning
+  - Wind
+  - kill
+  - Jily
+  - Bad
+  - Spike
+  - BlueBox
+  - rock
+  - s
+  - as
+>>>>>>> e67351fd0753fc3e9466579d8410c1770b9cceaa
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Temp
   - Water
   - UI
+<<<<<<< HEAD
   - Player
   - Enemy
+=======
+  - enemy
+  - 
+>>>>>>> e67351fd0753fc3e9466579d8410c1770b9cceaa
   - 
   - 
   - 
@@ -46,6 +75,7 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+<<<<<<< HEAD
   - name: player
     uniqueID: 3375582245
     locked: 0
@@ -57,6 +87,16 @@ TagManager:
     locked: 0
   - name: ground
     uniqueID: 346356921
+=======
+  - name: Background
+    uniqueID: 1659263577
+    locked: 0
+  - name: Figures
+    uniqueID: 2626324439
+    locked: 0
+  - name: Floor
+    uniqueID: 1581953921
+>>>>>>> e67351fd0753fc3e9466579d8410c1770b9cceaa
     locked: 0
   m_RenderingLayers:
   - Default

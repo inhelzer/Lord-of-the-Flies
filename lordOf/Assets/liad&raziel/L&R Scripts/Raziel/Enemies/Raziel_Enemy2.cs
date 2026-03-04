@@ -3,23 +3,32 @@ using UnityEngine;
 
 public class Raziel_Enemy2 : MonoBehaviour
 {
-    [SerializeField] Transform playerTransform;
+    Transform playerTransform;
     [SerializeField] float aggroRange;
     [SerializeField] float attackRange;
     [SerializeField] float aggroSpeed;
     float deltaFromPlayer;
-    bool aggroed;
-    bool attacking;
-    bool mayRoam;
+    [SerializeField] bool aggroed;
+    [SerializeField] bool attacking;
+    [SerializeField] bool mayRoam;
     [SerializeField] float attackDuration;
 
+    [Header("Animation")]
+    Animator animator;
+    string currentAnimation;
+    public string walk;
+    public string startAttack;
+    public string attack;
+
+    /*
     [SerializeField] GameObject weapon;
     [SerializeField] float weaponDeltaY;
     [SerializeField] float weaponDeltaX;
     Vector3 weaponDestination;
+    */
 
     [SerializeField] float speed;
-    Vector2 direction;
+    float direction;
     Rigidbody2D rb2d;
     float yRotation;
     bool canMove;
@@ -27,7 +36,7 @@ public class Raziel_Enemy2 : MonoBehaviour
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        direction = new Vector2(1, 0);
+        direction = 1;
         yRotation = 0;
 
         canMove = false;
@@ -35,29 +44,39 @@ public class Raziel_Enemy2 : MonoBehaviour
         aggroed = false;
         attacking = false;
 
-        weaponDestination = new Vector3();
+        //weaponDestination = new Vector3();
     }
 
+    private void Start()
+    {
+        playerTransform = GameObject.Find("Raziel_BasePlayer Variant").transform;
+
+        animator = GetComponent<Animator>();
+        ChangeAnimationState(walk);
+    }
     private void Update()
     {
-        AttractWeapon();
+        //AttractWeapon();
 
-        deltaFromPlayer = Mathf.Abs(transform.position.x - playerTransform.position.x);
-        if (deltaFromPlayer < aggroRange && playerTransform.position.y >= transform.position.y && playerTransform.position.y < transform.position.y + aggroRange)
+        if (!attacking)
         {
-            mayRoam = false;
-            if (deltaFromPlayer < attackRange)
+            deltaFromPlayer = Mathf.Abs(transform.position.x - playerTransform.position.x);
+            if (deltaFromPlayer < aggroRange && playerTransform.position.y >= transform.position.y && playerTransform.position.y < transform.position.y + aggroRange)
             {
-                aggroed = false;
+                mayRoam = false;
+                if (deltaFromPlayer < attackRange)
+                {
+                    aggroed = false;
+                }
+                else
+                {
+                    aggroed = true;
+                }
             }
-            else
+            else if (!mayRoam)
             {
-                aggroed = true;
+                mayRoam = true;
             }
-        }
-        else if (!mayRoam)
-        {
-            mayRoam = true;
         }
     }
 
@@ -80,18 +99,47 @@ public class Raziel_Enemy2 : MonoBehaviour
         }
     }
 
+    /*
     private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.otherCollider.CompareTag("Weapon"))
+            return;
+
+        if (collision.gameObject.CompareTag("ground") && !canMove)
+        {
+            canMove = true;
+        }
+        else if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("ground"))
+        {
+            SwitchDirection();
+        }
+    }
+    */
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("ground") && !canMove)
         {
             canMove = true;
         }
-        if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("ground"))
+        else if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Wind") &&
+            !collision.gameObject.CompareTag("LaserWarning") && !collision.gameObject.CompareTag("Laser"))
         {
             SwitchDirection();
         }
     }
+
+    /*
     private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("ground"))
+        {
+            SwitchDirection();
+        }
+    }
+    */
+
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("ground"))
         {
@@ -101,30 +149,48 @@ public class Raziel_Enemy2 : MonoBehaviour
 
     void Move()
     {
-        rb2d.MovePosition(rb2d.position + direction * speed * Time.fixedDeltaTime);
+        rb2d.linearVelocityX = direction * speed;
+    }
+
+    void Move(float speed)
+    {
+        rb2d.linearVelocityX = direction * speed;
     }
 
     void MoveTowardsPlayer()
     {
-        if (playerTransform.position.x < transform.position.x && direction.x == 1 || playerTransform.position.x > transform.position.x && direction.x == -1)
+        if (playerTransform.position.x < transform.position.x && direction == 1 || playerTransform.position.x > transform.position.x && direction == -1)
         {
-            direction = -direction;
+            //direction = -direction;
+            SwitchDirection();
         }
-        
-        rb2d.MovePosition(rb2d.position + direction * aggroSpeed * Time.fixedDeltaTime);
+
+        Move(aggroSpeed);
     }
 
     private IEnumerator Attack()
     {
         attacking = true;
-        weapon.SetActive(true);
+        //weapon.SetActive(true);
+
+        /*
+        ChangeAnimationState(startAttack);
+        yield return new WaitUntil(() =>
+        animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f &&
+        !animator.IsInTransition(0));
+        */
+
+
+        ChangeAnimationState(attack);
 
         yield return new WaitForSeconds(attackDuration);
 
-        weapon.SetActive(false);
+        //weapon.SetActive(false);
+        ChangeAnimationState(walk);
         attacking = false;
     }
 
+    /*
     void AttractWeapon()
     {
         if (direction.x == 1)
@@ -134,6 +200,7 @@ public class Raziel_Enemy2 : MonoBehaviour
 
         weapon.transform.position = weaponDestination;
     }
+    */
 
     void SwitchDirection()
     {
@@ -142,5 +209,12 @@ public class Raziel_Enemy2 : MonoBehaviour
         if (yRotation == 360f)
             yRotation = 0;
         transform.rotation = Quaternion.Euler(0, yRotation, 0);
+    }
+
+    public void ChangeAnimationState(string newAnimation)
+    {
+        if (currentAnimation == newAnimation) return;
+        animator.Play(newAnimation);
+        currentAnimation = newAnimation;
     }
 }

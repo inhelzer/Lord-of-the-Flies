@@ -233,7 +233,11 @@
                 },
                 {
                     "name": "",
+<<<<<<< HEAD
                     "id": "723da55d-73f9-4d47-9dfa-f2320db32e04",
+=======
+                    "id": "26886ecd-140f-4d98-955f-c929ebf850ff",
+>>>>>>> e67351fd0753fc3e9466579d8410c1770b9cceaa
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
@@ -241,6 +245,7 @@
                     "action": "Shot",
                     "isComposite": false,
                     "isPartOfComposite": false
+<<<<<<< HEAD
                 },
                 {
                     "name": "",
@@ -285,6 +290,8 @@
                     "action": "Bend",
                     "isComposite": false,
                     "isPartOfComposite": false
+=======
+>>>>>>> e67351fd0753fc3e9466579d8410c1770b9cceaa
                 }
             ]
         },
@@ -505,6 +512,34 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "RazielControls",
+            "id": "e9ecf737-da2f-496b-a1d3-ebfb5eba02eb",
+            "actions": [
+                {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "ac649774-4cc0-4219-874b-f3fec2c12ad8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9f70e1ca-f744-436c-aa72-93973cac6ef8",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

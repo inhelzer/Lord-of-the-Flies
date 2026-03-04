@@ -3,15 +3,15 @@ using UnityEngine;
 public class Raziel_Enemy1 : MonoBehaviour
 {
     [SerializeField] float speed;
-    Vector2 direction;
+    [SerializeField] protected float direction;
     Rigidbody2D rb2d;
-    float yRotation;
+    protected float yRotation;
     bool canMove;
 
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        direction = new Vector2 (1, 0);
+        direction = 1;
         yRotation = 0;
         canMove = false;
     }
@@ -26,18 +26,28 @@ public class Raziel_Enemy1 : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        /*
         if (collision.gameObject.CompareTag("ground") && !canMove)
         {
             canMove = true;
         }
-        
-        if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("ground"))
+        */
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("ground") && !canMove)
+        {
+            canMove = true;
+        }
+        else if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Wind") &&
+            !collision.gameObject.CompareTag("LaserWarning") && !collision.gameObject.CompareTag("Laser"))
         {
             SwitchDirection();
         }
-        
     }
-    private void OnCollisionExit2D(Collision2D collision)
+
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("ground"))
         {
@@ -47,12 +57,12 @@ public class Raziel_Enemy1 : MonoBehaviour
 
     void Move()
     {
-        rb2d.MovePosition(rb2d.position + direction * speed * Time.fixedDeltaTime);
+        rb2d.linearVelocityX = direction * speed;
     }
     
-    void SwitchDirection()
+    protected virtual void SwitchDirection()
     {
-        direction = -direction;
+        direction = -1 * direction;
             yRotation += 180f;
             if (yRotation == 360f)
                 yRotation = 0;
