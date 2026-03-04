@@ -239,6 +239,20 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
             audioSource.PlayOneShot(eat);
 
         }
+        if (!lostTriggered && other.gameObject.CompareTag("enemy"))
+        {
+            if (blood != null)
+            {
+                Instantiate(blood, transform.position, Quaternion.identity);
+            }
+            losttimer = Time.timeSinceLevelLoad;
+            lostTriggered = true;
+            moveInput = 0f;
+            rb.linearVelocity = Vector2.zero;
+            HideBody();
+            audioSource.PlayOneShot(loseClip);
+            ChangeAnimationState(non);
+        }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
