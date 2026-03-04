@@ -76,8 +76,17 @@ public class YZ_Player : MonoBehaviour, Controls.IGmaeControlsActions
         hasWeapon = (playerWeapon != null && playerWeapon.activeSelf);
     }
 
-    private void OnEnable() => controls.GmaeControls.Enable();
-    private void OnDisable() => controls.GmaeControls.Disable();
+    private void OnEnable()
+    {
+        if (controls != null)
+            controls.GmaeControls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        if (controls != null)
+            controls.GmaeControls.Disable();
+    }
 
     private void Update()
     {
