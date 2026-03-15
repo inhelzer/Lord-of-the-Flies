@@ -1,4 +1,4 @@
-using Unity.Cinemachine;
+﻿using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -18,9 +18,16 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
     [SerializeField] private float butterSpeedMultiplier = 1.5f;
     [SerializeField] private float butterAccelerationControl = 10f;
     [SerializeField] private float butterDecelerationControl = 1f;
+    [Header("Slope Slip")]
+    [SerializeField] private float minSlopeAngleForBoost = 20f;
+    [SerializeField] private float maxSlopeAngle = 60f;
+    [SerializeField] private float slopeGravityMultiplier = 3.5f;
+    [SerializeField] private float uphillBrakeStrength = 0.35f;
+    [SerializeField] private float maxSlopeSpeedMultiplier = 3.5f;
     private bool isSlipping;
     private float slipEndTime;
     private float normalMoveSpeed;
+    private Vector2 groundNormal = Vector2.up;
 
     //?????
     [SerializeField] private AudioSource audioSource;
@@ -171,12 +178,35 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
             {
                 StopDust();
             }
-            float targetX = moveInput * moveSpeed;
-            bool noInput = Mathf.Abs(moveInput) < 0.01f;
-            bool oppositeDirection = !noInput && Mathf.Sign(moveInput) != Mathf.Sign(rb.linearVelocity.x);
-            float control = (noInput || oppositeDirection) ? butterDecelerationControl : butterAccelerationControl;
-            float smoothX = Mathf.Lerp(rb.linearVelocity.x, targetX, control * Time.fixedDeltaTime);
-            rb.linearVelocity = new Vector2(smoothX, rb.linearVelocity.y);
+            float slopeAngle = Vector2.Angle(groundNormal, Vector2.up);
+            float slopeT = Mathf.InverseLerp(minSlopeAngleForBoost, maxSlopeAngle, slopeAngle);
+
+            Vector2 downhill = new Vector2(groundNormal.y, -groundNormal.x);
+            if (Vector2.Dot(downhill, Vector2.down) < 0f)
+            {
+                downhill *= -1f;
+            }
+
+            float slopeGravityForce = rb.gravityScale * Physics2D.gravity.magnitude * slopeGravityMultiplier * slopeT;
+            rb.AddForce(downhill.normalized * slopeGravityForce, ForceMode2D.Force);
+
+            float dynamicMaxSpeed = moveSpeed * Mathf.Lerp(1f, maxSlopeSpeedMultiplier, slopeT);
+            float downhillVelocity = Vector2.Dot(rb.linearVelocity, downhill.normalized);
+            float downhillInput = Vector2.Dot(new Vector2(moveInput, 0f), downhill.normalized);
+
+            if (downhillInput < 0f)
+            {
+                downhillVelocity += downhillInput * moveSpeed * uphillBrakeStrength * Time.fixedDeltaTime;
+                downhillVelocity = Mathf.Max(0f, downhillVelocity);
+            }
+            else if (downhillInput > 0f)
+            {
+                downhillVelocity += downhillInput * moveSpeed * butterAccelerationControl * Time.fixedDeltaTime;
+            }
+
+            downhillVelocity = Mathf.Clamp(downhillVelocity, 0f, dynamicMaxSpeed);
+            Vector2 slopeVelocity = downhill.normalized * downhillVelocity;
+            rb.linearVelocity = new Vector2(slopeVelocity.x, rb.linearVelocity.y);
             return;
         }
 
@@ -317,6 +347,14 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
         }
     }
 
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if ((collision.gameObject.CompareTag("ground") || collision.gameObject.CompareTag("Butter")) && collision.contactCount > 0)
+        {
+            groundNormal = collision.GetContact(0).normal;
+        }
+    }
+
     public void ChangeAnimationState(string newAnimation)
     {
         if (currentAnimation == newAnimation) return;
@@ -371,4 +409,6 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
         }
     }
 }
+
+
 

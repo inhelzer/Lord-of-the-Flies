@@ -3,7 +3,20 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - ground
+  - Laser
+  - LaserWarning
+  - Enemy
+  - Bad
+  - Weapon
+  - pBullet
+  - Jily
+  - Wall
+  - enemy
+  - Jump
+  - Butter
+  - Peror
   layers:
   - Default
   - TransparentFX
@@ -11,7 +24,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Ant
   - 
   - 
   - 
