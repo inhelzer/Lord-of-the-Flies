@@ -7,6 +7,17 @@ TagManager:
   - toJump
   - pBullet
   - Enemy
+  - ground
+  - Laser
+  - LaserWarning
+  - Bad
+  - Weapon
+  - Jily
+  - Wall
+  - enemy
+  - Jump
+  - Butter
+  - Peror
   layers:
   - Default
   - TransparentFX
@@ -40,6 +51,7 @@ TagManager:
   - 
   - 
   - 
+  - Ant-
   m_SortingLayers:
   - name: Default
     uniqueID: 0
@@ -51,4 +63,5 @@ TagManager:
     uniqueID: 36906987
     locked: 0
   m_RenderingLayers:
+  - Default
   - Default
