@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 010d17b069a00fd4ba0364a4b65a129d
+guid: 9396bef73050f8f42a1da14d4177f419
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5808964920810586849
-    second: groundGaza@0.33x_0
+      213: 4719582235430759037
+    second: fill_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: groundGaza@0.33x_0
+      name: fill_0
       rect:
         serializedVersion: 2
-        x: 32
-        y: 60
-        width: 1714
-        height: 84
+        x: 19
+        y: 27
+        width: 596
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f1d31668e29626fa0800000000000000
-      internalID: -5808964920810586849
+      spriteID: d7a2817a9035f7140800000000000000
+      internalID: 4719582235430759037
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      groundGaza@0.33x_0: -5808964920810586849
+      fill_0: 4719582235430759037
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

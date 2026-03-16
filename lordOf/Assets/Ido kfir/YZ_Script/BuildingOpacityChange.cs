@@ -3,12 +3,13 @@ using UnityEngine;
 public class BuildingOpacityChange : MonoBehaviour
 {
     [SerializeField] private string playerTag = "Player";
-    [SerializeField] private SpriteRenderer sprite;
 
+    private SpriteRenderer sprite;
     private Color originalColor;
 
     private void Start()
     {
+        sprite = GetComponent<SpriteRenderer>();
         originalColor = sprite.color;
     }
 
@@ -16,7 +17,6 @@ public class BuildingOpacityChange : MonoBehaviour
     {
         if (!other.CompareTag(playerTag)) return;
 
-        // Alpha = 200 מתוך 255
         sprite.color = new Color(
             originalColor.r,
             originalColor.g,
@@ -29,7 +29,6 @@ public class BuildingOpacityChange : MonoBehaviour
     {
         if (!other.CompareTag(playerTag)) return;
 
-        // מחזיר לאטימות מלאה
         sprite.color = originalColor;
     }
 }

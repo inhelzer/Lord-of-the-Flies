@@ -57,6 +57,21 @@ public class YZ_Player : MonoBehaviour, Controls.IGmaeControlsActions
     private Transform bodyT;
     private Vector3 bodyNormalScale;
 
+    // מד חיים
+    [SerializeField] private float maxHealth = 100f;
+    [SerializeField] private float damage = 5f;
+    [SerializeField] private HealthBar healthBarUI;
+
+    private float currentHealth;
+
+    private void Start()
+    {
+        currentHealth = maxHealth;
+
+        if (healthBarUI != null)
+            healthBarUI.SetHealthInstant(currentHealth, maxHealth);
+    }
+
     private void Awake()
     {
         controls = new Controls();
@@ -211,6 +226,7 @@ public class YZ_Player : MonoBehaviour, Controls.IGmaeControlsActions
     {
         if (other == null) return;
 
+        // איסוף נשק
         if (other.gameObject == weaponPickup)
         {
             EnableWeapon();
@@ -218,8 +234,19 @@ public class YZ_Player : MonoBehaviour, Controls.IGmaeControlsActions
             return;
         }
 
-        if (!other.CompareTag(resetJumpTag)) return;
-        ResetJumpsAndAnim();
+        // איפוס קפיצות
+        if (other.CompareTag(resetJumpTag))
+        {
+            ResetJumpsAndAnim();
+            return;
+        }
+
+        // פגיעה מכדור אויב
+        if (other.CompareTag("EnemyBullet"))
+        {
+            TakeDamage(damage);
+            Destroy(other.gameObject);
+        }
     }
 
     private void ResetJumpsAndAnim()
@@ -244,4 +271,36 @@ public class YZ_Player : MonoBehaviour, Controls.IGmaeControlsActions
         anim.Play(newAnimation);
         currentAnimation = newAnimation;
     }
+
+    // הורדת חיים
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+
+        if (healthBarUI != null)
+            healthBarUI.SetHealth(currentHealth, maxHealth);
+
+        if (currentHealth <= 0f)
+            Die();
+    }
+
+    // הוספת חיים
+    public void Heal(float amount)
+    {
+        currentHealth += amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+
+        if (healthBarUI != null)
+            healthBarUI.SetHealth(currentHealth, maxHealth);
+    }
+
+    // שחקן מת
+    private void Die()
+    {
+        //Debug.Log("Player died");
+        Destroy(gameObject);
+    }
+
 }
+
