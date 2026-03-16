@@ -48,7 +48,6 @@ public class YZ_Player : MonoBehaviour, Controls.IGmaeControlsActions
     [SerializeField] private float maxBendTime = 1.5f;                 // אחרי כמה זמן משתחרר לבד
     [SerializeField] private float bendCooldown = 1.0f;                // זמן המתנה בין Bend
 
-    private bool bendHeld;
     private bool isBending;
     private float bendTimer;
     private float nextBendAllowedTime;
@@ -162,8 +161,6 @@ public class YZ_Player : MonoBehaviour, Controls.IGmaeControlsActions
     {
         if (context.performed)
         {
-            bendHeld = true;
-
             // מתחיל רק אם קולדאון עבר
             if (Time.time >= nextBendAllowedTime)
             {
@@ -174,7 +171,6 @@ public class YZ_Player : MonoBehaviour, Controls.IGmaeControlsActions
 
         if (context.canceled)
         {
-            bendHeld = false;
             StopBend();
         }
     }
