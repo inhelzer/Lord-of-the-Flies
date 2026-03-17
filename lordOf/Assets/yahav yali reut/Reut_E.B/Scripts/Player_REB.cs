@@ -205,6 +205,8 @@ public class Player_REB : MonoBehaviour, Controls.IGmaeControlsActions
 
             GetComponent<CinemachineCamera>().Lens.OrthographicSize = 50f * counter;
 
+            GetComponent<Rigidbody2D>().gravityScale = GetComponent<Rigidbody2D>().gravityScale + 1;
+
         }
     }
 

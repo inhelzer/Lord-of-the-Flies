@@ -40505,7 +40505,7 @@ Transform:
   m_GameObject: {fileID: 864875506}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 90.26, y: -16.22, z: 0}
+  m_LocalPosition: {x: 91.7, y: -16.22, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -40642,7 +40642,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -5033765809227898745, guid: 85250849f6ccc9f4fa14b5d4653a5d31, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -40661,7 +40661,7 @@ Transform:
   m_GameObject: {fileID: 940948728}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 34.2, y: -3.2, z: 0}
+  m_LocalPosition: {x: -11.8, y: 7.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -61018,7 +61018,7 @@ Transform:
   m_GameObject: {fileID: 1297557476}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.6, y: -16.2, z: 0}
+  m_LocalPosition: {x: -1.1, y: -16.2, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -67044,7 +67044,7 @@ Transform:
   m_GameObject: {fileID: 1684843012}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.03489949, w: 0.99939084}
-  m_LocalPosition: {x: 13.38, y: -13.91, z: 0}
+  m_LocalPosition: {x: 13.32, y: -4.76, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -67138,7 +67138,7 @@ Transform:
   m_GameObject: {fileID: 1699381472}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: -21.52, z: -10}
+  m_LocalPosition: {x: -2, y: 1.6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -67381,7 +67381,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 45, y: -30.8, z: 0}
-  m_LocalScale: {x: 140, y: 20, z: 1}
+  m_LocalScale: {x: 140, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -67624,7 +67624,7 @@ Transform:
   m_GameObject: {fileID: 1765435115}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: -21.52, z: -10}
+  m_LocalPosition: {x: -2, y: 1.6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -82753,7 +82753,7 @@ Transform:
   m_GameObject: {fileID: 2048329359}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 43.9, y: -16.22, z: 0}
+  m_LocalPosition: {x: 45.46, y: -16.22, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -82959,7 +82959,7 @@ Transform:
   m_GameObject: {fileID: 989429842665122971}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: -23.52, z: 0}
+  m_LocalPosition: {x: -4, y: -0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -83021,7 +83021,7 @@ Transform:
   m_GameObject: {fileID: 7619906387610678685}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -24.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -83298,12 +83298,12 @@ MonoBehaviour:
   chip: {fileID: 8300000, guid: 40639a0f1ffb6094591a85030df45fea, type: 3}
   eiffel: {fileID: -2726517657836124694, guid: 85250849f6ccc9f4fa14b5d4653a5d31, type: 3}
   spaceship: {fileID: 1273521874970503620, guid: b5d1c66032711bc4ea0df80e9dc70381, type: 3}
-  plane: {fileID: 7273715560010668545, guid: 85250849f6ccc9f4fa14b5d4653a5d31, type: 3}
-  building: {fileID: 4334762076779417051, guid: 85250849f6ccc9f4fa14b5d4653a5d31, type: 3}
-  spiral: {fileID: 21300000, guid: fcc148d083062124789ee5dbe39b3bae, type: 3}
+  plane: {fileID: 0}
+  building: {fileID: 0}
+  spiral: {fileID: 0}
   sparkle: {fileID: 1810282850767875196, guid: b5d1c66032711bc4ea0df80e9dc70381, type: 3}
   building2: {fileID: -8400026313531373926, guid: 85250849f6ccc9f4fa14b5d4653a5d31, type: 3}
-  bigben: {fileID: 7357463629525551998, guid: 85250849f6ccc9f4fa14b5d4653a5d31, type: 3}
+  bigben: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

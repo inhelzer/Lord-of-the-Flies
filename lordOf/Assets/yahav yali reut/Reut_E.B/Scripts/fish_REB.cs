@@ -1,50 +1,35 @@
 using UnityEngine;
+using System.Collections;
 
 public class fish_REB : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
-    
-    float interval = 2.3f;  
-    float timer = 0f;
-
-    float moveDuration = 0.2f;  
-    float moveTimer = 0f;
-
-    bool movingLeft = false;
-
-    // Update is called once per frame
-    void Update()
-    {
-        timer += Time.deltaTime;
-
-        if (timer >= interval)
-        {
-            timer = 0f;
-            movingLeft = true;
-            moveTimer = moveDuration;
-        }
-    }
+    [SerializeField] private float moveSpeed = 2f;
+    [SerializeField] private float moveTime = 0.2f;
+    [SerializeField] private float interval = 0.75f;
 
     private Rigidbody2D rb;
 
-    void FixedUpdate()
+    private void Awake()
     {
-        if (movingLeft)
-        {
-            rb.linearVelocity = new Vector2(-1f, rb.linearVelocity.y);
-
-            moveTimer -= Time.fixedDeltaTime;
-
-            if (moveTimer <= 0f)
-            {
-                movingLeft = false;
-                rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
-            }
-        }
+        rb = GetComponent<Rigidbody2D>();
     }
 
+    private void Start()
+    {
+        StartCoroutine(MoveRoutine());
+    }
+
+    private IEnumerator MoveRoutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(interval);
+
+            rb.linearVelocity = new Vector2(-moveSpeed, rb.linearVelocity.y);
+
+            yield return new WaitForSeconds(moveTime);
+
+            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+        }
+    }
 }
