@@ -1,204 +1,306 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class YZ_Player : MonoBehaviour, Controls.IGmaeControlsActions
 {
     Controls controls;
 
     [Header("Movement")]
-    public float moveSpeed = 8f;
-    public float moveInput;
+    [SerializeField] private float moveSpeed = 8f;
+    private float moveInput;
     private Rigidbody2D rb;
-    float yLocalScale;
+
+    private float facingX = 1f; // 1 éîéðä, -1 ùîàìä
 
     [Header("Jumping")]
-    public float jumpForce = 16f;
-    public int maxJumps = 2;
+    [SerializeField] private float jumpForce = 16f;
+    [SerializeField] private int maxJumps = 3;
     private int jumpCount;
-    public bool isGrounded;
+    private bool isJump;
 
-    [Header("anim")]
-    public GameObject body;
-    Animator anim;
-    string currentAnimation;
-    public string idle;
-    public string run;
-    public string jump;
-    bool isJump = false;
+    [Header("Jump Reset")]
+    [SerializeField] private string resetJumpTag = "toJump";
 
-    [Header("walkEffect")]
-    [SerializeField] GameObject spark;
-    [SerializeField] float delay;
-    float sparkTime;
-    public Color sparkColor;
-    public float yShift = -2f;
+    [Header("Animation")]
+    [SerializeField] private GameObject body;
+    [SerializeField] private string idle;
+    [SerializeField] private string run;
+    [SerializeField] private string jump;
+    private Animator anim;
+    private string currentAnimation;
 
-[Header("Shooting")]
-[SerializeField] private Transform firePoint;
-[SerializeField] private GameObject bulletPrefab;
-[SerializeField] private float bulletSpeed = 14f;
-[SerializeField] private float fireCooldown = 0.15f;
-private float lastFireTime;
+    [Header("Shooting")]
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private float bulletSpeed = 14f;
+    [SerializeField] private float fireCooldown = 0.15f;
+    private float lastFireTime;
+
+    [Header("Weapon Pickup")]
+    [SerializeField] private GameObject playerWeapon;
+    [SerializeField] private GameObject weaponPickup;
+    private bool hasWeapon;
+
+    [Header("Bend (simple + not OP)")]
+    [SerializeField, Range(0.3f, 1f)] private float bendYScale = 0.65f; // 0.6-0.7
+    [SerializeField] private float bendSmooth = 12f;                   // ëîä çì÷
+    [SerializeField] private float maxBendTime = 1.5f;                 // àçøé ëîä æîï îùúçøø ìáã
+    [SerializeField] private float bendCooldown = 1.0f;                // æîï äîúðä áéï Bend
+
+    private bool bendHeld;
+    private bool isBending;
+    private float bendTimer;
+    private float nextBendAllowedTime;
+
+    // Bend òì äâåó áìáã (åéæåàìé)
+    private Transform bodyT;
+    private Vector3 bodyNormalScale;
+
+    // îã çééí
+    [SerializeField] private float maxHealth = 100f;
+    [SerializeField] private float damage = 5f;
+    [SerializeField] private HealthBar healthBarUI;
+
+    private float currentHealth;
+
+    private void Start()
+    {
+        currentHealth = maxHealth;
+
+        if (healthBarUI != null)
+            healthBarUI.SetHealthInstant(currentHealth, maxHealth);
+    }
 
     private void Awake()
     {
         controls = new Controls();
         controls.GmaeControls.SetCallbacks(this);
 
-        // Auto-find FirePoint by name
-        if (firePoint == null)
-            firePoint = transform.Find("FirePoint");
+        rb = GetComponent<Rigidbody2D>();
 
-        // Auto-load bullet prefab from Resources/Bullet.prefab
-        if (bulletPrefab == null)
-            bulletPrefab = Resources.Load<GameObject>("Bullet");
+        facingX = Mathf.Sign(transform.localScale.x);
+
+        bodyT = (body != null) ? body.transform : transform;   // àí àéï body, ðéôåì òì transform (ôçåú îåîìõ)
+        bodyNormalScale = bodyT.localScale;
+
+        if (body != null) anim = body.GetComponent<Animator>();
+        if (firePoint == null) firePoint = transform.Find("FirePoint");
+        if (bulletPrefab == null) bulletPrefab = Resources.Load<GameObject>("Bullet");
+
+        hasWeapon = (playerWeapon != null && playerWeapon.activeSelf);
     }
 
-
-
-    private void Start()
+    private void OnEnable()
     {
-        rb = GetComponent<Rigidbody2D>();
-        controls.GmaeControls.Enable();
+        if (controls != null)
+            controls.GmaeControls.Enable();
+    }
 
-        if (body != null)
-        {
-            anim = body.GetComponent<Animator>();
-            ChangeAnimationState(idle);
-        }
-
-        yLocalScale = transform.localScale.y;
+    private void OnDisable()
+    {
+        if (controls != null)
+            controls.GmaeControls.Disable();
     }
 
     private void Update()
     {
-        if (moveInput > 0)
-            transform.localScale = new Vector3(1, yLocalScale, 1);
-        else if (moveInput < 0)
-            transform.localScale = new Vector3(-1, yLocalScale, 1);
+        // ëéååï ìôé úðåòä (ôìéô òì äùç÷ï òöîå)
+        if (moveInput > 0) facingX = 1f;
+        else if (moveInput < 0) facingX = -1f;
 
-        if (spark != null)
-        {
-            if (isGrounded && moveInput != 0 &&
-                (Time.timeSinceLevelLoad - sparkTime >= Random.Range(delay * 0.6f, delay * 1.3f)))
-            {
-                sparkTime = Time.timeSinceLevelLoad;
-                CreateSpark();
-            }
-        }
+        transform.localScale = new Vector3(facingX, transform.localScale.y, 1f);
+
+        HandleBendVisualOnly();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void FixedUpdate()
     {
-        // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ linearVelocity ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ - ï¿½ï¿½ï¿½ï¿½.
-        // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½:
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
     }
 
     public void OnMoveHorizontal(InputAction.CallbackContext context)
     {
-        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-        if (context.canceled)
-        {
-            moveInput = 0;
-            if (!isJump) ChangeAnimationState(idle);
-            return;
-        }
-
-        moveInput = context.ReadValue<float>();
-        if (!isJump)
-        {
-            if (moveInput != 0) ChangeAnimationState(run);
-            else ChangeAnimationState(idle);
-        }
+        moveInput = context.canceled ? 0f : context.ReadValue<float>();
+        UpdateMoveAnim();
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
         if (!context.performed) return;
-
-        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ maxJumps ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (jumpCount >= maxJumps) return;
 
         isJump = true;
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         jumpCount++;
+
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         ChangeAnimationState(jump);
     }
 
     public void OnShot(InputAction.CallbackContext context)
     {
         if (!context.performed) return;
+        if (!hasWeapon) return;
+
         if (Time.time < lastFireTime + fireCooldown) return;
+        if (bulletPrefab == null || firePoint == null) return;
 
         lastFireTime = Time.time;
 
-        if (bulletPrefab == null || firePoint == null) return;
+        float dir = (facingX < 0) ? -1f : 1f;
 
-        float dir = transform.localScale.x >= 0 ? 1f : -1f;
-
-        GameObject b = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-        Rigidbody2D brb = b.GetComponent<Rigidbody2D>();
-        if (brb != null)
-            brb.linearVelocity = new Vector2(dir * bulletSpeed, 0f);
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        Rigidbody2D brb = bullet.GetComponent<Rigidbody2D>();
+        if (brb != null) brb.linearVelocity = new Vector2(dir * bulletSpeed, 0f);
     }
 
-
-    public void CreateSpark()
+    // ---- BEND ----
+    public void OnBend(InputAction.CallbackContext context)
     {
-        GameObject currentSpark = Instantiate(
-            spark,
-            transform.position + new Vector3(moveInput * -0.5f, yShift, 0),
-            Quaternion.identity
-        );
-
-        SpriteRenderer sr = currentSpark.GetComponent<SpriteRenderer>();
-        if (sr != null) sr.color = sparkColor;
-
-        Rigidbody2D srb = currentSpark.GetComponent<Rigidbody2D>();
-        if (srb != null)
+        if (context.performed)
         {
-            srb.linearVelocity = new Vector2(moveInput * -1, Random.Range(0.7f, 4f));
+            bendHeld = true;
+
+            // îúçéì ø÷ àí ÷åìãàåï òáø
+            if (Time.time >= nextBendAllowedTime)
+            {
+                isBending = true;
+                bendTimer = 0f;
+            }
         }
 
-        Destroy(currentSpark, 1f);
+        if (context.canceled)
+        {
+            bendHeld = false;
+            StopBend();
+        }
     }
 
+    private void StopBend()
+    {
+        if (!isBending) return;
+
+        isBending = false;
+        nextBendAllowedTime = Time.time + bendCooldown;
+    }
+
+    private void HandleBendVisualOnly()
+    {
+        // àí ëôåó éåúø îãé æîï - îùúçøø ìáã
+        if (isBending)
+        {
+            bendTimer += Time.deltaTime;
+            if (bendTimer >= maxBendTime)
+                StopBend();
+        }
+
+        // éòã äñ÷ééì òì äâåó áìáã
+        float targetY = isBending ? bendYScale : bodyNormalScale.y;
+
+        float newY = (bendSmooth <= 0f)
+            ? targetY
+            : Mathf.Lerp(bodyT.localScale.y, targetY, Time.deltaTime * bendSmooth);
+
+        bodyT.localScale = new Vector3(bodyNormalScale.x, newY, bodyNormalScale.z);
+    }
+
+    // ---- WEAPON ----
+    public void EnableWeapon()
+    {
+        hasWeapon = true;
+        if (playerWeapon != null) playerWeapon.SetActive(true);
+    }
+
+    // ---- COLLISIONS ----
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("ground") || collision.gameObject.CompareTag("Rock"))
-        {
-            if (isJump)
-            {
-                isJump = false;
-                if (moveInput != 0) ChangeAnimationState(run);
-                else ChangeAnimationState(idle);
-            }
-
-            isGrounded = true;
-            jumpCount = 0;
-        }
+        if (collision.collider == null) return;
+        if (!collision.collider.CompareTag(resetJumpTag)) return;
+        ResetJumpsAndAnim();
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.CompareTag("ground") || collision.gameObject.CompareTag("Rock"))
+        if (other == null) return;
+
+        // àéñåó ðù÷
+        if (other.gameObject == weaponPickup)
         {
-            isGrounded = false;
+            EnableWeapon();
+            Destroy(weaponPickup);
+            return;
+        }
+
+        // àéôåñ ÷ôéöåú
+        if (other.CompareTag(resetJumpTag))
+        {
+            ResetJumpsAndAnim();
+            return;
+        }
+
+        // ôâéòä îëãåø àåéá
+        if (other.CompareTag("EnemyBullet"))
+        {
+            TakeDamage(damage);
+            Destroy(other.gameObject);
         }
     }
 
-    public void ChangeAnimationState(string newAnimation)
+    private void ResetJumpsAndAnim()
+    {
+        jumpCount = 0;
+        isJump = false;
+        UpdateMoveAnim();
+    }
+
+    private void UpdateMoveAnim()
+    {
+        if (isJump) return;
+        ChangeAnimationState(moveInput != 0 ? run : idle);
+    }
+
+    private void ChangeAnimationState(string newAnimation)
     {
         if (anim == null) return;
+        if (string.IsNullOrEmpty(newAnimation)) return;
         if (currentAnimation == newAnimation) return;
 
         anim.Play(newAnimation);
         currentAnimation = newAnimation;
     }
 
-    private void OnDestroy()
+    // äåøãú çééí
+    public void TakeDamage(float damage)
     {
-        if (controls != null) controls.GmaeControls.Disable();
+        currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+
+        if (healthBarUI != null)
+            healthBarUI.SetHealth(currentHealth, maxHealth);
+
+        if (currentHealth <= 0f)
+            Die();
     }
+
+    // äåñôú çééí
+    public void Heal(float amount)
+    {
+        currentHealth += amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+
+        if (healthBarUI != null)
+            healthBarUI.SetHealth(currentHealth, maxHealth);
+    }
+
+    // ùç÷ï îú
+    private void Die()
+    {
+        //Debug.Log("Player died");
+        Destroy(gameObject);
+    }
+
 }
+

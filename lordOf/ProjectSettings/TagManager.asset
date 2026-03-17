@@ -3,39 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags:
-  - ground
-  - food
-  - Rock
-  - Peror
-  - ground
-  - Rock
-  - Wall
-  - Jump
-  - enemy
-  - ground
-  - quicksand
-  - Weapon
-  - quicksand
-  - Laser
-  - LaserWarning
-  - Wind
-  - kill
-  - Jily
-  - Bad
-  - Spike
-  - BlueBox
-  - rock
-  - s
-  - as
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Temp
+  - 
   - Water
   - UI
-  - enemy
+  - 
   - 
   - 
   - 
@@ -64,17 +40,6 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: background
-    uniqueID: 2488526317
-  - name: Background
-    uniqueID: 1659263577
-    locked: 0
-  - name: Figures
-    uniqueID: 2626324439
-    locked: 0
-  - name: Floor
-    uniqueID: 1581953921
     locked: 0
   m_RenderingLayers:
   - Default
