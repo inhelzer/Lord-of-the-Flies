@@ -141,6 +141,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Raziel_BasePlayer Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 4277909534978994613, guid: 065de5bea6b834061b301360eb25296c, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 76025f6257cdf4bde9fc6b4a53d7e911, type: 2}
     - target: {fileID: 4950641528951987616, guid: 065de5bea6b834061b301360eb25296c, type: 3}
       propertyPath: m_Size.y
       value: 2.8137865
@@ -195,7 +199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5557898454234279629, guid: 065de5bea6b834061b301360eb25296c, type: 3}
       propertyPath: m_SortingLayer
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5557898454234279629, guid: 065de5bea6b834061b301360eb25296c, type: 3}
       propertyPath: m_SortingOrder
@@ -246,7 +250,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Raziel_BasePlayer
   health: 9
-  isHitable: 0
   hitlessSeconds: 2
   respawn_ground: -1000
   enteredWindSpeed: 6
