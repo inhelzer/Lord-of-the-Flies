@@ -10,7 +10,6 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
     [SerializeField] int health;
     int full_health;
     float delay;
-
     bool isHitable;
     [SerializeField] float hitlessSeconds;
     float framesHitless;
@@ -100,7 +99,7 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
             transform.localScale = new Vector3(1, yLocalScale, 1);
         else if (moveInput < 0)
             transform.localScale = new Vector3(-1, yLocalScale, 1);  // Facing left
-            transform.localScale = new Vector3(-1, yLocalScale, 1);
+        //transform.localScale = new Vector3(-1, yLocalScale, 1);
     }
 
     private void FixedUpdate()
@@ -305,7 +304,8 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
         {
             if (context.performed && !isDashing && dashesLeft >= 1)
             {
-                dashDirection = transform.localScale.x;
+                //dashDirection = transform.localScale.x;
+                dashDirection = moveInput;
                 StartCoroutine(Dash());
             }
         }

@@ -19,6 +19,9 @@ TagManager:
   - Butter
   - Peror
   - EnemyBullet
+  - quicksand
+  - Wind
+  - Spike
   layers:
   - Default
   - TransparentFX
