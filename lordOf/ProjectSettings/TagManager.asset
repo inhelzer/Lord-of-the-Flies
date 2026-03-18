@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Bad
   layers:
   - Default
   - TransparentFX
@@ -40,25 +41,6 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-
-  - name: background
-    uniqueID: 2488526317
-  - name: Background
-    uniqueID: 1659263577
-
-  - name: helic
-    uniqueID: 36906987
-
-    locked: 0
-  - name: player
-    uniqueID: 3862946857
-    locked: 0
-  - name: destroys
-    uniqueID: 4054006885
-    locked: 0
-  - name: ground
-    uniqueID: 303790833
     locked: 0
   m_RenderingLayers:
   - Default
