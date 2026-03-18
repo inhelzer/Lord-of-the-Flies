@@ -272,7 +272,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 303790833
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 20
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 010d17b069a00fd4ba0364a4b65a129d, type: 3}
@@ -1707,7 +1707,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 303790833
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 20
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 010d17b069a00fd4ba0364a4b65a129d, type: 3}
@@ -3668,7 +3668,7 @@ MonoBehaviour:
   bendSmooth: 12
   maxBendTime: 2.8
   bendCooldown: 0.8
-  maxHealth: 100
+  maxHealth: 200
   damage: 5
   healthBarUI: {fileID: 1978891713}
 --- !u!1 &1978891711
@@ -4038,7 +4038,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 303790833
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 20
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 010d17b069a00fd4ba0364a4b65a129d, type: 3}
@@ -4086,8 +4086,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -238, y: 453}
-  m_SizeDelta: {x: 209.2063, y: 68.4126}
+  m_AnchoredPosition: {x: -258.3, y: 453}
+  m_SizeDelta: {x: 197.0302, y: 82.4116}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2068769440
 MonoBehaviour:
@@ -4124,17 +4124,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 200
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ebb30c78322f1e34791daca1b2c3c3f2, type: 2}
+  m_sharedMaterial: {fileID: -4809665612974964953, guid: ebb30c78322f1e34791daca1b2c3c3f2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294552418
-  m_fontColor: {r: 0.38431376, g: 0.67058825, b: 0.97647065, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4151,15 +4151,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 65
-  m_fontSizeBase: 65
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1
@@ -4190,7 +4190,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 13.152039, y: 0, z: 13.151733, w: 0}
+  m_margin: {x: 13.152039, y: 6.8377686, z: 3.6141357, w: 0.47857666}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -4254,6 +4254,12 @@ MonoBehaviour:
   minX: -29
   maxX: 39
   spawnY: -4
+  minDistanceFromLastSpawn: 2
+  minDistanceFromOthers: 1.5
+  maxSpawnTries: 10
+  checkLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &2123237801
 GameObject:
   m_ObjectHideFlags: 0
@@ -4319,7 +4325,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 303790833
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 20
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 010d17b069a00fd4ba0364a4b65a129d, type: 3}

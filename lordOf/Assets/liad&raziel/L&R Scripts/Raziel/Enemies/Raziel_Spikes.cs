@@ -25,7 +25,7 @@ public class Raziel_Spikes : MonoBehaviour
     {
         player.GiveControls(false);
         player.CheckPlayerConstraints();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
 
         if (delta)
             player.SendToPosition(transform.position + HazardPosition);

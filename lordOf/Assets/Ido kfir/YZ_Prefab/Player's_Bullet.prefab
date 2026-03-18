@@ -199,5 +199,5 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b2b09d387ea304438a4d39800b1cc47, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::YZ_Bullet
-  lifeTime: 2
+  m_EditorClassIdentifier: Assembly-CSharp::YZ_Player_Bullet
+  lifeTime: 6.7
