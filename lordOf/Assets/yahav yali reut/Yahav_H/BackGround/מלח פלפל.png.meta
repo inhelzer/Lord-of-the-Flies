@@ -1,0 +1,399 @@
+fileFormatVersion: 2
+guid: a8d5e6fb2ceb60940b79b239748bcb18
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8725662085412758382
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_0"
+  - first:
+      213: -2734344199491069255
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_1"
+  - first:
+      213: -5113835114909720365
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_2"
+  - first:
+      213: -480861888913921501
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_3"
+  - first:
+      213: 285107843228897674
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_4"
+  - first:
+      213: 7051374058082981275
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_5"
+  - first:
+      213: 7472269371572706076
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_6"
+  - first:
+      213: -7290279586151639099
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_7"
+  - first:
+      213: 2059824705687459561
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_8"
+  - first:
+      213: 1106503221837516845
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_9"
+  - first:
+      213: 7163452615174413042
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_10"
+  - first:
+      213: -7470661020073182571
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_11"
+  - first:
+      213: -2866901306904009850
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_12"
+  - first:
+      213: -2104778723267594356
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_13"
+  - first:
+      213: -5715939716946845566
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_14"
+  - first:
+      213: -2591982223044698305
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_15"
+  - first:
+      213: -5976372945846007377
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_16"
+  - first:
+      213: -4149135183679007272
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_17"
+  - first:
+      213: -1779653193076513278
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_18"
+  - first:
+      213: -1404414679159413801
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_19"
+  - first:
+      213: 8190647837581793071
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_20"
+  - first:
+      213: -3767131447378577624
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_21"
+  - first:
+      213: 4180439917069346151
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_22"
+  - first:
+      213: 8220979727946699834
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_23"
+  - first:
+      213: 3875928608551187020
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_24"
+  - first:
+      213: 328845537364890027
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_25"
+  - first:
+      213: 1371459189735947086
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_26"
+  - first:
+      213: -2891419400350439429
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_27"
+  - first:
+      213: 5454757283659173732
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_28"
+  - first:
+      213: -842004238403397556
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_29"
+  - first:
+      213: 3871562824824775862
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_30"
+  - first:
+      213: -3583849886544835735
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_31"
+  - first:
+      213: 6094175527870778412
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_32"
+  - first:
+      213: 7103419549012526952
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_33"
+  - first:
+      213: 5012366839577588356
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_34"
+  - first:
+      213: -6872627114209680899
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_35"
+  - first:
+      213: -2959515391957335856
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_36"
+  - first:
+      213: -5114360388476178339
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_37"
+  - first:
+      213: -7959898717618564165
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_38"
+  - first:
+      213: 3857084284492952059
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_39"
+  - first:
+      213: -7941115256177982961
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_40"
+  - first:
+      213: 1568521367639455262
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_41"
+  - first:
+      213: -3223843873991648017
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_42"
+  - first:
+      213: -75602960177769361
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_43"
+  - first:
+      213: 3888344306324999768
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_44"
+  - first:
+      213: 8687807655306036497
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_45"
+  - first:
+      213: -49243457777504784
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_46"
+  - first:
+      213: -4793447896694237189
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_47"
+  - first:
+      213: 4528822416946418599
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_48"
+  - first:
+      213: -1242683090561985422
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_49"
+  - first:
+      213: -6372414703871276943
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_50"
+  - first:
+      213: 5980805108640257802
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_51"
+  - first:
+      213: 2260097791219548881
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_52"
+  - first:
+      213: 6757112983618953274
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_53"
+  - first:
+      213: 3618799276349144932
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_54"
+  - first:
+      213: 2120855033831903008
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_55"
+  - first:
+      213: -5917476231200110664
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_56"
+  - first:
+      213: -7049008744255051980
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_57"
+  - first:
+      213: -8913174446323847092
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_58"
+  - first:
+      213: -3623846838460805096
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_59"
+  - first:
+      213: -5512801916838868646
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_60"
+  - first:
+      213: 540868943302197342
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_61"
+  - first:
+      213: -1113966810735514607
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_62"
+  - first:
+      213: 8152825525861864261
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_63"
+  - first:
+      213: -7185314873354432130
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_64"
+  - first:
+      213: -2296374670936436394
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_65"
+  - first:
+      213: -951608563180639765
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_66"
+  - first:
+      213: -145623320173708892
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_67"
+  - first:
+      213: -6177378827304066162
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_68"
+  - first:
+      213: -3501701655702268351
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_69"
+  - first:
+      213: 6875403382092988395
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_70"
+  - first:
+      213: 3093194322446564938
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_71"
+  - first:
+      213: -5999112019048141770
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_72"
+  - first:
+      213: 8723483646904164782
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_73"
+  - first:
+      213: -7036626067595334332
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_74"
+  - first:
+      213: 4325311125676437028
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_75"
+  - first:
+      213: -2718833476423795253
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_76"
+  - first:
+      213: -7029390771118738084
+    second: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_77"
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_0"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 185
+        height: 119
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29cd0e8509838e680800000000000000
+      internalID: -8725662085412758382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_1"
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 0
+        width: 257
+        height: 119
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ba5faf0078ad0ad0800000000000000
+      internalID: -2734344199491069255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: cb6dcf2a6d722a94b9531c2d6c38a9f1
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":2.0,"y":1.0},"gridSpriteSize":{"x":221.0,"y":119.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_0": -8725662085412758382
+      "\u05DE\u05DC\u05D7 \u05E4\u05DC\u05E4\u05DC_1": -2734344199491069255
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

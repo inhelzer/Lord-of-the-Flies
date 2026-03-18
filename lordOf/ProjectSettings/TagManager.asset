@@ -4,34 +4,29 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Peror
+  - toJump
+  - pBullet
+  - Enemy
   - ground
-  - Rock
-  - Wall
-  - Jump
-  - enemy
-  - ground
-  - quicksand
-  - Weapon
-  - quicksand
   - Laser
   - LaserWarning
-  - Wind
-  - kill
   - Bad
-  - Spike
-  - BlueBox
-  - rock
-  - s
-  - as
+  - Weapon
+  - Jily
+  - Wall
+  - enemy
+  - Jump
+  - Butter
+  - Peror
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Temp
+  - Water
   - Water
   - UI
-  - enemy
+  - 
   - 
   - 
   - 
@@ -61,11 +56,20 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: background
-    uniqueID: 1659263577
+  - name: helic
+    uniqueID: 36906987
     locked: 0
-  - name: figures
-    uniqueID: 2626324439
+  - name: player
+    uniqueID: 3862946857
+    locked: 0
+  - name: destroys
+    uniqueID: 4054006885
+    locked: 0
+  - name: enemy
+    uniqueID: 2640713035
+    locked: 0
+  - name: ground
+    uniqueID: 303790833
     locked: 0
   m_RenderingLayers:
   - Default

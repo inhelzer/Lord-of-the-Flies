@@ -174,5 +174,10 @@ public class PlayerMove : MonoBehaviour, Controls.IGmaeControlsActions
     {
         throw new System.NotSupportedException();
     }
+
+    public void OnBend(InputAction.CallbackContext context)
+    {
+        throw new System.NotImplementedException();
+    }
 }
 
