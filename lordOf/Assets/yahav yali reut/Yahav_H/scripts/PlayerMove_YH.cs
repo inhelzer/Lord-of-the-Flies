@@ -169,6 +169,26 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
 
         if (isSlipping)
         {
+            float slopeAngle = Vector2.Angle(groundNormal, Vector2.up);
+            if (slopeAngle < minSlopeAngleForBoost)
+            {
+                float targetSpeed = moveInput * moveSpeed;
+                float control = Mathf.Abs(moveInput) > 0.01f ? butterAccelerationControl : butterDecelerationControl;
+                float newVelocityX = Mathf.MoveTowards(rb.linearVelocity.x, targetSpeed, control * moveSpeed * Time.fixedDeltaTime);
+
+                if (Mathf.Abs(newVelocityX) > 0.1f)
+                {
+                    CreateDust();
+                }
+                else
+                {
+                    StopDust();
+                }
+
+                rb.linearVelocity = new Vector2(newVelocityX, rb.linearVelocity.y);
+                return;
+            }
+
             if (Mathf.Abs(rb.linearVelocity.x) > 0.1f)
             {
                 //Debug.Log("DUST PLAY");
@@ -178,7 +198,6 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
             {
                 StopDust();
             }
-            float slopeAngle = Vector2.Angle(groundNormal, Vector2.up);
             float slopeT = Mathf.InverseLerp(minSlopeAngleForBoost, maxSlopeAngle, slopeAngle);
 
             Vector2 downhill = new Vector2(groundNormal.y, -groundNormal.x);
