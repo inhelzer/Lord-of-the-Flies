@@ -85,6 +85,11 @@ public class Player_REB : MonoBehaviour, Controls.IGmaeControlsActions
             }
         }
 
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            Debug.Log("SPACE WORKS");
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        }
     }
 
     private void FixedUpdate()
@@ -209,6 +214,13 @@ public class Player_REB : MonoBehaviour, Controls.IGmaeControlsActions
 
         }
     }
+
+    void Controls.IGmaeControlsActions.OnBend(InputAction.CallbackContext context)
+    {
+        throw new System.NotImplementedException();
+    }
+
+
 
     public Sprite eiffel;
     public Sprite spaceship;
