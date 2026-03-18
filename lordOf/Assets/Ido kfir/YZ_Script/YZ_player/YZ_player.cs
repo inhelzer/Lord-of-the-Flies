@@ -57,7 +57,7 @@ public class YZ_Player : MonoBehaviour, Controls.IGmaeControlsActions
     private Vector3 bodyNormalScale;
 
     // מד חיים
-    [SerializeField] private float maxHealth = 100f;
+    [SerializeField] private float maxHealth = 200f;
     [SerializeField] private float damage = 5f;
     [SerializeField] private HealthBar healthBarUI;
 

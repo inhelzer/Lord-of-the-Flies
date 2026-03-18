@@ -65,6 +65,9 @@ TagManager:
   - name: destroys
     uniqueID: 4054006885
     locked: 0
+  - name: enemy
+    uniqueID: 2640713035
+    locked: 0
   - name: ground
     uniqueID: 303790833
     locked: 0
