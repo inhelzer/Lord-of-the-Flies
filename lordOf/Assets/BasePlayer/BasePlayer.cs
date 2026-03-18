@@ -155,4 +155,9 @@ public class BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions
         isShooting = false;
         ChangeAnimationState(idle);
     }
+
+    public void OnBend(InputAction.CallbackContext context)
+    {
+        throw new System.NotImplementedException();
+    }
 }

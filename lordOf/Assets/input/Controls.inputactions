@@ -32,11 +32,20 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Bend",
+                    "type": "Button",
+                    "id": "45879af0-9aac-43df-a9ec-4b7278d07869",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
-                    "name": "1D Axis",
+                    "name": "1D Axis - Arrows",
                     "id": "14c534a4-2666-4b2e-9b45-a04d74ef36c4",
                     "path": "1DAxis",
                     "interactions": "",
@@ -69,7 +78,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "1D Axis",
+                    "name": "1D Axis - A/D",
                     "id": "532183fb-84f3-4e08-8b10-26bfa6fa7073",
                     "path": "1DAxis",
                     "interactions": "",
@@ -102,7 +111,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "1D Axis",
+                    "name": "1D Axis - Joystick",
                     "id": "5aa4f445-ad27-4eb5-98fc-9681227712b3",
                     "path": "1DAxis",
                     "interactions": "",
@@ -127,6 +136,39 @@
                     "name": "positive",
                     "id": "39bd098c-8d62-48c5-b15c-c1c5513a78f7",
                     "path": "<Joystick>/stick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "moveHorizontal",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis - PS Arrows",
+                    "id": "797f19bd-18b7-4401-8448-bd48a247b32d",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "moveHorizontal",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "a15a2b7f-390a-4851-ac33-06a98ea9441a",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "moveHorizontal",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "0a3336eb-03c8-4ea1-8efa-5975628b2c10",
+                    "path": "<Gamepad>/dpad/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -169,6 +211,17 @@
                 },
                 {
                     "name": "",
+                    "id": "3af607f1-1b02-4705-946f-2f1453920cec",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "1a0ea2ad-c138-4f6d-a7ea-d4a5eac155d6",
                     "path": "<HID::Microntek              USB Joystick          >/button8",
                     "interactions": "",
@@ -188,226 +241,50 @@
                     "action": "Shot",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "MicroBit",
-            "id": "0867d1f0-1d24-48e6-b4c1-007a193a26dd",
-            "actions": [
-                {
-                    "name": "right",
-                    "type": "Button",
-                    "id": "47485506-9d7e-46b4-b3a0-26ab21f532fe",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 },
-                {
-                    "name": "left",
-                    "type": "Button",
-                    "id": "fcf8d26b-8f49-472c-b0f5-46d65d0ac35f",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "middle",
-                    "type": "Button",
-                    "id": "590ccb44-8153-4601-a26d-8c9550ac9018",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "jump",
-                    "type": "Button",
-                    "id": "013746c6-39e4-4618-91fd-4e14e877136f",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "highJump",
-                    "type": "Button",
-                    "id": "81062fe9-e73e-4490-89ca-7e38cd90c254",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
                 {
                     "name": "",
-                    "id": "9bddc452-ece6-4ab0-8854-97ea3d514a4f",
-                    "path": "<Keyboard>/d",
+                    "id": "1a70cb45-214a-417b-974a-06c188206a43",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "right",
+                    "action": "Shot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "472c8eb0-4372-4d21-9564-e79d8c49977c",
-                    "path": "<Keyboard>/a",
+                    "id": "240828ad-1d37-428b-b444-c4b806e6e1a6",
+                    "path": "<Keyboard>/x",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "left",
+                    "action": "Bend",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "45472a60-8b71-4df0-906e-049e6792b114",
-                    "path": "<Keyboard>/s",
+                    "id": "093ada5d-4dc9-4043-ad12-f9976176a3a2",
+                    "path": "<Joystick>/trigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "middle",
+                    "action": "Bend",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "aa86f0be-8b21-4b1d-9f9e-459609d4dd71",
-                    "path": "<Keyboard>/upArrow",
+                    "id": "71da3628-fc27-47b9-ad6a-a63daa204555",
+                    "path": "<Gamepad>/rightStickPress",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "jump",
+                    "action": "Bend",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d1af0ee2-1f15-40ce-8863-6af34094e2b3",
-                    "path": "<Keyboard>/enter",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "highJump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "MouseActions",
-            "id": "3cbb9e34-db52-4d27-99c3-5dc3c0e801b5",
-            "actions": [
-                {
-                    "name": "Movement",
-                    "type": "Value",
-                    "id": "3d1c03bc-c59e-4228-a4ef-cb919914cf85",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "PointerPosition",
-                    "type": "Value",
-                    "id": "dc950839-8f0e-4cf2-985a-4a8619f53a5b",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Attack",
-                    "type": "Button",
-                    "id": "6e9cc12f-cd97-47f3-9c94-e900999c6a9f",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "d485979a-79f3-489f-9d9c-bbe0e730e5a3",
-                    "path": "<Mouse>/position",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "PointerPosition",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "311eb9e6-2911-40fd-a515-186d7bc5c063",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "2D Vector",
-                    "id": "a958e8a4-e457-48dc-8e72-76d72cf383bb",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "30582ca3-9a15-4635-8c24-d1706b5496ff",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "9878eec8-509a-4f68-82e6-3a4b3f3df6dd",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "6ebe2cfb-61b6-4797-a60f-40f8286618d3",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "b9a3d944-fa86-4990-bfed-f02af8d4983a",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 }
             ]
         },

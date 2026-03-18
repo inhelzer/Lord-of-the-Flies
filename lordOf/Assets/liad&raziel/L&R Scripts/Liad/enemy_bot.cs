@@ -34,11 +34,11 @@ public class enemy_bot : MonoBehaviour
         }
         if (direction > 0)
         {
-            gameObject.GetComponent<SpriteRenderer>().flipX = true;
+            gameObject.GetComponent<SpriteRenderer>().flipX = false;
         }
         else
         {
-            gameObject.GetComponent<SpriteRenderer>().flipX = false;
+            gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
         // ball attack
         /*
@@ -50,6 +50,16 @@ public class enemy_bot : MonoBehaviour
                 delay = Time.timeSinceLevelLoad + 1f;
             }
         }
-        */
+        */ 
+
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision != player)
+        {
+            Destroy(gameObject);
+        }
     }
 }
