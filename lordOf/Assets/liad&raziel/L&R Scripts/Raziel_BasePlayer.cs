@@ -11,6 +11,10 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
     int full_health;
     float delay;
 
+    bool isHitable;
+    [SerializeField] float hitlessSeconds;
+    float framesHitless;
+
     [Header("Raziel")]
     Vector3 respawnPosition;
     [SerializeField] float respawn_ground;
@@ -71,6 +75,7 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
         respawnPosition = transform.localPosition;
         isDashing = false;
         dashesLeft = 1;
+        isHitable = true;
     }
 
     private void Update()
@@ -85,10 +90,23 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
             SendToPosition();
         }
 
+<<<<<<< HEAD
+        if (!isHitable)
+        {
+            if (Time.time > framesHitless)
+                isHitable = true;
+        }
+
+=======
+>>>>>>> bd122578f286427d9fc0f67ba802dbd282d35df0
         if (moveInput > 0)
             transform.localScale = new Vector3(1, yLocalScale, 1);
         else if (moveInput < 0)
+<<<<<<< HEAD
+            transform.localScale = new Vector3(-1, yLocalScale, 1);  // Facing left
+=======
             transform.localScale = new Vector3(-1, yLocalScale, 1);
+>>>>>>> bd122578f286427d9fc0f67ba802dbd282d35df0
     }
 
     private void FixedUpdate()
@@ -133,6 +151,18 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+<<<<<<< HEAD
+        if (isHitable && (collision.gameObject.CompareTag("Bad") || collision.gameObject.CompareTag("Laser") || collision.gameObject.CompareTag("Spike")))
+        {
+            framesHitless = Time.time + hitlessSeconds;
+            isHitable = false;
+
+            health = health - 1;
+            if (health < 0)
+            {
+                SendToPosition();
+                health = full_health;
+=======
         if (collision.gameObject.CompareTag("Bad"))
         {
             if (delay < Time.timeSinceLevelLoad)
@@ -148,6 +178,7 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
                     body.GetComponent<SpriteRenderer>().color = Color.red;
                     delay = Time.timeSinceLevelLoad + 1f;
                 }
+>>>>>>> bd122578f286427d9fc0f67ba802dbd282d35df0
             }
         }
     }
@@ -159,6 +190,31 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+<<<<<<< HEAD
+        // Raziel - Added quicksand
+        /*
+        if (collision.gameObject.CompareTag("quicksand"))
+        {
+            //Debug.Log(0);
+            EnterQucicksand();
+        }
+
+        */
+        // Liad
+        if (isHitable && (collision.gameObject.CompareTag("Bad") || collision.gameObject.CompareTag("Laser") || collision.gameObject.CompareTag("Spike")))
+        {
+            framesHitless = Time.time + hitlessSeconds;
+            isHitable = false;
+
+            health = health - 1;
+            if (health < 0)
+            {
+                SendToPosition();
+                health = full_health;
+            }
+        }
+=======
+>>>>>>> bd122578f286427d9fc0f67ba802dbd282d35df0
         if (collision.gameObject.CompareTag("ground"))
         {
             if (isJump)
@@ -293,9 +349,11 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
     public void CheckPlayerConstraints()
     {
         if (playerControlling)
-            rb.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
+        {
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
         else
-            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
     }
 
     public void OnBend(InputAction.CallbackContext context)
