@@ -9,13 +9,14 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
     [Header("Liad")]
     [SerializeField] int health;
     int full_health;
+    float delay;
 
     bool isHitable;
     [SerializeField] float hitlessSeconds;
     float framesHitless;
 
     [Header("Raziel")]
-    Vector3 respawnPosition; // Default in start
+    Vector3 respawnPosition;
     [SerializeField] float respawn_ground;
     float windSpeed;
     [SerializeField] float enteredWindSpeed;
@@ -50,8 +51,6 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
     public string jump;
     bool isJump = false;
 
-
-
     private void Awake()
     {
         controls = new Controls();
@@ -63,8 +62,8 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
 
     private void Start()
     {
-        // Liad
-        full_health = health; 
+        full_health = health;
+        delay = Time.timeSinceLevelLoad - 1f;
 
         rb = GetComponent<Rigidbody2D>();
         controls.GmaeControls.Enable();
@@ -73,30 +72,41 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
         ChangeAnimationState(idle);
         yLocalScale = transform.localScale.y;
 
-        // Raziel added
         respawnPosition = transform.localPosition;
         isDashing = false;
         dashesLeft = 1;
         isHitable = true;
     }
+
     private void Update()
     {
-        // Raziel added
+        if (body.GetComponent<SpriteRenderer>().color == Color.red && delay < Time.timeSinceLevelLoad)
+        {
+            body.GetComponent<SpriteRenderer>().color = Color.white;
+        }
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             SendToPosition();
         }
 
+<<<<<<< HEAD
         if (!isHitable)
         {
             if (Time.time > framesHitless)
                 isHitable = true;
         }
 
+=======
+>>>>>>> bd122578f286427d9fc0f67ba802dbd282d35df0
         if (moveInput > 0)
-            transform.localScale = new Vector3(1, yLocalScale, 1);  // Facing right
+            transform.localScale = new Vector3(1, yLocalScale, 1);
         else if (moveInput < 0)
+<<<<<<< HEAD
             transform.localScale = new Vector3(-1, yLocalScale, 1);  // Facing left
+=======
+            transform.localScale = new Vector3(-1, yLocalScale, 1);
+>>>>>>> bd122578f286427d9fc0f67ba802dbd282d35df0
     }
 
     private void FixedUpdate()
@@ -114,7 +124,6 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
             {
                 ChangeAnimationState(idle);
             }
-
         }
         if (context.performed && playerControlling)
         {
@@ -142,6 +151,7 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+<<<<<<< HEAD
         if (isHitable && (collision.gameObject.CompareTag("Bad") || collision.gameObject.CompareTag("Laser") || collision.gameObject.CompareTag("Spike")))
         {
             framesHitless = Time.time + hitlessSeconds;
@@ -152,15 +162,35 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
             {
                 SendToPosition();
                 health = full_health;
+=======
+        if (collision.gameObject.CompareTag("Bad"))
+        {
+            if (delay < Time.timeSinceLevelLoad)
+            {
+                health = health - 1;
+                if (health <= 0)
+                {
+                    SendToPosition();
+                    health = full_health;
+                }
+                else
+                {
+                    body.GetComponent<SpriteRenderer>().color = Color.red;
+                    delay = Time.timeSinceLevelLoad + 1f;
+                }
+>>>>>>> bd122578f286427d9fc0f67ba802dbd282d35df0
             }
         }
     }
+
     private void OnCollisionExit2D(Collision2D collision)
     {
 
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
+<<<<<<< HEAD
         // Raziel - Added quicksand
         /*
         if (collision.gameObject.CompareTag("quicksand"))
@@ -183,6 +213,8 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
                 health = full_health;
             }
         }
+=======
+>>>>>>> bd122578f286427d9fc0f67ba802dbd282d35df0
         if (collision.gameObject.CompareTag("ground"))
         {
             if (isJump)
@@ -199,11 +231,10 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
                 }
             }
             isGrounded = true;
-            jumpCount = 0;  // Reset jump count when touching ground
+            jumpCount = 0;
             dashesLeft = 1;
         }
 
-        // Wind checks
         if (collision.gameObject.CompareTag("Wind"))
         {
             windSpeed = enteredWindSpeed;
@@ -212,10 +243,8 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        // Raziel - Added quicksand
         if (collision.gameObject.CompareTag("quicksand"))
         {
-            //Debug.Log(1);
             ExitQuicksand();
         }
 
@@ -223,7 +252,7 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
         {
             isGrounded = false;
         }
-        // Wind Checks
+
         if (collision.gameObject.CompareTag("Wind"))
         {
             windSpeed = 0;
@@ -247,7 +276,7 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
     {
         throw new NotImplementedException();
     }
-    // Raziel -
+
     public void EnterQucicksand()
     {
         moveSpeed = 1f;
@@ -255,7 +284,6 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 0.005f;
         isGrounded = true;
         jumpCount = -9999;
-        //isJump = false;
     }
 
     public void ExitQuicksand()
@@ -264,7 +292,6 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
         jumpForce = 20f;
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 4f;
         jumpCount = 0;
-
     }
 
     public void SetRespawnPosition(Vector3 respawnPosition)
@@ -327,5 +354,10 @@ public class Raziel_BasePlayer : MonoBehaviour, Controls.IGmaeControlsActions, C
         }
         else
             rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+    }
+
+    public void OnBend(InputAction.CallbackContext context)
+    {
+        throw new NotImplementedException();
     }
 }
