@@ -4,9 +4,11 @@ public class Raziel_CheckPoint : MonoBehaviour
 {
     private Vector3 myPosition;
     Raziel_BasePlayer playerCode;
-    [SerializeField] private GameObject player;
+    private GameObject player;
     private void Start()
     {
+        player = GameObject.Find("Raziel_BasePlayer Variant");
+
         myPosition = transform.position;
         playerCode = player.GetComponent<Raziel_BasePlayer>();
     }
