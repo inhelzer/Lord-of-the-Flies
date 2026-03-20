@@ -5,6 +5,15 @@ TagManager:
   serializedVersion: 3
   tags:
   - Bad
+  - food
+  - ground
+  - Jily
+  - Wall
+  - enemy
+  - Jump
+  - Butter
+  - Peror
+  - Fire
   layers:
   - Default
   - TransparentFX
