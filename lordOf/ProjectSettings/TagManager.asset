@@ -4,26 +4,12 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - toJump
-  - pBullet
-  - Enemy
-  - ground
-  - Laser
-  - LaserWarning
   - Bad
-  - Weapon
-  - Jily
-  - Wall
-  - enemy
-  - Jump
-  - Butter
-  - Peror
-  - EnemyBullet
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Water
+  - 
   - Water
   - UI
   - 
@@ -55,21 +41,6 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: helic
-    uniqueID: 36906987
-    locked: 0
-  - name: player
-    uniqueID: 3862946857
-    locked: 0
-  - name: destroys
-    uniqueID: 4054006885
-    locked: 0
-  - name: enemy
-    uniqueID: 2640713035
-    locked: 0
-  - name: ground
-    uniqueID: 303790833
     locked: 0
   m_RenderingLayers:
   - Default
