@@ -15,7 +15,9 @@ public class Spider_YH : MonoBehaviour
     public float wakeTime = 5f;
     public float blinkMinTime = 2f;
     public float blinkMaxTime = 5f;
-    public float angryTime = 3f;
+    public float normalPhaseDuration = 25f;
+    public float angryPhaseDuration = 20f;
+    public int phaseCycles = 2;
 
     [Header("movement")]
     public GameObject hand1;
@@ -35,20 +37,28 @@ public class Spider_YH : MonoBehaviour
     public float hand1Direction = 1f;
     public float hand2Direction = -1f;
     public float hand3Direction = -1f;
+    public float handsMoveSmooth = 3f;
+    public float hand1AngryAngle = -90f;
+    public float hand2AngryAngle = 0f;
+    public float hand3AngryAngle = 90f;
 
     private float wakeTimer;
     private float blinkTimer;
-    private float angryTimer;
+    private float phaseTimer;
 
     private Vector3 startBossPosition;
     private Quaternion hand1StartRot;
     private Quaternion hand2StartRot;
     private Quaternion hand3StartRot;
+    private bool hand1WasActiveAtStart;
+    private bool hand2WasActiveAtStart;
+    private bool hand3WasActiveAtStart;
 
     private bool wakeFinished = false;
     private bool isAngry = false;
     private bool savedStartPositions = false;
     private float movementStartTime;
+    private int completedCycles = 0;
 
     void Start()
     {
@@ -69,6 +79,7 @@ public class Spider_YH : MonoBehaviour
         }
 
         FindHands();
+        SaveHandsInitialActiveState();
         SetHandsCollidersAsTriggers();
         ChangeAnimationState(Wake);
         wakeTimer = Time.timeSinceLevelLoad + wakeTime;
@@ -88,9 +99,7 @@ public class Spider_YH : MonoBehaviour
                 wakeFinished = true;
                 SaveStartPositions();
                 movementStartTime = Time.timeSinceLevelLoad;
-                currentAnimation = "";
-                ChangeAnimationState(Blink);
-                ResetBlinkTimer();
+                StartNormalPhase();
             }
 
             return;
@@ -100,18 +109,29 @@ public class Spider_YH : MonoBehaviour
         {
             ReturnToStartPosition();
 
-            if (Time.timeSinceLevelLoad >= angryTimer)
+            if (Time.timeSinceLevelLoad >= phaseTimer)
             {
-                isAngry = false;
-                currentAnimation = "";
-                ChangeAnimationState(Blink);
-                ResetBlinkTimer();
+                completedCycles++;
+                if (completedCycles >= phaseCycles)
+                {
+                    phaseTimer = float.PositiveInfinity;
+                }
+                else
+                {
+                    StartNormalPhase();
+                }
             }
 
             return;
         }
 
         MoveBossAndHands();
+
+        if (completedCycles < phaseCycles && Time.timeSinceLevelLoad >= phaseTimer)
+        {
+            StartAngryPhase();
+            return;
+        }
 
         AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
 
@@ -136,30 +156,26 @@ public class Spider_YH : MonoBehaviour
         currentAnimation = newAnimation;
     }
 
-    public void StartAngry()
+    void StartNormalPhase()
     {
-        if (anim == null || !wakeFinished)
-        {
-            return;
-        }
-
-        isAngry = true;
-        angryTimer = Time.timeSinceLevelLoad + angryTime;
-        currentAnimation = "";
-        ChangeAnimationState(Angry);
-    }
-
-    public void StopAngry()
-    {
-        if (anim == null)
-        {
-            return;
-        }
-
         isAngry = false;
+        movementStartTime = Time.timeSinceLevelLoad;
+        ResetHandsToStartRotation();
+        SetHandsVisible(true);
+        phaseTimer = Time.timeSinceLevelLoad + normalPhaseDuration;
         currentAnimation = "";
         ChangeAnimationState(Blink);
         ResetBlinkTimer();
+    }
+
+    void StartAngryPhase()
+    {
+        isAngry = true;
+        phaseTimer = Time.timeSinceLevelLoad + angryPhaseDuration;
+        ResetHandsToStartRotation();
+        SetHandsVisible(true);
+        currentAnimation = "";
+        ChangeAnimationState(Angry);
     }
 
     void ResetBlinkTimer()
@@ -206,15 +222,44 @@ public class Spider_YH : MonoBehaviour
         }
     }
 
+    void SaveHandsInitialActiveState()
+    {
+        hand1WasActiveAtStart = hand1 != null && hand1.activeSelf;
+        hand2WasActiveAtStart = hand2 != null && hand2.activeSelf;
+        hand3WasActiveAtStart = hand3 != null && hand3.activeSelf;
+    }
+
+    void SetHandsVisible(bool isVisible)
+    {
+        SetHandVisible(hand1, isVisible, hand1WasActiveAtStart);
+        SetHandVisible(hand2, isVisible, hand2WasActiveAtStart);
+        SetHandVisible(hand3, isVisible, hand3WasActiveAtStart);
+    }
+
+    void SetHandVisible(GameObject hand, bool isVisible, bool wasActiveAtStart)
+    {
+        if (hand == null) return;
+        hand.SetActive(isVisible && wasActiveAtStart);
+    }
+
     void SaveStartPositions()
     {
         if (savedStartPositions) return;
 
         startBossPosition = transform.position;
 
-        if (hand1 != null) hand1StartRot = hand1.transform.localRotation;
-        if (hand2 != null) hand2StartRot = hand2.transform.localRotation;
-        if (hand3 != null) hand3StartRot = hand3.transform.localRotation;
+        if (hand1 != null)
+        {
+            hand1StartRot = hand1.transform.localRotation;
+        }
+        if (hand2 != null)
+        {
+            hand2StartRot = hand2.transform.localRotation;
+        }
+        if (hand3 != null)
+        {
+            hand3StartRot = hand3.transform.localRotation;
+        }
 
         savedStartPositions = true;
     }
@@ -239,7 +284,8 @@ public class Spider_YH : MonoBehaviour
         float cycleTime = handRaiseTime + handDropTime;
         if (cycleTime <= 0.01f) return;
 
-        float timeInCycle = (Time.timeSinceLevelLoad + timeOffset) % cycleTime;
+        float handMotionTime = Mathf.Max(0f, Time.timeSinceLevelLoad - movementStartTime + timeOffset);
+        float timeInCycle = handMotionTime % cycleTime;
         float angle;
 
         if (timeInCycle < handRaiseTime)
@@ -256,26 +302,44 @@ public class Spider_YH : MonoBehaviour
         hand.transform.localRotation = startRot * Quaternion.Euler(0f, 0f, angle * direction);
     }
 
+    void ResetHandsToStartRotation()
+    {
+        if (hand1 != null)
+        {
+            hand1.transform.localRotation = hand1StartRot;
+        }
+
+        if (hand2 != null)
+        {
+            hand2.transform.localRotation = hand2StartRot;
+        }
+
+        if (hand3 != null)
+        {
+            hand3.transform.localRotation = hand3StartRot;
+        }
+    }
+
     void ReturnToStartPosition()
     {
         if (!savedStartPositions) return;
 
         transform.position = Vector3.Lerp(transform.position, startBossPosition, Time.deltaTime * 3f);
+        MoveHandToAngryRotation(hand1, hand1StartRot, hand1AngryAngle, hand1WasActiveAtStart);
+        MoveHandToAngryRotation(hand2, hand2StartRot, hand2AngryAngle, hand2WasActiveAtStart);
+        MoveHandToAngryRotation(hand3, hand3StartRot, hand3AngryAngle, hand3WasActiveAtStart);
+    }
 
-        if (hand1 != null)
-        {
-            hand1.transform.localRotation = Quaternion.Lerp(hand1.transform.localRotation, hand1StartRot, Time.deltaTime * 4f);
-        }
+    void MoveHandToAngryRotation(GameObject hand, Quaternion startRot, float angryAngle, bool wasActiveAtStart)
+    {
+        if (hand == null || !wasActiveAtStart) return;
 
-        if (hand2 != null)
-        {
-            hand2.transform.localRotation = Quaternion.Lerp(hand2.transform.localRotation, hand2StartRot, Time.deltaTime * 4f);
-        }
-
-        if (hand3 != null)
-        {
-            hand3.transform.localRotation = Quaternion.Lerp(hand3.transform.localRotation, hand3StartRot, Time.deltaTime * 4f);
-        }
+        Quaternion targetRotation = startRot * Quaternion.Euler(0f, 0f, angryAngle);
+        hand.transform.localRotation = Quaternion.Lerp(
+            hand.transform.localRotation,
+            targetRotation,
+            Time.deltaTime * handsMoveSmooth
+        );
     }
 
     float GetCurrentMoveSpeed()
