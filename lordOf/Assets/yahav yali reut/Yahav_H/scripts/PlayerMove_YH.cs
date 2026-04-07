@@ -288,19 +288,9 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
             audioSource.PlayOneShot(eat);
 
         }
-        if (!lostTriggered && other.gameObject.CompareTag("enemy"))
+        if (!lostTriggered && (other.gameObject.CompareTag("enemy") || IsFireObject(other.gameObject)))
         {
-            if (blood != null)
-            {
-                Instantiate(blood, transform.position, Quaternion.identity);
-            }
-            losttimer = Time.timeSinceLevelLoad;
-            lostTriggered = true;
-            moveInput = 0f;
-            rb.linearVelocity = Vector2.zero;
-            HideBody();
-            audioSource.PlayOneShot(loseClip);
-            ChangeAnimationState(non);
+            TriggerDeath();
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -341,19 +331,9 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
             Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
             rb.linearVelocity = new Vector2(moveInput * moveSpeed, 35);
         }
-        if (!lostTriggered && collision.gameObject.CompareTag("enemy"))
+        if (!lostTriggered && (collision.gameObject.CompareTag("enemy") || IsFireObject(collision.gameObject)))
         {
-            if (blood != null)
-            {
-                Instantiate(blood, transform.position, Quaternion.identity);
-            }
-            losttimer = Time.timeSinceLevelLoad;
-            lostTriggered = true;
-            moveInput = 0f;
-            rb.linearVelocity = Vector2.zero;
-            HideBody();
-            audioSource.PlayOneShot(loseClip);
-            ChangeAnimationState(non);
+            TriggerDeath();
         }
     }
 
@@ -426,6 +406,48 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
             c.a = 0f;
             sr.color = c;
         }
+    }
+
+    void TriggerDeath()
+    {
+        if (blood != null)
+        {
+            Instantiate(blood, transform.position, Quaternion.identity);
+        }
+
+        losttimer = Time.timeSinceLevelLoad;
+        lostTriggered = true;
+        moveInput = 0f;
+        rb.linearVelocity = Vector2.zero;
+        HideBody();
+        audioSource.PlayOneShot(loseClip);
+        ChangeAnimationState(non);
+    }
+
+    bool IsFireObject(GameObject obj)
+    {
+        if (obj == null)
+        {
+            return false;
+        }
+
+        if (obj.CompareTag("Fire"))
+        {
+            return true;
+        }
+
+        Transform current = obj.transform.parent;
+        while (current != null)
+        {
+            if (current.CompareTag("Fire"))
+            {
+                return true;
+            }
+
+            current = current.parent;
+        }
+
+        return obj.GetComponentInParent<Fire_YH>() != null;
     }
 }
 
