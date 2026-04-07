@@ -134,12 +134,10 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
             audioSource.PlayOneShot(loseClip);
             ChangeAnimationState(non);
         }
-
         if (lostTriggered && Time.timeSinceLevelLoad > losttimer + 1f)
         {
-            SceneManager.LoadScene("Yahav_H");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-
 
         if (spark != null)
         {
@@ -288,7 +286,7 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
             audioSource.PlayOneShot(eat);
 
         }
-        if (!lostTriggered && (other.gameObject.CompareTag("enemy") || IsFireObject(other.gameObject)))
+        if (!lostTriggered && IsDeadlyObject(other.gameObject))
         {
             TriggerDeath();
         }
@@ -331,7 +329,7 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
             Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
             rb.linearVelocity = new Vector2(moveInput * moveSpeed, 35);
         }
-        if (!lostTriggered && (collision.gameObject.CompareTag("enemy") || IsFireObject(collision.gameObject)))
+        if (!lostTriggered && IsDeadlyObject(collision.gameObject))
         {
             TriggerDeath();
         }
@@ -448,6 +446,32 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
         }
 
         return obj.GetComponentInParent<Fire_YH>() != null;
+    }
+
+    bool IsDeadlyObject(GameObject obj)
+    {
+        if (obj == null)
+        {
+            return false;
+        }
+
+        if (obj.CompareTag("enemy") || obj.CompareTag("spider"))
+        {
+            return true;
+        }
+
+        Transform current = obj.transform.parent;
+        while (current != null)
+        {
+            if (current.CompareTag("enemy") || current.CompareTag("spider"))
+            {
+                return true;
+            }
+
+            current = current.parent;
+        }
+
+        return IsFireObject(obj);
     }
 }
 
