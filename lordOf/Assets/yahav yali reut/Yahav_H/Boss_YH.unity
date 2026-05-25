@@ -7182,6 +7182,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &287933793
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 287933794}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &287933794
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287933793}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 18.8, y: -12.28409, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &294530070
 GameObject:
   m_ObjectHideFlags: 0
@@ -17928,18 +17959,20 @@ MonoBehaviour:
   Wake: Wakeing
   Blink: Blink
   Angry: Anger
+  Dead: Dead_YH
   wakeTime: 5
   blinkMinTime: 2
   blinkMaxTime: 5
-  normalPhaseDuration: 25
-  angryPhaseDuration: 20
+  normalPhaseDuration: 10
+  angryPhaseDuration: 5
+  returnToNormalDuration: 1
   phaseCycles: 2
   hand1: {fileID: 2054807332}
   hand2: {fileID: 560165652}
   hand3: {fileID: 1631648484}
   moveDistanceX: 5
   startMoveSpeed: 0.7
-  fastMoveSpeed: 1.8
+  fastMoveSpeed: 1
   speedRampDelay: 6
   speedRampDuration: 5
   handUpAngle: 20
@@ -20300,6 +20333,56 @@ PolygonCollider2D:
       - {x: 1.0770059, y: -6.8223953}
       - {x: 1.2070059, y: -6.6123953}
   m_UseDelaunayMesh: 1
+--- !u!1 &1112529375
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1112529377}
+  - component: {fileID: 1112529376}
+  m_Layer: 0
+  m_Name: DrinkMe_Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1112529376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1112529375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f07f0fd3c865f1d4ca2eb89825cd646a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  spider: {fileID: 843383007}
+  bottlePrefab: {fileID: 6745874257781917303, guid: eb775a3bf31c6634e92e3c5eff597d79, type: 3}
+  spawnPoint: {fileID: 0}
+  spawnWhenSpiderDies: 1
+  nextScene: Reut_E.B
+  sceneLoadDelay: 1
+--- !u!4 &1112529377
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1112529375}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: 0.09830057, w: 0.99515676}
+  m_LocalPosition: {x: 12.1, y: -2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 11.283}
 --- !u!1 &1124327600
 GameObject:
   m_ObjectHideFlags: 0
@@ -51135,7 +51218,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2705493967504445784, guid: 38aff912bf00a7d4eac683ceab5b1c39, type: 3}
   m_Color: {r: 0.89840347, g: 0.6622641, b: 1, a: 1}
@@ -52334,6 +52417,81 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 43.890656, y: 1.0787762}
   m_EdgeRadius: 0
+--- !u!1 &2141584432
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2141584434}
+  - component: {fileID: 2141584433}
+  - component: {fileID: 2141584435}
+  m_Layer: 0
+  m_Name: Flyes Spowner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2141584433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141584432}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5f44b1fe40d77845abc29e60784e8c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FoodSpowner
+  foodPrefab: {fileID: 336676838554868961, guid: cfd61ad9d4337884fb087296fbe88c34, type: 3}
+  minSpawnX: -17.5
+  maxSpawnX: 17.5
+  spawnY: 16
+  spawnInterval: 4
+  maxFoodOnScene: 3
+--- !u!4 &2141584434
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141584432}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 15.9, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2141584435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141584432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e169e56f0ad53641b5c45f4200755c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  flyesPrefab: {fileID: 336676838554868961, guid: cfd61ad9d4337884fb087296fbe88c34, type: 3}
+  spider: {fileID: 843383007}
+  minSpawnX: -17.5
+  maxSpawnX: 17.5
+  spawnY: 16
+  randomYRange: 1.5
+  minDistanceBetweenFlyes: 0.8
+  maxFlyesOnScene: 7
+  flyesPerWave: 6
+  waveInterval: 0.8
+  waveSpawnDuration: 0.45
+  spawnImmediatelyWhenAngry: 1
 --- !u!1 &2143406021
 GameObject:
   m_ObjectHideFlags: 0
@@ -52920,7 +53078,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19dbbf7c28750724a890b4d3d225fa5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  moveSpeed: 11
+  moveSpeed: 12
   moveInput: 0
   butterDuration: 10
   butterSpeedMultiplier: 1.5
@@ -52940,7 +53098,7 @@ MonoBehaviour:
   dust: {fileID: 1602880386}
   effectPrefab: {fileID: 946163222686141868, guid: ac814fcf1e96e0c46879de5645d0f351, type: 3}
   blood: {fileID: 8332869060022974528, guid: a950cabfb1bc8364e9b0d23b4f6ee003, type: 3}
-  jumpForce: 20
+  jumpForce: 15
   maxJumps: 2
   isGrounded: 0
   body: {fileID: 7662927014019616515}
@@ -53127,3 +53285,6 @@ SceneRoots:
   - {fileID: 1757864640}
   - {fileID: 1213641216}
   - {fileID: 613244298}
+  - {fileID: 2141584434}
+  - {fileID: 287933794}
+  - {fileID: 1112529377}

@@ -10,6 +10,7 @@ public class Spider_YH : MonoBehaviour
     public string Wake = "Wakeing";
     public string Blink = "Blink";
     public string Angry = "Anger";
+    public string Dead = "Dead_YH";
 
     [Header("time")]
     public float wakeTime = 5f;
@@ -17,6 +18,7 @@ public class Spider_YH : MonoBehaviour
     public float blinkMaxTime = 5f;
     public float normalPhaseDuration = 25f;
     public float angryPhaseDuration = 20f;
+    public float returnToNormalDuration = 1f;
     public int phaseCycles = 2;
 
     [Header("movement")]
@@ -45,6 +47,7 @@ public class Spider_YH : MonoBehaviour
     private float wakeTimer;
     private float blinkTimer;
     private float phaseTimer;
+    private float returnToNormalTimer;
 
     private Vector3 startBossPosition;
     private Quaternion hand1StartRot;
@@ -56,9 +59,14 @@ public class Spider_YH : MonoBehaviour
 
     private bool wakeFinished = false;
     private bool isAngry = false;
+    private bool isDead = false;
+    private bool isReturningToNormal = false;
     private bool savedStartPositions = false;
     private float movementStartTime;
     private int completedCycles = 0;
+
+    public bool IsAngry => isAngry;
+    public bool IsDead => isDead;
 
     void Start()
     {
@@ -92,6 +100,11 @@ public class Spider_YH : MonoBehaviour
             return;
         }
 
+        if (isDead)
+        {
+            return;
+        }
+
         if (!wakeFinished)
         {
             if (Time.timeSinceLevelLoad >= wakeTimer)
@@ -99,6 +112,19 @@ public class Spider_YH : MonoBehaviour
                 wakeFinished = true;
                 SaveStartPositions();
                 movementStartTime = Time.timeSinceLevelLoad;
+                StartNormalPhase();
+            }
+
+            return;
+        }
+
+        if (isReturningToNormal)
+        {
+            MoveBodyToStartPosition();
+            ResetHandsToStartRotation();
+
+            if (Time.timeSinceLevelLoad >= returnToNormalTimer)
+            {
                 StartNormalPhase();
             }
 
@@ -114,11 +140,11 @@ public class Spider_YH : MonoBehaviour
                 completedCycles++;
                 if (completedCycles >= phaseCycles)
                 {
-                    phaseTimer = float.PositiveInfinity;
+                    StartDeadPhase();
                 }
                 else
                 {
-                    StartNormalPhase();
+                    StartReturnToNormalPhase();
                 }
             }
 
@@ -159,6 +185,7 @@ public class Spider_YH : MonoBehaviour
     void StartNormalPhase()
     {
         isAngry = false;
+        isReturningToNormal = false;
         movementStartTime = Time.timeSinceLevelLoad;
         ResetHandsToStartRotation();
         SetHandsVisible(true);
@@ -171,11 +198,37 @@ public class Spider_YH : MonoBehaviour
     void StartAngryPhase()
     {
         isAngry = true;
+        isReturningToNormal = false;
         phaseTimer = Time.timeSinceLevelLoad + angryPhaseDuration;
         ResetHandsToStartRotation();
         SetHandsVisible(true);
         currentAnimation = "";
         ChangeAnimationState(Angry);
+    }
+
+    void StartReturnToNormalPhase()
+    {
+        isAngry = false;
+        isReturningToNormal = true;
+        returnToNormalTimer = Time.timeSinceLevelLoad + returnToNormalDuration;
+        phaseTimer = float.PositiveInfinity;
+        ResetHandsToStartRotation();
+        SetHandsVisible(false);
+        currentAnimation = "";
+        ChangeAnimationState(Blink);
+        ResetBlinkTimer();
+    }
+
+    void StartDeadPhase()
+    {
+        isDead = true;
+        isAngry = false;
+        isReturningToNormal = false;
+        phaseTimer = float.PositiveInfinity;
+        ReturnToStartPosition();
+        SetHandsVisible(false);
+        currentAnimation = "";
+        ChangeAnimationState(Dead);
     }
 
     void ResetBlinkTimer()
@@ -269,7 +322,8 @@ public class Spider_YH : MonoBehaviour
         if (!savedStartPositions) return;
 
         float currentMoveSpeed = GetCurrentMoveSpeed();
-        float moveX = Mathf.Sin(Time.timeSinceLevelLoad * currentMoveSpeed) * moveDistanceX;
+        float elapsedMovementTime = Time.timeSinceLevelLoad - movementStartTime;
+        float moveX = Mathf.Sin(elapsedMovementTime * currentMoveSpeed) * moveDistanceX;
         transform.position = new Vector3(startBossPosition.x + moveX, startBossPosition.y, startBossPosition.z);
 
         MoveHand(hand1, hand1StartRot, 0f, hand1Direction);
@@ -324,10 +378,17 @@ public class Spider_YH : MonoBehaviour
     {
         if (!savedStartPositions) return;
 
-        transform.position = Vector3.Lerp(transform.position, startBossPosition, Time.deltaTime * 3f);
+        MoveBodyToStartPosition();
         MoveHandToAngryRotation(hand1, hand1StartRot, hand1AngryAngle, hand1WasActiveAtStart);
         MoveHandToAngryRotation(hand2, hand2StartRot, hand2AngryAngle, hand2WasActiveAtStart);
         MoveHandToAngryRotation(hand3, hand3StartRot, hand3AngryAngle, hand3WasActiveAtStart);
+    }
+
+    void MoveBodyToStartPosition()
+    {
+        if (!savedStartPositions) return;
+
+        transform.position = Vector3.Lerp(transform.position, startBossPosition, Time.deltaTime * 3f);
     }
 
     void MoveHandToAngryRotation(GameObject hand, Quaternion startRot, float angryAngle, bool wasActiveAtStart)
