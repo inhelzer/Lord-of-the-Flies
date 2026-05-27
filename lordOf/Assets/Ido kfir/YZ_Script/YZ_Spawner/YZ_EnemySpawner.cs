@@ -7,7 +7,7 @@ public class BasicSpawner : MonoBehaviour
 
     [Header("Spawn Time")]
     [SerializeField] private float minTime = 1f;
-    [SerializeField] private float maxTime = 3f;
+    [SerializeField] private float maxTime = 2f;
 
     [Header("Spawn X Range")]
     [SerializeField] private float minX = -5f;

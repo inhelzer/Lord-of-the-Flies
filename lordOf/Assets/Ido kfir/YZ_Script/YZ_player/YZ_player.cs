@@ -11,7 +11,7 @@ public class YZ_Player : MonoBehaviour, Controls.IGmaeControlsActions
     private float moveInput;
     private Rigidbody2D rb;
 
-    private float facingX = 1f; // 1 ימינה, -1 שמאלה
+    private float facingX = 1f; 
 
     [Header("Jumping")]
     [SerializeField] private float jumpForce = 16f;
@@ -104,6 +104,9 @@ public class YZ_Player : MonoBehaviour, Controls.IGmaeControlsActions
 
     private void Update()
     {
+        if (GameManeger.Instance != null && GameManeger.Instance.isPaused)
+            return;
+
         // כיוון לפי תנועה (פליפ על השחקן עצמו)
         if (moveInput > 0) facingX = 1f;
         else if (moveInput < 0) facingX = -1f;
@@ -118,6 +121,11 @@ public class YZ_Player : MonoBehaviour, Controls.IGmaeControlsActions
 
     private void FixedUpdate()
     {
+        if (GameManeger.Instance != null && GameManeger.Instance.isPaused)
+            return;
+
+        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
     }
 
