@@ -3,7 +3,7 @@
 public class YZ_Enemy : MonoBehaviour
 {
     [Header("Refs")]
-    [SerializeField] Transform player;      // אפשר להשאיר ריק - יתמלא לבד
+    [SerializeField] Transform player;
     [SerializeField] Rigidbody2D rb;
     [SerializeField] Transform firePoint;
     [SerializeField] GameObject bulletPrefab;
@@ -43,7 +43,10 @@ public class YZ_Enemy : MonoBehaviour
 
     void Update()
     {
-        if (player == null) return; // שלא יקרוס אם אין Player/Tag
+        if (GameManeger.Instance != null && GameManeger.Instance.isPaused)
+            return;
+
+        if (player == null) return;
 
         float dist = Vector2.Distance(transform.position, player.position);
 
@@ -86,8 +89,6 @@ public class YZ_Enemy : MonoBehaviour
 
     void SetFacing(int d)
     {
-        // d = 1 (ימינה) => פליפ (סקייל שלילי)
-        // d = -1 (שמאלה) => רגיל (סקייל חיובי)
         Vector3 s = transform.localScale;
         s.x = Mathf.Abs(s.x) * (d == 1 ? -1f : 1f);
         transform.localScale = s;
@@ -96,6 +97,11 @@ public class YZ_Enemy : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("pBullet"))
+        {
+            if (GameManeger.Instance != null)
+                GameManeger.Instance.AddScore();
+
             Destroy(gameObject);
+        }
     }
 }
