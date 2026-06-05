@@ -107,7 +107,6 @@ public class YZ_Player : MonoBehaviour, Controls.IGmaeControlsActions
         if (GameManeger.Instance != null && GameManeger.Instance.isPaused)
             return;
 
-        // כיוון לפי תנועה (פליפ על השחקן עצמו)
         if (moveInput > 0) facingX = 1f;
         else if (moveInput < 0) facingX = -1f;
 
