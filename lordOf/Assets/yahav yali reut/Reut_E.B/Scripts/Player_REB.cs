@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Player_REB : MonoBehaviour, Controls.IGmaeControlsActions
 {
@@ -46,6 +47,7 @@ public class Player_REB : MonoBehaviour, Controls.IGmaeControlsActions
     [SerializeField] private AudioClip munch;
     [SerializeField] private AudioClip eat;
     [SerializeField] private AudioClip chip;
+    public GameObject REB_BasePlayer;
 
     AudioClip[] aud;
 
@@ -83,12 +85,6 @@ public class Player_REB : MonoBehaviour, Controls.IGmaeControlsActions
                 sparkTime = Time.timeSinceLevelLoad;
                 CreateSpark();
             }
-        }
-
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
-        {
-            Debug.Log("SPACE WORKS");
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
     }
 
@@ -132,18 +128,43 @@ public class Player_REB : MonoBehaviour, Controls.IGmaeControlsActions
     {
         if (context.performed)
         {
-            if (isGrounded && jumpCount < maxJumps - 1)
+            
+            if (isGrounded) 
             {
-                isJump = true;
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-                jumpCount++;
-                ChangeAnimationState(jump);
+                Debug.Log("is grounded");
+                if (jumpCount < maxJumps - 1)
+                {
+                    Debug.Log("maxjumps");
+                    isJump = true;
+                    rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+                    jumpCount++;
+                    ChangeAnimationState(jump);
+                }
+                
             }
+        }
+    }
+
+    public void LoadNextLevel()
+    {
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+
+        // Check if a next scene actually exists to avoid errors
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(nextSceneIndex);
+        }
+        else
+        {
+            Debug.Log("No more levels! Returning to Main Menu.");
+            SceneManager.LoadScene(0); // Load first scene (usually menu)
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
+        
         if (collision.gameObject.CompareTag("ground") || collision.gameObject.CompareTag("Rock"))
         {
             if (isJump)
@@ -160,6 +181,7 @@ public class Player_REB : MonoBehaviour, Controls.IGmaeControlsActions
                 }
             }
             isGrounded = true;
+            Debug.Log("grounded");
             jumpCount = 0;  // Reset jump count when touching ground
         }
     }
@@ -169,7 +191,7 @@ public class Player_REB : MonoBehaviour, Controls.IGmaeControlsActions
         if (collision.gameObject.CompareTag("ground"))
         {
             isGrounded = false;
-
+            Debug.Log("not grounded");
         }
     }
 
@@ -190,18 +212,31 @@ public class Player_REB : MonoBehaviour, Controls.IGmaeControlsActions
         throw new System.NotImplementedException();
     }
 
-
-
-    
+   
     int counter = 0;
     public void OnTriggerEnter2D(Collider2D other)
     {
+        int foods = 10;
+
         if (other.gameObject.CompareTag("food"))
         {
-            counter++;
+            if (GetComponent<Rigidbody2D>().gravityScale > 0.3)
+            {
+                GetComponent<Rigidbody2D>().gravityScale = GetComponent<Rigidbody2D>().gravityScale - 0.30f;
+                Debug.Log("Gravity Scale: " + GetComponent<Rigidbody2D>().gravityScale);
+            }
+            
 
-            transform.localScale = new Vector3(transform.localScale.x + 1f,
-                transform.localScale.y + 1f, transform.localScale.z);
+            foods--;
+
+            if (foods == 0)
+            {
+                LoadNextLevel();
+            }
+            counter = counter + 2;
+
+            transform.localScale = new Vector3(transform.localScale.x + 0.25f,
+                transform.localScale.y + 0.25f, transform.localScale.z);
 
             Destroy(other.gameObject);
 
@@ -210,7 +245,7 @@ public class Player_REB : MonoBehaviour, Controls.IGmaeControlsActions
 
             GetComponent<CinemachineCamera>().Lens.OrthographicSize = 50f * counter;
 
-            GetComponent<Rigidbody2D>().gravityScale = GetComponent<Rigidbody2D>().gravityScale + 1;
+            //REB_BasePlayer.GetComponent<Rigidbody2D>().gravityScale = 5.7f + counter;
 
         }
     }

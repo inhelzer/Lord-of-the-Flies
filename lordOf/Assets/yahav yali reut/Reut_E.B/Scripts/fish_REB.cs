@@ -1,35 +1,76 @@
 using UnityEngine;
 using System.Collections;
 
-public class fish_REB : MonoBehaviour
+public class SideStepTimer : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 2f;
-    [SerializeField] private float moveTime = 0.2f;
-    [SerializeField] private float interval = 0.75f;
+    public float moveAmount = -0.4f;
+    public float interval = 3.5f;
+    public float moveDuration = 0.25f;
 
-    private Rigidbody2D rb;
+    private float timer;
+    private bool isMoving;
+    private bool started;   // NEW
 
-    private void Awake()
+    private Vector3 startPos;
+    private Vector3 targetPos;
+    private float moveT;
+
+    private Animator anim;
+
+    void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        anim.applyRootMotion = false;
+
+        StartCoroutine(StartWithDelay()); // NEW
     }
 
-    private void Start()
+    IEnumerator StartWithDelay()
     {
-        StartCoroutine(MoveRoutine());
+        yield return new WaitForSeconds(0.25f);
+        started = true;
     }
 
-    private IEnumerator MoveRoutine()
+    void Update()
     {
-        while (true)
+        if (!started) return; // NEW: blocks everything for first 0.5s
+
+        if (!isMoving)
         {
-            yield return new WaitForSeconds(interval);
+            timer += Time.deltaTime;
 
-            rb.linearVelocity = new Vector2(-moveSpeed, rb.linearVelocity.y);
+            if (timer >= interval)
+            {
+                timer = 0f;
+                StartMove();
+            }
+        }
+        else
+        {
+            SmoothMove();
+        }
+    }
 
-            yield return new WaitForSeconds(moveTime);
+    void StartMove()
+    {
+        isMoving = true;
+        moveT = 0f;
 
-            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+        startPos = transform.position;
+        targetPos = startPos + new Vector3(moveAmount, 0f, 0f);
+    }
+
+    void SmoothMove()
+    {
+        moveT += Time.deltaTime;
+        float progress = moveT / moveDuration;
+
+        transform.position = Vector3.Lerp(startPos, targetPos, progress);
+
+        if (progress >= 1f)
+        {
+            transform.position = targetPos;
+            isMoving = false;
         }
     }
 }
