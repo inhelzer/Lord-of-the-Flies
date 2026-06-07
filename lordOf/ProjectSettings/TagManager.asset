@@ -5,6 +5,16 @@ TagManager:
   serializedVersion: 3
   tags:
   - Bad
+<<<<<<< HEAD
+  - ground
+  - Laser
+  - LaserWarning
+  - Enemy
+  - EnemyBullet
+  - Weapon
+  - pBullet
+  - food
+=======
   - food
   - ground
   - Jily
@@ -17,6 +27,7 @@ TagManager:
   - spider
   - BossLevel
   - flyes
+>>>>>>> 4115fdf9a48ee91a6f9bcd6c59b9b09a1f0913e1
   layers:
   - Default
   - TransparentFX

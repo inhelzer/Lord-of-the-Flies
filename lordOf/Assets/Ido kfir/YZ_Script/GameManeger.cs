@@ -1,6 +1,7 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using TMPro;
+using UnityEngine.SceneManagement; // נוסף בשביל מעבר סצנות
 
 public class GameManeger : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class GameManeger : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI scoreText;
+
+    [Header("Scene Management")]
+    [Tooltip("הכנס כאן את שם הסצנה שאליה תרצה לעבור")]
+    [SerializeField] private string winSceneName; // משתנה לבחירת שם הסצנה
 
     private void Awake()
     {
@@ -28,7 +33,7 @@ public class GameManeger : MonoBehaviour
 
         UpdateScoreUI();
 
-        if (score % 10 == 0 && score <= 50)
+        if (score % 10 == 0 && score < 50) // שונה ל- < כדי שלא יפעיל פאוז ב-50
         {
             StartCoroutine(PauseGame());
         }
@@ -36,7 +41,7 @@ public class GameManeger : MonoBehaviour
         if (score >= 50)
         {
             Debug.Log("YOU WIN!");
-            Time.timeScale = 0f;
+            SceneManager.LoadScene(6); // מעבר לסצנה שבחרת
         }
     }
 
