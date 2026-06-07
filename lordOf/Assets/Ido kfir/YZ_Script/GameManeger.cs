@@ -41,7 +41,7 @@ public class GameManeger : MonoBehaviour
         if (score >= 50)
         {
             Debug.Log("YOU WIN!");
-            SceneManager.LoadScene(6); // מעבר לסצנה שבחרת
+            SceneManager.LoadScene("V2"); // מעבר לסצנה שבחרת
         }
     }
 

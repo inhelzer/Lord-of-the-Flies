@@ -3,7 +3,29 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - food
+  - ground
+  - Jily
+  - Wall
+  - enemy
+  - spider
+  - Jump
+  - Butter
+  - Peror
+  - flyes
+  - Fire
+  - quicksand
+  - Bad
+  - Laser
+  - LaserWarning
+  - Weapon
+  - toJump
+  - pBullet
+  - Enemy
+  - EnemyBullet
+  - Knife
+  - SpaceBorder
   layers:
   - Default
   - TransparentFX

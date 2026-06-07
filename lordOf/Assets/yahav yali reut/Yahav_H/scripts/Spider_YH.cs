@@ -121,7 +121,7 @@ public class Spider_YH : MonoBehaviour
         if (isReturningToNormal)
         {
             MoveBodyToStartPosition();
-            ResetHandsToStartRotation();
+            MoveHandsToStartRotation();
 
             if (Time.timeSinceLevelLoad >= returnToNormalTimer)
             {
@@ -189,6 +189,7 @@ public class Spider_YH : MonoBehaviour
         movementStartTime = Time.timeSinceLevelLoad;
         ResetHandsToStartRotation();
         SetHandsVisible(true);
+        SetHandsCollidersEnabled(true);
         phaseTimer = Time.timeSinceLevelLoad + normalPhaseDuration;
         currentAnimation = "";
         ChangeAnimationState(Blink);
@@ -202,6 +203,7 @@ public class Spider_YH : MonoBehaviour
         phaseTimer = Time.timeSinceLevelLoad + angryPhaseDuration;
         ResetHandsToStartRotation();
         SetHandsVisible(true);
+        SetHandsCollidersEnabled(true);
         currentAnimation = "";
         ChangeAnimationState(Angry);
     }
@@ -212,8 +214,8 @@ public class Spider_YH : MonoBehaviour
         isReturningToNormal = true;
         returnToNormalTimer = Time.timeSinceLevelLoad + returnToNormalDuration;
         phaseTimer = float.PositiveInfinity;
-        ResetHandsToStartRotation();
-        SetHandsVisible(false);
+        SetHandsVisible(true);
+        SetHandsCollidersEnabled(false);
         currentAnimation = "";
         ChangeAnimationState(Blink);
         ResetBlinkTimer();
@@ -295,6 +297,24 @@ public class Spider_YH : MonoBehaviour
         hand.SetActive(isVisible && wasActiveAtStart);
     }
 
+    void SetHandsCollidersEnabled(bool isEnabled)
+    {
+        SetHandCollidersEnabled(hand1, isEnabled);
+        SetHandCollidersEnabled(hand2, isEnabled);
+        SetHandCollidersEnabled(hand3, isEnabled);
+    }
+
+    void SetHandCollidersEnabled(GameObject hand, bool isEnabled)
+    {
+        if (hand == null) return;
+
+        Collider2D[] colliders = hand.GetComponentsInChildren<Collider2D>(true);
+        foreach (Collider2D handCollider in colliders)
+        {
+            handCollider.enabled = isEnabled;
+        }
+    }
+
     void SaveStartPositions()
     {
         if (savedStartPositions) return;
@@ -374,6 +394,13 @@ public class Spider_YH : MonoBehaviour
         }
     }
 
+    void MoveHandsToStartRotation()
+    {
+        MoveHandToRotation(hand1, hand1StartRot, hand1WasActiveAtStart);
+        MoveHandToRotation(hand2, hand2StartRot, hand2WasActiveAtStart);
+        MoveHandToRotation(hand3, hand3StartRot, hand3WasActiveAtStart);
+    }
+
     void ReturnToStartPosition()
     {
         if (!savedStartPositions) return;
@@ -396,6 +423,13 @@ public class Spider_YH : MonoBehaviour
         if (hand == null || !wasActiveAtStart) return;
 
         Quaternion targetRotation = startRot * Quaternion.Euler(0f, 0f, angryAngle);
+        MoveHandToRotation(hand, targetRotation, wasActiveAtStart);
+    }
+
+    void MoveHandToRotation(GameObject hand, Quaternion targetRotation, bool wasActiveAtStart)
+    {
+        if (hand == null || !wasActiveAtStart) return;
+
         hand.transform.localRotation = Quaternion.Lerp(
             hand.transform.localRotation,
             targetRotation,

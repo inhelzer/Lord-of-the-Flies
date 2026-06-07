@@ -1,6 +1,5 @@
 ﻿using Unity.Cinemachine;
 using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
@@ -471,7 +470,7 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
             return !isTriggerHit;
         }
 
-        if (obj.CompareTag("spider") || obj.CompareTag("flyes"))
+        if (obj.CompareTag("spider") || obj.CompareTag("flyes") || obj.CompareTag("Knife"))
         {
             return true;
         }
@@ -484,7 +483,7 @@ public class PlayerMove_YH : MonoBehaviour, Controls.IGmaeControlsActions
         Transform current = obj.transform.parent;
         while (current != null)
         {
-            if (current.CompareTag("spider") || current.CompareTag("flyes"))
+            if (current.CompareTag("spider") || current.CompareTag("flyes") || current.CompareTag("Knife"))
             {
                 return true;
             }

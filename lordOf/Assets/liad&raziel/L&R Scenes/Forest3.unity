@@ -38457,7 +38457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 237d36f654d2363488fa922e1845ad7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadNextLevel
-  scene: v3
+  scene: V3
 --- !u!1 &2096538081
 GameObject:
   m_ObjectHideFlags: 0

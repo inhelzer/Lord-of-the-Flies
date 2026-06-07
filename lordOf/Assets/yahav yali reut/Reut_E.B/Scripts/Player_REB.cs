@@ -1,6 +1,5 @@
 using Unity.Cinemachine;
 using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -247,6 +246,11 @@ public class Player_REB : MonoBehaviour, Controls.IGmaeControlsActions
 
             //REB_BasePlayer.GetComponent<Rigidbody2D>().gravityScale = 5.7f + counter;
 
+        }
+
+        if(other.gameObject.tag == "SpaceBorder")
+        {
+            SceneManager.LoadScene("V1");
         }
     }
 

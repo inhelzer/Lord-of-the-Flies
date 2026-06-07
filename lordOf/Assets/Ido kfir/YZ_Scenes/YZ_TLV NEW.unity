@@ -465,6 +465,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1460976545}
   - component: {fileID: 1460976544}
+  - component: {fileID: 1460976546}
   m_Layer: 0
   m_Name: Screenshot 2026-05-28 175924_0
   m_TagString: Untagged
@@ -546,6 +547,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1460976546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460976543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6328fd514fe7efc4aa78da86beb294c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Ending_KF
+  secondsBeforeNextScene: 5
+  nextSceneName: V2
+  music: {fileID: 0}
+  sceneLight: {fileID: 0}
+  startCameraColor: {r: 0.02, g: 0.02, b: 0.05, a: 1}
+  endCameraColor: {r: 0.25, g: 0.06, b: 0.02, a: 1}
 --- !u!1 &1543457705
 GameObject:
   m_ObjectHideFlags: 0
@@ -559,6 +578,7 @@ GameObject:
   - component: {fileID: 1543457708}
   - component: {fileID: 1543457707}
   - component: {fileID: 1543457706}
+  - component: {fileID: 1543457711}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -716,6 +736,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1543457711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543457705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6328fd514fe7efc4aa78da86beb294c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  secondsBeforeNextScene: 5
+  nextSceneName: V2
+  music: {fileID: 0}
+  sceneLight: {fileID: 0}
+  startCameraColor: {r: 0.02, g: 0.02, b: 0.05, a: 1}
+  endCameraColor: {r: 0.25, g: 0.06, b: 0.02, a: 1}
 --- !u!1 &1551502020
 GameObject:
   m_ObjectHideFlags: 0

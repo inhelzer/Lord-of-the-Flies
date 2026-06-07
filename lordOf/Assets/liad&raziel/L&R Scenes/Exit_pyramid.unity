@@ -896,6 +896,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Raziel_BasePlayer Variant (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 915151975251653209, guid: c1b109b14d6821546aa36481f3b0bba5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4792702769152535961, guid: c1b109b14d6821546aa36481f3b0bba5, type: 3}
       propertyPath: Health
       value: 3
